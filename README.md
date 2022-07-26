@@ -3,12 +3,15 @@ managing run commands/configs across computers
 because I keep having to rsync them and this is easier
 
 ## usage
-Placing .git outside of `~/` and aliasing to `dot`, no accidental commits
+Creating a unique git directory and aliasing to `dot` - no accidental commits, `git` doesn't show up in every subfolder. 
 ```
-    $ git clone --git-dir=.dot/.git https://www.github.com/joeysapp/dot
-    $ echo '*' > .dot/.git/info/exclude
-    $ git --git-dir=.dot/.git restore .                    ; overwrite existing local files
-    $ alias dot="/usr/bin/git --git-dir=$HOME/.dot/.git"   ; no accidental git use in root
+    $ mkdir .dot.git
+    $ git init --bare $HOME/.dot.git
+    $ echo '*' > .dot.git/info/exclude
+    $ alias dot="/usr/bin/git --git-dir=$HOME/.dot.git"   ; no accidental git use in root
+    $ dot remote add origin https://www.github.com/joeysapp/dot
+    $ dot pull origin master -u
+    $ dot restore .                    ; overwrite existing local files
     ...
     $ dot status
     $ dot add [file] -f

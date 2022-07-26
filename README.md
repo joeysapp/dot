@@ -8,8 +8,7 @@ cd $HOME
 git init --bare $HOME/.dot.git
 # Ignore all files
 echo '*' > .dot.git/info/exclude
-# Alias includes --force to override the above
-alias dot="/usr/bin/git --git-dir="$HOME/.dot.git" --work-tree=$HOME --force"
+alias dot="/usr/bin/git --git-dir="$HOME/.dot.git" --work-tree=$HOME"
 dot remote add origin https://www.github.com/joeysapp/dot.git
 dot fetch
 # Sync up to repo, overrides local files

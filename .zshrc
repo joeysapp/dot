@@ -63,7 +63,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 ## Aliases
 alias ls='LC_COLLATE=C ls -alF'
-alias dotfiles="git --git-dir=$HOME/.dotfiles.git"
+alias dot="git --git-dir=$HOME/.dotfiles.git"
 
 ## Colors
 autoload -U colors && colors

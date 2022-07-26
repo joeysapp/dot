@@ -12,7 +12,7 @@ export LSCOLORS=gafacadabaegedabagacad
 
 ## Aliases
 alias ls='LC_COLLATE=C ls -alF'
-alias dot="git --git-dir="$HOME/.dot.git" --work-tree=$HOME --force"
+alias dot="git --git-dir="$HOME/.dot.git" --work-tree=$HOME"
 
 # https://old.reddit.com/r/linux4noobs/comments/oeqi2j/simple_bashrc_tweak_that_ive_found_extremely/v
 se() {

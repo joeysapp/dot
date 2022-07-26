@@ -1,3 +1,8 @@
+;; todo(joeysapp): read over these:
+; * https://github.com/Fanael/init.el/blob/master/init.el
+; *
+
+
 ;; visual config
 (load-theme 'kaolin-valley-light t) ; t is 'NO-CONFIRM' flag
 (set-frame-parameter (selected-frame) 'alpha '(95 95))

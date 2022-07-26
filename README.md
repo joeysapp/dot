@@ -7,16 +7,12 @@ Creating a unique git directory and aliasing to `dot` - no accidental commits, `
 ```
     $ mkdir .dot.git
     $ git init --bare $HOME/.dot.git
-    $ echo '*' > .dot.git/info/exclude
+    $ echo '*' > .dot.git/info/exclude                                      ; we have to explicitly add items now
     $ alias dot="/usr/bin/git --git-dir=$HOME/.dot.git" --work-tree=$HOME
-    $ dot remote add origin https://www.github.com/joeysapp/dot
-    $ dot config status.advice.addIgnoredFile no
+    $ dot remote add origin https://www.github.com/joeysapp/dot.git
+    $ dot config status.advice.addIgnoredFile no                            ; no warning on adding items 
     $ dot fetch
-    $ dot reset --hard origin/master
-    ...
-    $ dot status
-    $ dot add [file] -f
-    $ dot push origin master
+    $ dot reset --hard origin/master                                        ; sync up to repo
 ```
 
 ## further reading

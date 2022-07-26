@@ -9,15 +9,14 @@
 (add-to-list 'default-frame-alist '(alpha 95 95))
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
-(tool-bar-mode nil)
-(scroll-bar-mode nil)
-(nyan-mode t) ; very useful 
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
 
 ; (set-face-attribute 'default nil :background "black"
 ;  :foreground "white" :font "Courier" :height 180)
 
 ;; Place all backup files (files~) in this location instead of in pwd
-(setq backup-directory-alist '(("." . "~/.emacs.bak")))
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
 
 ;; packages
 (require 'package)

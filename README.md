@@ -8,10 +8,11 @@ Creating a unique git directory and aliasing to `dot` - no accidental commits, `
     $ mkdir .dot.git
     $ git init --bare $HOME/.dot.git
     $ echo '*' > .dot.git/info/exclude
-    $ alias dot="/usr/bin/git --git-dir=$HOME/.dot.git"   ; no accidental git use in root
+    $ alias dot="/usr/bin/git --git-dir=$HOME/.dot.git" --work-tree=$HOME
     $ dot remote add origin https://www.github.com/joeysapp/dot
-    $ dot pull origin master -u
-    $ dot restore .                    ; overwrite existing local files
+    $ dot config status.advice.addIgnoredFile no
+    $ dot fetch
+    $ dot reset --hard origin/master
     ...
     $ dot status
     $ dot add [file] -f

@@ -10,6 +10,9 @@ se() {
 
 # Nice highlighting for tabbing through stuff in term
 zstyle ':completion:*' menu select
+# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+# autoload -Uz compinit && compinit
+
 
 # Reload without restarting:
 # source .zshrc
@@ -63,7 +66,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 ## Aliases
 alias ls='LC_COLLATE=C ls -alF'
-alias dot="git --git-dir=$HOME/.dotfiles.git"
+alias dot="git --git-dir="$HOME/.dot.git" --work-tree=$HOME"
 
 ## Colors
 autoload -U colors && colors

@@ -1,18 +1,19 @@
 # dot
-managing run commands/configs across computers
-because I keep having to rsync them and this is easier
+Managing run configs across computers because `rsync`ing and `mv`ing gets tedious
 
 ## usage
-Creating a unique git directory and aliasing to `dot` - no accidental commits, `git` doesn't show up in every subfolder. 
+Creating a unique git directory and aliasing to `dot` so `git status` doesn't show everything in every subfolder under `/Users/you/*`. 
 ```
-    $ mkdir .dot.git
-    $ git init --bare $HOME/.dot.git
-    $ echo '*' > .dot.git/info/exclude                                      ; we have to explicitly add items now
-    $ alias dot="/usr/bin/git --git-dir=$HOME/.dot.git" --work-tree=$HOME
-    $ dot remote add origin https://www.github.com/joeysapp/dot.git
-    $ dot config status.advice.addIgnoredFile no                            ; no warning on adding items 
-    $ dot fetch
-    $ dot reset --hard origin/master                                        ; sync up to repo
+cd $HOME
+git init --bare $HOME/.dot.git
+# Ignore all files
+echo '*' > .dot.git/info/exclude
+# Alias includes --force to override the above
+alias dot="/usr/bin/git --git-dir="$HOME/.dot.git" --work-tree=$HOME --force"
+dot remote add origin https://www.github.com/joeysapp/dot.git
+dot fetch
+# Sync up to repo, overrides local files
+dot reset --hard origin/master
 ```
 
 ## further reading

@@ -1,5 +1,18 @@
-## Users/zooey/.zshrc
+## Path
+# export PATH="/usr/local/sbin:$PATH"
 
+# reload
+# source ./zshrc
+
+## Colors
+autoload -U colors && colors
+export CLICOLOR=1
+export LSCOLORS=gafacadabaegedabagacad
+
+
+## Aliases
+alias ls='LC_COLLATE=C ls -alF'
+alias dot="git --git-dir="$HOME/.dot.git" --work-tree=$HOME --force"
 
 # https://old.reddit.com/r/linux4noobs/comments/oeqi2j/simple_bashrc_tweak_that_ive_found_extremely/v
 se() {
@@ -7,15 +20,10 @@ se() {
     /usr/bin/open -a /Applications/Firefox.app --args -private-window "https://duckduckgo.com/?t=ffsb&q=${search_term}+site%3Astackexchange.com&ia=web"
 }
 
-
 # Nice highlighting for tabbing through stuff in term
 zstyle ':completion:*' menu select
-# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-# autoload -Uz compinit && compinit
-
-
-# Reload without restarting:
-# source .zshrc
+zstyle ':completion:\*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+autoload -Uz compinit && compinit
 
 function gifify {
   if [ -z "$1" ]; then
@@ -41,8 +49,6 @@ function gifify {
 }
 
 
-
-
 ## https://jdhao.github.io/2021/03/24/zsh_history_setup/
 # the detailed meaning of the below three variable can be found in `man zshparam`.
 # The meaning of these options can be found in man page of `zshoptions`.
@@ -60,17 +66,6 @@ alias history="fc -l 1"
 export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-## Path
-export PATH="/usr/local/sbin:$PATH"
-
-## Aliases
-alias ls='LC_COLLATE=C ls -alF'
-alias dot="git --git-dir="$HOME/.dot.git" --work-tree=$HOME"
-
-## Colors
-autoload -U colors && colors
-
 
 # https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#SEC59
 # https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
@@ -131,7 +126,7 @@ autoload -U colors && colors
 #     \] end a sequence of non-printing character
 # 
 
-
+## Formatting
 
 # %U underline
 setopt PROMPT_SUBST # evals code in ps1/prompt
@@ -156,17 +151,15 @@ RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
 # RPROMPT="[(%D{%s})]"
 
-# LS colors
-export CLICOLOR=1
-export LSCOLORS=gafacadabaegedabagacad
+# Printouts on tty start
 
 env
 # cat ~/.zshrc
 echo '\n === ps '
 ps
 echo '\n\n === ifconfig | grep inet'
-ifconfig | egrep -o '([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}' 
-#ifconfig | grep inet
+# ifconfig | egrep -o '([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}' 
+ifconfig | grep inet
 echo '\n\n === tail -5 ~/.zsh_history'
 tail -5 ~/.zsh_history
 

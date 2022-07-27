@@ -67,6 +67,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(kaolin-valley-light))
  '(custom-safe-themes
    '("5a00018936fa1df1cd9d54bee02c8a64eafac941453ab48394e2ec2c498b834a" default))
  '(electric-indent-mode nil)
@@ -81,6 +82,7 @@
  '(package-selected-packages
    '(kaolin-themes dumb-jump nyan-mode use-package web-mode markdown-mode cider clojure-mode))
  '(standard-indent 2)
+ '(tool-bar-mode nil)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
  '(web-mode-enable-auto-indentation nil)
@@ -92,6 +94,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#fdfde7" :foreground "#5f5f5f" :inverse-video nil :box nil :strike-through nil :extend nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code")))))
+ '(default ((t (:inherit nil :stipple nil :background "#fdfde7" :foreground "#5f5f5f" :inverse-video nil :box nil :strike-through nil :extend nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "Fantasque Sans Mono")))))
 
 ;; height is 100 = 1/10pt, so 140 is 14pt

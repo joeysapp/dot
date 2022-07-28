@@ -1,24 +1,34 @@
-# dot
-Managing import files (configs, run commands, fonts, ...) across computers because `rsync`ing and `mv`ing gets tedious
+# Dot
+Managing files (configs, run commands, fonts, ...) across computers because `rsync`ing and `mv`ing gets tedious
 
-## usage
+## Usage
 Creating a unique git directory and aliasing to `dot` so `git status` doesn't show everything in every subfolder under `/Users/you/*`. 
 ```
 cd $HOME
-git init --bare $HOME/.dot.git
+git init --bare $HOME/.dot/.git
+
 # Ignore all files
-echo '*' > .dot.git/info/exclude
-alias dot="/usr/bin/git --git-dir="$HOME/.dot.git" --work-tree=$HOME"
+echo '*' > .dot/.git/info/exclude
+
+alias dot="/usr/bin/git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
 dot remote add origin https://www.github.com/joeysapp/dot.git
-dot fetch
+
 # Sync up to repo, overrides local files
+dot fetch
 dot reset --hard origin/master
 ```
 
 ## Specifics
-* ~/.firefox
-- goto about:profiles on firefox, create a new default profile pointing here
+<details><summary>`.firefox`</summary>
+* Goto `about:profiles` on Firefox, create a new default profile pointing here.
+* userChrome is for the application window itself
+** e.g. I want each tab on Firefox to have a custom font
+* userContent is custom css styling for websites
+** e.g. "I want to always hide a certain div on a certain site"
+** e.g. "I want the youtube player to utilize the entire app window 100%"
 
-## further reading
+</details>
+
+## Reading
 * [https://www.edwardthomson.com/blog/managing_dotfiles_with_git.htm](https://www.edwardthomson.com/blog/managing_dotfiles_with_git.html)
 * [Ask HN: What do you use to manage dotfiles? (https://news.ycombinator.com/item?id=11070797)](https://news.ycombinator.com/item?id=11070797)

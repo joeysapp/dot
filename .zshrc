@@ -153,17 +153,17 @@ RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
 # Printouts on tty start
 
-env
+# env | lolcat
 # cat ~/.zshrc
-echo '\n === ps '
-ps
-echo '\n\n === ifconfig | grep inet'
+# echo '\n === ps '
+# ps | lolcat
+# echo '\n\n === ifconfig | grep inet'
 # ifconfig | egrep -o '([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}' 
-ifconfig | grep inet
-echo '\n\n === tail -5 ~/.zsh_history'
-tail -5 ~/.zsh_history
+# ifconfig | grep inet | lolcat
+echo '\n=== tail -5 ~/.zsh_history ==='
+tail -5 ~/.zsh_history | lolcat --spread=3.5
 
-echo '\n === df'
-df
-echo '\n'
-echo '\tRemember to C-r for backwards search'
+# echo '\n === df'
+# df | lolcat --spread=4
+figlet what on earth | lolcat
+echo '\n\tRemember to C-r for backwards search\n'

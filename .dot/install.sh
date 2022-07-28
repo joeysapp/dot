@@ -15,6 +15,9 @@ brew install figlet
 echo 'Installing cowsay..'
 brew install cowsay
 
+echo 'Installing lolcat..'
+brew install lolcat
+
 echo 'Installing ag/the_silver_searcher'..
 brew install ag
 

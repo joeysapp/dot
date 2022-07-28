@@ -6,10 +6,11 @@
 
 ## Aliases
 
-alias dot="git --git-dir="$HOME/.dot.git" --work-tree=$HOME"
-alias ls='LC_COLLATE=C ls -AlFh'
-# LiSt
+alias dot="git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
 
+alias hi="fc -l 1"
+
+alias ls='LC_COLLATE=C ls -AlFh'
 # A - all files, no . ..
 # l - list format
 # F - long show / after directories
@@ -29,8 +30,6 @@ alias ls='LC_COLLATE=C ls -AlFh'
 # |  |   |   |    |   |      |
 # d rwx r-x r-x   5 zooey  staff   160B Jul 27 17:13 .config
 
-# https://old.reddit.com/r/linux4noobs/comments/oeqi2j/simple_bashrc_tweak_that_ive_found_extremely/v
-
 # Nice highlighting for tabbing through stuff in term
 zstyle ':completion:*' menu select
 zstyle ':completion:\*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
@@ -48,46 +47,27 @@ setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
 setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 setopt EXTENDED_HISTORY  # record command start time
-alias history="fc -l 1"
 
 ## NVM Config
 export NVM_DIR="$HOME/.nvm"
   [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-# https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#SEC59
-# https://www.thegeekstuff.com/2008/09/bash-shell-ps1-10-examples-to-make-your-linux-prompt-like-angelina-jolie/
-# PS1="\[$(tput bold)$(tput setb 4)$(tput setaf 7)\]\u@\h:\w $ \[$(tput sgr0)\]"
-# function httpdcount {
-#   ps aux | grep httpd | grep -v grep | wc -l
-# }
-# export PS1='\u@\h [`httpdcount`]> '
-# 
-# for filesize in $(ls -l . | grep "^-" | awk '{print $5}')
-# do
-#   let totalsize=$totalsize+$filesize
-# done
-# echo -n "$totalsize"
-# export PS1="\u@\h [\$(totalfilesize.sh) bytes]> "
-# 
-# # https://zsh.sourceforge.io/Intro/intro_14.html#SEC14
 
-## Formatting
-
-
+# Formatting
 ## Colors
 autoload -U colors && colors
 export CLICOLOR=0
 export LSCOLORS=gafacadabaegedabagacad
 # export lscolors=Exbhcxdxbxegedabagacad
 
-# %U underline
-# If the PROMPT_SUBST option is set, the prompt string is first subjected to parameter expansion, command substitution and arithmetic expansion.
-setopt PROMPT_SUBST # evals code in ps1/prompt
+# If the PROMPT_SUBST option is set,
+# the prompt string is first subjected to parameter expansion, command substitution and arithmetic expansion.
+setopt PROMPT_SUBST
 PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
 RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
-# Printouts on tty start
+# Printouts 
 
 # env | lolcat
 # cat ~/.zshrc
@@ -105,12 +85,10 @@ tail -5 ~/.zsh_history | lolcat --spread=3.5
 # echo '\n === df'
 # df | lolcat --spread=4
 
-figlet what on earth | lolcat
+figlet hello there | lolcat
 echo '\n\tRemember to C-r for backwards search\n'
 
 # du -ckh --si ~/ | sort -h   
 # du -hd 1
-# ncdu?
-
 
 # find . -maxdepth 1 -type d | sort  

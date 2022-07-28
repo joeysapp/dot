@@ -6,6 +6,7 @@
 ;; visual config
 (set-frame-parameter (selected-frame) 'alpha '(95 95))
 (add-to-list 'default-frame-alist '(alpha 95 95))
+(nyan-mode)
 
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)

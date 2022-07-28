@@ -1,5 +1,5 @@
 # dot
-Managing run configs across computers because `rsync`ing and `mv`ing gets tedious
+Managing import files (configs, run commands, fonts, ...) across computers because `rsync`ing and `mv`ing gets tedious
 
 ## usage
 Creating a unique git directory and aliasing to `dot` so `git status` doesn't show everything in every subfolder under `/Users/you/*`. 
@@ -17,7 +17,7 @@ dot reset --hard origin/master
 
 ## Specifics
 * ~/.firefox
-** goto about:profiles on firefox, create a new default profile pointing here
+- goto about:profiles on firefox, create a new default profile pointing here
 
 ## further reading
 * [https://www.edwardthomson.com/blog/managing_dotfiles_with_git.htm](https://www.edwardthomson.com/blog/managing_dotfiles_with_git.html)

@@ -1,0 +1,100 @@
+/* stack* websites */
+.js-consent-banner {
+    opacity: 0.33;
+    width: 200px !important;
+}
+
+@import url('userChrome.css');
+
+/* Removes the white loading page */
+/* url(about:newtab), url(about:home) */
+@-moz-document url(about:blank) {
+	html:not(#ublock0-epicker), html:not(#ublock0-epicker) body, #newtab-customize-overlay {
+		background: var(--bf-bg) !important;
+	}
+}
+
+/* Sets up minimal scrollbar */
+:root {
+	scrollbar-width: thin !important;
+	scrollbar-color: rgb(161, 161, 161) transparent !important;
+}
+
+/*  Sets up minimal incognito scrollbar */
+@-moz-document url(about:privatebrowsing) {
+	:root{
+		scrollbar-width: thin !important;
+		scrollbar-color: rgb(161, 161, 161) transparent !important;
+	}
+}
+
+html {
+    /*background-color: red !important;*/
+}
+
+@-moz-document url("about:newtab"), url("about:home"), url("about:blank#foobar") {
+
+body { background: transparent !important;}
+
+} 
+
+/* reddit */
+/* bottom thing on pages */
+.read-next-container {
+    display: none;
+}
+.link.promotedlink {
+    background: white !important;
+    filter: grayscale(1);
+    opacity: 0.5;
+    scale: 0.75;
+
+    * {
+        background: white !important;
+    }
+}
+
+/* youtube */
+ytd-watch-felxy {
+  /* hiding the search bar */
+  position: absolute;
+  top: 0px;
+}
+
+#masthead-container {
+    opacity: 0 !important;
+    transition: all 1s ease !important;
+
+}
+
+#masthead-container:hover {
+    opacity: 1 !important
+}
+
+#start {
+display: none !important;
+}
+
+#end {
+display: none !important;
+}
+
+#page-manager {
+    margin-top: 0px !important;
+}
+
+#player-theater-container {
+    max-height: 100vh !important;
+    height: 100vh !important;
+}
+
+#video-stream, #html5-main-video {
+    width: auto;
+    height: auto;
+}
+
+/* adds in the """suggested videos""" area */
+#watch-checkout-offers {
+  max-height: 0px !important;
+  opacity: 0.25;
+}

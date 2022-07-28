@@ -15,6 +15,10 @@ dot fetch
 dot reset --hard origin/master
 ```
 
+## Specifics
+* ~/.firefox
+** goto about:profiles on firefox, create a new default profile pointing here
+
 ## further reading
 * [https://www.edwardthomson.com/blog/managing_dotfiles_with_git.htm](https://www.edwardthomson.com/blog/managing_dotfiles_with_git.html)
 * [Ask HN: What do you use to manage dotfiles? (https://news.ycombinator.com/item?id=11070797)](https://news.ycombinator.com/item?id=11070797)

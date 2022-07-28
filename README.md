@@ -3,7 +3,7 @@ Managing files (configs, run commands, fonts, ...) across computers because `rsy
 
 ## Usage
 Creating a unique git directory and aliasing to `dot` so `git status` doesn't show everything in every subfolder under `/Users/you/*`. 
-```
+```bash
 cd $HOME
 git init --bare $HOME/.dot/.git
 
@@ -19,13 +19,17 @@ dot reset --hard origin/master
 ```
 
 ## Specifics
-<details><summary>`.firefox`</summary>
+<details><summary>Firefox</summary>
+
+<p>
 * Goto `about:profiles` on Firefox, create a new default profile pointing here.
 * userChrome is for the application window itself
 ** e.g. I want each tab on Firefox to have a custom font
 * userContent is custom css styling for websites
 ** e.g. "I want to always hide a certain div on a certain site"
 ** e.g. "I want the youtube player to utilize the entire app window 100%"
+
+</p>
 
 </details>
 

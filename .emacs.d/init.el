@@ -4,9 +4,9 @@
 
 
 ;; visual config
-(load-theme 'kaolin-valley-light t) ; t is 'NO-CONFIRM' flag
 (set-frame-parameter (selected-frame) 'alpha '(95 95))
 (add-to-list 'default-frame-alist '(alpha 95 95))
+
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (tool-bar-mode -1)
@@ -26,11 +26,11 @@
 
 ;; https://github.com/jacktasia/dumb-jump
 ;; M-. to jump to definitions
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+;; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 ; save cursor in buffer
-(use-package saveplace
-  :init (save-place-mode))
+;(use-package saveplace
+;  :init (save-place-mode))
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 (load "figlet.el")
@@ -51,7 +51,6 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
 
-
 ;; (setq web-mode-enable-auto-pairing t)
 ; (add-hook 'web-mode-hook
 ;           (lambda ()
@@ -67,8 +66,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("5a00018936fa1df1cd9d54bee02c8a64eafac941453ab48394e2ec2c498b834a" default))
  '(electric-indent-mode nil)
  '(global-linum-mode t)
  '(indent-tabs-mode nil)
@@ -78,9 +75,9 @@
  '(js-js-switch-tabs nil)
  '(js-jsx-align->-with-< nil)
  '(js-jsx-detect-syntax nil)
- '(package-selected-packages
-   '(kaolin-themes dumb-jump nyan-mode use-package web-mode markdown-mode cider clojure-mode))
+ '(package-selected-packages '(nyan-mode web-mode markdown-mode cider clojure-mode))
  '(standard-indent 2)
+ '(tool-bar-mode nil)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
  '(web-mode-enable-auto-indentation nil)
@@ -92,6 +89,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#fdfde7" :foreground "#5f5f5f" :inverse-video nil :box nil :strike-through nil :extend nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code")))))
+ '(default ((t (:inherit nil :stipple nil :background "#fdfde7" :foreground "#5f5f5f" :inverse-video nil :box nil :strike-through nil :extend nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "CtrlD")))))
 
 ;; height is 100 = 1/10pt, so 140 is 14pt

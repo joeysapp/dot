@@ -90,5 +90,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#fdfde7" :foreground "#5f5f5f" :inverse-video nil :box nil :strike-through nil :extend nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "CtrlD")))))
-
 ;; height is 100 = 1/10pt, so 140 is 14pt

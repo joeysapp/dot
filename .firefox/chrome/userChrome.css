@@ -1,6 +1,8 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-/* enable gfx.webrender.all in about:config */
+/* INITIAL SETUP: */
+/* about:config -> toolkit.legacyUserProfileCustomizations.stylesheets to true */
+/* about:config -> gfx.webrender.all to true */
 /* https://old.reddit.com/r/FirefoxCSS/comments/gk93p2/help_in_creating_a_transparent_userchromecss/ */
 
 #appcontent {

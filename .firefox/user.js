@@ -1,6 +1,8 @@
 /* https://github.com/arkenfox/user.js/wiki/2.1-User.js */
 /* look @ ./prefs.js */
 
+user_pref('browser.altClickSave', true); // enable legacy alt-click to save
+
 user_pref("gfx.font_rendering.opentype_svg.enabled", false);
 
 /* 1402: limit font visibility (Windows, Mac, some Linux) [FF94+]

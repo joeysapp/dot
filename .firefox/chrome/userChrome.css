@@ -18,21 +18,24 @@
 }
 
 /* statuspanel - on link hover item at bottom left of window */
+#browserContainer {
+    margin-bottom: 48px; /* so there's space for this always-visible panel */
+}
 #statuspanel {
     visibility: visible !important;
-    opacity: 0.9 !important;
+    opacity: 1.0 !important;
     font-family: Monaco !important;
     z-index: 100000;
 
-    left: 12px !important;
+    left: 4px !important;
     top: 99.5vh !important;
 
     max-width: 200vw;
 }
 #statuspanel-inner{
     height: auto !important;
-    padding: 0.5rem;
-    border-radius: 24px !important;
+    padding: 2px;
+    border-radius: 0px !important;
     background: rgba(41, 41, 41, 1) !important;
     z-index: 100000;
 }

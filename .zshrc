@@ -1,5 +1,6 @@
 ## Path
 # export PATH="/usr/local/sbin:$PATH"
+export PATH=".dot/bin:$PATH"
 
 # reload
 # source ./zshrc
@@ -31,8 +32,14 @@ alias ls='LC_COLLATE=C ls -AlFh'
 # d rwx r-x r-x   5 zooey  staff   160B Jul 27 17:13 .config
 
 # Nice highlighting for tabbing through stuff in term
-zstyle ':completion:*' menu select
+# https://thevaluable.dev/zsh-completion-guide-examples/
+zstyle ':completion:*' menu select 
+zstyle ':completion:*' file-list all # shows a list, not just rows
+# https://askubuntu.com/a/854365 # autocomplete of user scripts
+
 zstyle ':completion:\*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+# places descriptions above autocomplete
+zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
 autoload -Uz compinit && compinit
 
 

@@ -1,12 +1,32 @@
-;; https://raw.githubusercontent.com/jpkotta/figlet/19a38783a90e151faf047ff233a21a729db0cea9/figlet.el
-;; https://github.com/jpkotta/figlet/tree/master
-;;; figlet.el --- Annoy people with big, ascii art text
 
+;;  .d888d8b        888        888              888
+;; d88P" Y8P        888        888              888
+;; 888              888        888              888
+;; 888888888 .d88b. 888 .d88b. 888888    .d88b. 888
+;; 888   888d88P"88b888d8P  Y8b888      d8P  Y8b888
+;; 888   888888  88888888888888888      88888888888
+;; 888   888Y88b 888888Y8b.    Y88b. d8bY8b.    888
+;; 888   888 "Y88888888 "Y8888  "Y888Y8P "Y8888 888
+;;               888
+;;          Y8b d88P
+;;           "Y88P"
+;;
 ;; Copyright (C) 2014 Aurelien Aptel <aurelien.aptel@gmail.com>
 ;; Copyright (C) 2008 Philip Jackson
-
 ;; Author: Philip Jackson <phil@shellarchive.co.uk>
-;; Version: 0.5
+;;
+;;    Warning, leaving large ascii art text in your teams codebase might
+;;    cause an outbreak of physical violence.
+;;
+;; * https://github.com/jpkotta/figlet/tree/master
+;;
+;; * (require 'figlet)
+;;
+;; figlet, figlet-comment,
+;; figlet-figletify-region, figlet-figletify-region-comment
+;;
+;; * M-x figlet
+;; * C-u M-x figlet
 
 ;; This file is not currently part of GNU Emacs.
 
@@ -25,24 +45,15 @@
 ;; the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 ;; Boston, MA 02111-1307, USA.
 
-;;; Commentary:
-
-;; To use this feature simple eval (require 'figlet) type M-x figlet
-;; and you will be asked for a string. If you use a prefix (C-u M-x
-;; figlet) then you will be asked for a font.
-
-;; Have a look at `figlet-comment', `figlet-figletify-region' and
-;; `figlet-figletify-region-comment'.
-
-;; Warning, leaving large ascii art text in your teams codebase might
-;; cause an outbreak of physical violence.
+(defvar figlet-default-font "chunky"
+  "originally: small -> cricket -> chunky")
 
 (defvar figlet-fonts '())
-(defvar figlet-default-font "small"
-  "Default font to use when none is supplied.")
+
 (defvar figlet-options '()
   "List of options for the figlet call.
 This is a list of strings, e.g. '(\"-k\").")
+
 (defvar figlet-font-directory nil
   "Figlet default font directory")
 
@@ -63,27 +74,47 @@ This is a list of strings, e.g. '(\"-k\").")
 
 ;;;###autoload
 (defun figlet (string)
-  "Pass a string through figlet and insert the output at
-point. Use a prefix arg to be promted for a font."
+  "Pass a string through figlet and insert the output at point."
   (interactive "sTo be fug: ")
+  (let ((r-start (if (use-region-p)
+                     (region-beginning)
+                     (line-beginning-position)))
+         (r-end (if (use-region-p)
+                    (region-end)
+                    (line-end-position)))))
   (let* ((fonts (figlet-get-font-list))
-         (font (if current-prefix-arg
-                   (if fonts
-                       (completing-read "Font: " fonts nil t)
-                       (read-from-minibuffer "Font: " figlet-default-font))
-                   figlet-default-font)))
+         ;; note(@joeysapp): Remove C-u M-x figlet behavior, always ask for font
+         (font (if fonts
+                   (completing-read "Font: " fonts nil t)
+                   (read-from-minibuffer "Font: " figlet-default-font))))
     (insert
      (with-temp-buffer
        (apply #'call-process (append '("figlet" nil t t)
                                      figlet-options
-                                     `("-f" ,font ,string)))
+                                     ;; note(joeysapp): Allow user to <enter> through Font prompt
+                                     `("-f" , (if (> (length font) 0)
+                                                  font
+                                                figlet-default-font), string)))
        (goto-char (point-min))
        (re-search-forward "^." nil t)
        (delete-region (point-min) (point-at-bol))
+       ;; atempting to allow non-selected lines
+       ; (goto-char (point-min))
+       ; (delete-region (point-min) (point-at-bol))
+
        (re-search-forward "^[[:blank:]]*$" nil t)
        (delete-region (point) (point-max))
        (delete-trailing-whitespace)
        (buffer-substring (point-min) (point-max))))))
+
+
+
+
+
+
+
+
+
 
 ;;;###autoload
 (defun figlet-comment (string)

@@ -18,6 +18,10 @@
 ;; |   _|  _  |  _  ||  _  |
 ;; |____|_____|_____||_____|
 ;;
+;; [ ] Put CtrlD in dot somehow, or git-annex
+;;
+;; [ ] Create eval-region-or-last-sexp for C-q
+;;
 ;; [ ] Improve custom/figlet.el to allow unselected lines - 2022-09-04
 ;;     notes/elisp stuff for that:
 ;;
@@ -59,19 +63,15 @@
 (put 'set-goal-column 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-
-
 ;;         __               __
 ;; .-----.|  |_.---.-.----.|  |_.--.--.-----.
 ;; |__ --||   _|  _  |   _||   _|  |  |  _  |
 ;; |_____||____|___._|__|  |____|_____|   __|
 ;;                                    |__|
-(set #'display-startup-echo-area-message #'ignore)
-(setq inhibit-splash-screen t)
-(setq initial-scratch-message "")
-; (figlet-preview-fonts)
-
-; (setq initial-scratch-message "foo")
+; (set #'display-startup-echo-area-message #'ignore)
+; (setq inhibit-splash-screen t)
+; (setq initial-scratch-message "")
+; (setq initial-scratch-message "foo") ; (figlet-preview-fonts)
 (setq create-lockfiles nil)
 (setq make-backup-files nil)
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
@@ -82,18 +82,18 @@
 ;; |__|__|_____|___  ||_____|_____|___._|__| |_____|
 ;;             |_____|
 (global-set-key (kbd "<S-tab>") nil) ; collapses all headers in markdown
-; (global-set-key (kbd "<backtab>") nil)
-(global-set-key (kbd "C-z") #'figlet-figletify-region-comment)
-; (global-set-key (kbd "C-u z") #'figlet-figletify-region-comment) ; how to "prefix arg"?
+(global-set-key (kbd "C-t") nil) ; (transpose-chars), swaps chars around..
+(global-set-key (kbd "C-t") 'figlet-figletify-region-comment)
+(global-set-key (kbd "C-q") nil) ; (quoted-insert), i think this puts quotes to M-x <here> ?
+(global-set-key (kbd "C-q") 'eval-last-sexp) ; (quoted-insert), i think this puts quotes to M-x <here> ?
 (setq-default indent-tabs-mode -1) ; indent with spaces vs tab
-
 
 ;;   ___
 ;; .'  _|.----.---.-.--------.-----.
 ;; |   _||   _|  _  |        |  -__|
 ;; |__|  |__| |___._|__|__|__|_____|
 ;;
-(nyan-mode)
+(nyan-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
@@ -103,9 +103,20 @@
 (set-frame-parameter (selected-frame) 'alpha '(95 95))
 (add-to-list 'default-frame-alist '(alpha 95 95))
 (setq-default global-linum-mode 1)
-(setq linum-format "%3d") ; "%4d \u2502 "  is  pipe to right side of 00 | on the left side
-(add-to-list 'default-frame-alist '(left-fringe . 0))
-(add-to-list 'default-frame-alist '(right-fringe . 0))
+(setq linum-format "%4d") ; "%4d \u2502 "  is  pipe to right side of 00 | on the left side
+; (add-to-list 'default-frame-alist '(left-fringe . 8))
+; (add-to-list 'default-frame-alist '(right-fringe . 0)) ; right side of window
+
+(fringe-mode '(2 . 0)) ; 2px border of gray60
+(set-face-attribute 'fringe nil :background "gray60") ; line separating fringe and content,
+; (set-face-attribute 'fringe nil :background nil)
+; (set-face-attribute 'linum nil :background (face-background 'default))
+(set-face-attribute 'fringe nil :foreground "red")
+
+
+;(set-face-attribute 'fringe nil :foreground (face-foreground 'default))
+;(set-face-attribute 'fringe nil :background (face-background 'default))
+
 ; (setq-default left-fringe-width 11) "set fringes globally"
 ; (setq-default right-fringe-width 0)
 
@@ -119,7 +130,7 @@
 (add-to-list 'load-path "~/.emacs.d/custom")
 (load "figlet.el") ; (figlet-get-font-list) to see all fonts
 (load "indent-region-example.el")  ; look at a nice emacs-list example :^)
-(load "open-file-with-program.el") ; currently not working?
+; (load "open-file-with-program.el") ; currently not working?
 (eval-and-compile
   (require 'package)
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")

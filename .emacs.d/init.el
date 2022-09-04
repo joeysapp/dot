@@ -72,6 +72,8 @@
 ; (setq inhibit-splash-screen t)
 ; (setq initial-scratch-message "")
 ; (setq initial-scratch-message "foo") ; (figlet-preview-fonts)
+; (add-hook 'after-init-hook (lambda () (append-to-file "after-init-hook\n" nil  "log.txt")))
+; (add-hook 'after-init-hook (lambda () (figlet-preview-fonts)))
 (setq create-lockfiles nil)
 (setq make-backup-files nil)
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))

@@ -72,7 +72,9 @@ export LSCOLORS=gafacadabaegedabagacad
 # the prompt string is first subjected to parameter expansion, command substitution and arithmetic expansion.
 setopt PROMPT_SUBST
 PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
-RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
+
+# Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
+# RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
 # Printouts 
 
@@ -86,14 +88,14 @@ RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 # ifconfig | egrep -o '([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}' 
 # ifconfig | grep inet | lolcat
 
-echo '\n=== tail -5 ~/.zsh_history ==='
-tail -5 ~/.zsh_history | lolcat --spread=3.5
+# echo '\n=== tail -5 ~/.zsh_history ==='
+# tail -5 ~/.zsh_history | lolcat --spread=3.5
 
 # echo '\n === df'
 # df | lolcat --spread=4
 
-figlet hello there | lolcat
-echo '\n\tRemember to C-r for backwards search\n'
+figlet -k -f chunky o hai thar | lolcat
+echo '  tip: Remember to C-r for backwards search\n'
 
 # du -ckh --si ~/ | sort -h   
 # du -hd 1

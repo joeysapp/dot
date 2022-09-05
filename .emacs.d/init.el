@@ -101,7 +101,7 @@
 ;; |   _||   _|  _  |        |  -__|
 ;; |__|  |__| |___._|__|__|__|_____|
 ;;
-(load-theme 'moe-dark t)
+(load-theme 'moe-light t)
 (nyan-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -109,7 +109,7 @@
 
 ;; frame size / opacity
 (set-face-attribute 'default nil :family "CtrlD" :height 130) ; height is 100 = 1*10pt, so 130 is 13pt
-(setq default-frame-alist '((width . 120) (height . 45)))
+(setq default-frame-alist '((width . 110) (height . 70)))
 (set-frame-parameter (selected-frame) 'alpha '(95 95))
 (add-to-list 'default-frame-alist '(alpha 95 95))
 

@@ -1,3 +1,16 @@
+
+#                  __
+#    .-----.-----.|  |--.----.----.
+#  __|-- __|__ --||     |   _|  __|
+# |__|_____|_____||__|__|__| |____|
+
+# 
+# todo(@joeysapp):
+#    * read through these:
+#      - https://github.com/zsh-users/zsh/tree/master/Functions/Misc
+#      - https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zstyle%2B
+# 
+
 ## Path
 # export PATH="/usr/local/sbin:$PATH"
 export PATH=".dot/bin:$PATH"
@@ -63,6 +76,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Formatting
 ## Colors
+zsh /.zsh_colors
 autoload -U colors && colors
 export CLICOLOR=0
 export LSCOLORS=gafacadabaegedabagacad

@@ -50,7 +50,7 @@
 
 (defvar figlet-fonts '())
 
-(defvar figlet-options '()
+(defvar figlet-options '("-k")
   "List of options for the figlet call.
 This is a list of strings, e.g. '(\"-k\").")
 

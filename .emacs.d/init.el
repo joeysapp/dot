@@ -101,7 +101,7 @@
 ;; |   _||   _|  _  |        |  -__|
 ;; |__|  |__| |___._|__|__|__|_____|
 ;;
-(load-theme 'moe-light t)
+(load-theme 'moe-dark t)
 (nyan-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)

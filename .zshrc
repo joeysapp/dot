@@ -109,8 +109,8 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # df | lolcat --spread=4
 
 figlet -k -f chunky o hai thar | lolcat
-echo '  tip: Remember to C-r for backwards search\n'
-
+echo '  tip: Remember to C-r for backwards search'
+echo '     : Also, C-<tab> in Firefox to switch tabs\n'
 # du -ckh --si ~/ | sort -h   
 # du -hd 1
 

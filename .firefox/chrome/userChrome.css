@@ -23,7 +23,7 @@
 }
 #statuspanel {
     visibility: visible !important;
-    opacity: 1.0 !important;
+    opacity: 0.5 !important;
     font-family: Monaco !important;
     z-index: 100000;
 
@@ -31,6 +31,8 @@
     top: 99.5vh !important;
 
     max-width: 200vw;
+    pointer-events:none;
+
 }
 #statuspanel-inner{
     height: auto !important;
@@ -38,6 +40,9 @@
     border-radius: 0px !important;
     background: rgba(41, 41, 41, 1) !important;
     z-index: 100000;
+
+    pointer-events: none;
+    opacity: 0.25;
 }
 
 

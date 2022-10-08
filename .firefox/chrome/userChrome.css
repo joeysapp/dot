@@ -11,43 +11,59 @@
     box-sizing: border-box;
     color: red;
 }
-
-
 #appcontent {
     background: transparent !important;
 }
 
-/* statuspanel - on link hover item at bottom left of window */
-#browserContainer {
-    margin-bottom: 48px; /* so there's space for this always-visible panel */
+
+
+
+/* Status Panel - The bottom-left item showing the href of whatever you hover over */
+.browserContainer {
+    /* nah */
+    /* margin-bottom: 48px; */
 }
 #statuspanel {
+    opacity: 1;
+
     visibility: visible !important;
-    opacity: 0.5 !important;
     font-family: Monaco !important;
     z-index: 100000;
 
-    left: 4px !important;
-    top: 99.5vh !important;
+    right: 48px !important
+    bottom: 48px !important;
+    /* left: 32px !important; */
+    /* top: 99.5vh !important; */
 
-    max-width: 200vw;
-    pointer-events:none;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+    pointer-events:none !important;
 
+    transition: opacity 1s ease 0s;
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/transition */
+    
 }
+#statuspanel[inactive] {
+    transition: opacity 1s ease 10s !important;
+    opacity: 0;
+}
+
 #statuspanel-inner{
     height: auto !important;
-    padding: 2px;
+    padding: 4px;
     border-radius: 0px !important;
+    border: 2px solid white;
     background: rgba(41, 41, 41, 1) !important;
     z-index: 100000;
 
-    pointer-events: none;
-    opacity: 0.25;
+    pointer-events: none !important;
+    opacity: 1;
 }
 
 
-* {
 
+
+* {
     --tabs-border: transparent !important; /* Remove borders from active tab and below tabs */
     
     font-kerning: normal;

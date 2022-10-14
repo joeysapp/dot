@@ -213,7 +213,7 @@
  '(js-indent-align-list-continuation nil)
  '(js-indent-level 2)
  '(js-js-switch-tabs nil)
- '(js-jsx-align->-with-< nil)
+ '(js-jsx-align->-with-< t)
  '(js-jsx-detect-syntax nil)
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)

@@ -76,7 +76,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Formatting
 ## Colors
-zsh /.zsh_colors
+# zsh /.zsh_colors
 autoload -U colors && colors
 export CLICOLOR=0
 export LSCOLORS=gafacadabaegedabagacad
@@ -107,12 +107,17 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 
 # echo '\n === df'
 # df | lolcat --spread=4
+# $a = figlet -k -f chunky "o     helo" | lolcat
 
-figlet -k -f chunky o     hai     thar | lolcat
-echo '     C-r for backwards term search'
-echo '     C-l for clear term window '
-echo '     C-tab for ff tab switch'
-echo '\n'
+
+DIV="----------------------------------------"
+echo $DIV
+echo ' - [shell]      <C-r> for hist search'
+echo ' - [shell]      <C-l> for clear shell '
+echo ' - [firefox]    <C-tab> for tab switch'
+echo $DIV
+~/.dot/bin/list-launch-info.sh | lolcat
+echo $DIV
 
 # du -ckh --si ~/ | sort -h   
 # du -hd 1

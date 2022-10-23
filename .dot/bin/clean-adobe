@@ -5,11 +5,19 @@
                      |__|
 ================================================================================
 
-; note that there's other Adobe stuff
+; note that there's other Adobe stuff..
+; like font/pdf support.. so be careful with rm -rf 
 sudo find / -name "*Adobe*" 2>/dev/null | while read thing
 do
 echo $thing
 done
+
+; Be careful with rm -rf this..
+; /Applications/Inkscape.app/Contents/Resources/share/inkscape/keys/adobe-illustrator-cs2.xml
+; /Desktop/how-to-delete-adobe.png
+; /Users/.../.dot/bin/clean-adobe lol
+
+; 2>/dev/null pipes error messages elsewhere
 
 sudo find / -name "*adobe*" 2>/dev/null | while read thing
 do

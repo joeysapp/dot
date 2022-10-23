@@ -1,0 +1,24 @@
+#!/bin/zsh
+# https://ss64.com/osx/launchctl.html
+#    ~/Library/LaunchAgents            Per-user agents provided by the user.
+#    /Library/LaunchAgents             Per-user agents provided by the administrator.
+#    /Library/LaunchDaemons            System-wide daemons provided by the administrator.
+#    /System/Library/LaunchAgents      Per-user agents provided by Mac OS X.
+#    /System/Library/LaunchDaemons     System-wide daemons provided by Mac OS X.
+
+specificUserByUser="/Users/zooey/Library/LaunchAgents"
+specificUserByAdmin="/Library/LaunchAgents"
+specificUserByOS="/System/Library/LaunchAgents"
+
+entireSystemByAdmin="/Library/LaunchDaemons"
+entireSystemByOS="/System/Library/LaunchDaemons"
+
+command="find"
+LAUNCH=`
+        echo "" $($command $specificUserByUser    -maxdepth 1 -type f | wc -l)   "  "   $specificUserByUser  ;        
+        echo "" $($command $specificUserByAdmin   -maxdepth 1 -type f | wc -l)   "  "   $specificUserByAdmin ;
+        echo "" $($command $entireSystemByAdmin   -maxdepth 1 -type f | wc -l)   "  "   $entireSystemByAdmin ;
+        echo "" $($command $specificUserByOS      -maxdepth 1 -type f | wc -l)   ""   $specificUserByOS    ;
+        echo "" $($command $entireSystemByOS      -maxdepth 1 -type f | wc -l)   ""   $entireSystemByOS    ;
+`
+echo $LAUNCH

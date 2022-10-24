@@ -3,26 +3,90 @@
 #    .-----.-----.|  |--.----.----.
 #  __|-- __|__ --||     |   _|  __|
 # |__|_____|_____||__|__|__| |____|
+# ------------------------------------------------------------
+# reload after saving .zshrc
+# source ./zshrc
 
-# 
 # todo(@joeysapp):
 #    * read through these:
 #      - https://github.com/zsh-users/zsh/tree/master/Functions/Misc
 #      - https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zstyle%2B
 # 
 
-## Path
+#     __ __
+# .--|  |  |--.
+# |  _  |  _  |
+# |_____|_____|
+# ----------------------------------------
+# Add in all our needed terminal commands
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
+# Default postgres directory for all postgres/pg_ctl commands, etc.
+export PGDATA="/Users/zooey/Documents/code/db/postgres/database"
+export PGPORT="9002"
+
+
+# Not sure if this does anything?
+export PG_COLOR="auto"
+
+# For compilers to find postgresql@15 you may need to set:
+# export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
+
+
+
+
+
+#         __ __
+# .-----.|__|  |_
+# |  _  ||  |   _|
+# |___  ||__|____|
+# |_____|
+# ------------------------------------------------------------
+# todo: Make this work for .dot/annex too
+# todo: Add .gitconfig to .dot
+# [alias]
+#         branches = branch --all -vvv --color=auto
+
+# https://stackoverflow.com/questions/3538774/is-it-possible-to-override-git-command-by-git-alias
+function git {
+#    if [[ "$1" == "branch" && "$@" != *"--help"* && "$@" != *"-h"* ]];
+#    then
+#        shift 1
+#        command git branches "$@"
+    if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
+    then
+        shift 1
+        command echo ""
+        command echo "---------------------------------------------------------"
+        command git branches "$@"
+        command echo "---------------------------------------------------------"
+        command echo ""
+        command git status "$@"
+    else
+        command git "$@"
+    fi
+}
+
+
+#  ___ ___
+# |   |   |.---.-.----.-----.
+# |   |   ||  _  |   _|__ --|
+#  \_____/ |___._|__| |_____|
+# ----------------------------------------
 # export PATH="/usr/local/sbin:$PATH"
 export PATH=".dot/bin:$PATH"
 
-# reload
-# source ./zshrc
 
-## Aliases
+#  _______ __ __
+# |   _   |  |__|.---.-.-----.
+# |       |  |  ||  _  |__ --|
+# |___|___|__|__||___._|_____|
+# --------------------------------------------------
+
+# - https://stackoverflow.com/questions/69213355/how-can-i-add-a-flag-to-alias
 
 alias dot="git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
-
-alias hi="fc -l 1"
 
 alias ls='LC_COLLATE=C ls -AlFh'
 # A - all files, no . ..
@@ -44,7 +108,14 @@ alias ls='LC_COLLATE=C ls -AlFh'
 # |  |   |   |    |   |      |
 # d rwx r-x r-x   5 zooey  staff   160B Jul 27 17:13 .config
 
-# Nice highlighting for tabbing through stuff in term
+
+
+#  _______ __         __     __ __         __     __   __
+# |   |   |__|.-----.|  |--.|  |__|.-----.|  |--.|  |_|__|.-----.-----.
+# |       |  ||  _  ||     ||  |  ||  _  ||     ||   _|  ||     |  _  |
+# |___|___|__||___  ||__|__||__|__||___  ||__|__||____|__||__|__|___  |
+#             |_____|              |_____|                      |_____|
+# --------------------------------------------------------------------------------
 # https://thevaluable.dev/zsh-completion-guide-examples/
 zstyle ':completion:*' menu select 
 zstyle ':completion:*' file-list all # shows a list, not just rows
@@ -67,15 +138,22 @@ setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
 setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 setopt EXTENDED_HISTORY  # record command start time
+# alias show_last_commands="fc -l 1"
+
 
 ## NVM Config
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
-# Formatting
-## Colors
+
+#  ______         __
+# |      |.-----.|  |.-----.----.-----.
+# |   ---||  _  ||  ||  _  |   _|__ --|
+# |______||_____||__||_____|__| |_____|
+# ----------------------------------------
+
 # zsh /.zsh_colors
 autoload -U colors && colors
 export CLICOLOR=0
@@ -90,13 +168,27 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
 # RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
-# Printouts 
+
+
+
+#  ______        __         __                __
+# |   __ \.----.|__|.-----.|  |_.-----.--.--.|  |_.-----.
+# |    __/|   _||  ||     ||   _|  _  |  |  ||   _|__ --|
+# |___|   |__|  |__||__|__||____|_____|_____||____|_____|
+# ------------------------------------------------------------
 
 # env | lolcat
 # cat ~/.zshrc
 
 # echo '\n === ps '
 # ps | lolcat
+
+
+# du -ckh --si ~/ | sort -h   
+# du -hd 1
+
+# find . -maxdepth 1 -type d | sort  
+
 
 # echo '\n\n === ifconfig | grep inet'
 # ifconfig | egrep -o '([[:digit:]]{1,3}\.){3}[[:digit:]]{1,3}' 
@@ -109,7 +201,6 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # df | lolcat --spread=4
 # $a = figlet -k -f chunky "o     helo" | lolcat
 
-
 DIV="----------------------------------------"
 echo $DIV
 echo ' - [shell]      <C-r> for hist search'
@@ -118,8 +209,3 @@ echo ' - [firefox]    <C-tab> for tab switch'
 echo $DIV
 ~/.dot/bin/list-launch-info.sh | lolcat
 echo $DIV
-
-# du -ckh --si ~/ | sort -h   
-# du -hd 1
-
-# find . -maxdepth 1 -type d | sort  

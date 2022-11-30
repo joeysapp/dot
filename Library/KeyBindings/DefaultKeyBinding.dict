@@ -1,0 +1,14 @@
+{
+  "^w" = "deleteWordBackward:";
+  "~f" = "moveWordForward:";
+  "~b" = "moveWordBackward:";
+  "~d" = "deleteWordForward:";
+  "~<" = "moveToBeginningOfDocument:";
+  "~>" = "moveToEndOfDocument:";
+  "~w" = "copy:";
+  "^y" = "yank:";
+  "^t" = "transpose:";
+  "^p" = "moveUp:";
+  "^n" = "moveDown:";
+  "^u" = "deleteToBeginningOfLine:";
+}

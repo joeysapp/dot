@@ -25,6 +25,9 @@ export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PGDATA="/Users/zooey/Documents/code/db/postgres/database"
 export PGPORT="9002"
 
+# Site + DB project
+export DBPATH="/Users/zooey/Documents/code/db"
+export SITEPATH="/Users/zooey/Documents/code/joeysapp.github.io"
 
 # Not sure if this does anything?
 export PG_COLOR="auto"
@@ -203,9 +206,15 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 
 DIV="----------------------------------------"
 echo $DIV
-echo ' - [shell]      <C-r> for hist search'
-echo ' - [shell]      <C-l> for clear shell '
-echo ' - [firefox]    <C-tab> for tab switch'
+echo "  pg_ctl -l \$PGDATA'/log' start
+  cd \$DBPATH;   nodemon nodemon/server.js
+  cd \$SITEPATH; npm run start" | lolcat
+
+echo $DIV
+echo ' [shell]      <C-r> for hist search
+ [shell]      <C-l> for clear shell
+ [*]          <C-tab> for tab switch' | lolcat
+
 echo $DIV
 ~/.dot/bin/list-launch-info.sh | lolcat
 echo $DIV

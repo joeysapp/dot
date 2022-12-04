@@ -213,7 +213,9 @@ echo "  pg_ctl -l \$PGDATA'/log' start
 echo $DIV
 echo ' [shell]      <C-r> for hist search
  [shell]      <C-l> for clear shell
- [*]          <C-tab> for tab switch' | lolcat
+ [*]          <C-tab> for tab switch
+ <M-x> outline-show-all to unfold md files
+ --> learn org-mode?' | lolcat
 
 echo $DIV
 ~/.dot/bin/list-launch-info.sh | lolcat

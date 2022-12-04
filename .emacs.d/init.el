@@ -222,6 +222,7 @@
  '(js-jsx-align->-with-< t)
  '(js-jsx-detect-syntax nil)
  '(js-jsx-syntax t)
+ '(outline-minor-mode-cycle t)
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)

@@ -6,12 +6,10 @@
 
 
 ;; * C-x <tab> <arrow-keys> lets you indent a region easer than C-x t
-
-
 ;; * M-x describe-variable <name> shows you all of the environment variables and info.
-;; * C-h l shows you a log of (keystroke . command) executed in your buffer
+;; * C-h l ; history of keystrokes in buffer
 ;; * C-x a : 
-
+;; 
 
 ;; init inspirations:
 ;; - https://github.com/Fanael/init.el/blob/master/init.el
@@ -22,9 +20,11 @@
 ;; [ ] Put CtrlD in dot somehow, or git-annex
 ;; [ ] Upgrade eval-last-sexp to eval-region-or-last-sexp for C-q
 ;; [ ] Improve custom/figlet.el to allow unselected lines - 2022-09-04
+;; - [ ] review figlet/arduino, look at https://stackoverflow.com/questions/30677784/shell-zsh-through-emacs
+;; - [ ] just make your own arduino-mode lol
+;; [ ] - https://github.com/atomontage/xterm-color
 
-
-;; elisp stuffs
+;; elisp notes
 ;;   (message "foo")
 ;;   (insert "foo")
 ;;   (defcustom foo 0 "testing")
@@ -57,12 +57,12 @@
 ; (add-hook 'after-init-hook (lambda () (figlet-preview-fonts)))
 (setq create-lockfiles nil)
 (setq make-backup-files nil)
-(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
-(when (string= system-type "darwin")   ; macOS doesn't support --dired in ls call
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))) ; for when we do use above
+(when (string= system-type "darwin") ; macOS doesn't support --dired in ls call
   (setq dired-use-ls-dired nil))
-;; saves cursor location in file on close for next open
-(save-place-mode 1) ; saves cursor location in files / directory
-
+(save-place-mode 1) ; saves cursor location in frames (e.g. files/dired)
+(setq-default indent-tabs-mode nil) ; indent will only insert spaces now
+(put 'set-goal-column 'disabled nil) ; what happens on <enter>, basically auto-indenting
 
 
 
@@ -71,28 +71,19 @@
 ;; |    <|  -__|  |  ||  _  |  _  |  _  |   _|  _  |
 ;; |__|__|_____|___  ||_____|_____|___._|__| |_____|
 ;;             |_____|
+; Emacs defaults/overrides
+(global-set-key (kbd "C-z") nil) ;; (suspend-frame), minimizes frame on macOS
+(global-set-key (kbd "C-x C-u") nil) ;; (upcase-region), annoying
+(put 'downcase-region 'disabled nil) ;; 
+(global-set-key (kbd "C-t") nil) ;; (transpose-chars) ; swaps chars around, "useless" (lol)
+(global-set-key (kbd "C-q") nil) ;; (quoted-insert), i think this puts quotes to M-x <here> ?
+;; fold all headers in modes using outline-mode (org, markdown)
+; (global-set-key (kbd "<S-tab>") nil)
+; (global-set-key (kbd "<backtab>") nil) ; equivalent of above
 
-;; (suspend-frame), minimizes frame on macOS.
-(global-set-key (kbd "C-z") nil)
-
-;; (upcase-region), annoying
-(global-set-key (kbd "C-x C-u") nil)
-
-;; collapses all headers in markdown, annoying when shift-tab
-(global-set-key (kbd "<S-tab>") nil)
-(global-set-key (kbd "<backtab>") nil) ; equivalent of above
-
-;; (transpose-chars) ; swaps chars around,"useless" (lol)
-(global-set-key (kbd "C-t") nil)
+; Custom keybinds
 (global-set-key (kbd "C-t") 'figlet-figletify-region-comment)
-
-;; (quoted-insert), i think this puts quotes to M-x <here> ?
-(global-set-key (kbd "C-q") nil)
 (global-set-key (kbd "C-q") 'eval-last-sexp)
-
-(setq-default indent-tabs-mode nil) ; indent will only insert spaces now
-; what happens on <enter>, basically auto-indenting
-(put 'set-goal-column 'disabled nil)
 
 
 
@@ -113,7 +104,7 @@
 (set-frame-parameter (selected-frame) 'alpha '(95 95))
 (add-to-list 'default-frame-alist '(alpha 95 95))
 
-;; linum and fringe
+; fringe/linum
 (global-linum-mode 1)
 (setq linum-format "%4d") ; "%4d \u2502 "  is  pipe to right side of 00 | on the left side
 ; (add-to-list 'default-frame-alist '(left-fringe . 8))
@@ -130,30 +121,49 @@
 ;; |__|                         |_____|
 ;;
 (add-to-list 'load-path "~/.emacs.d/custom")
-(load "figlet.el") ; (figlet-get-font-list) to see all fonts
+'
+(load "figlet.el") ; (figlet-get-font-list)
+
+(load "arduino-mode.el")
+(autoload 'arduino-mode "arduino-mode" "Major mode for editing Arduino code." t)
+(autoload 'ede-arduino-preferences-file "ede-arduino" "Preferences file of Arduino." t)
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
+(add-to-list 'auto-mode-alist '("\\.pde\\'" . arduino-mode))
+
+; requires https://github.com/arduino/arduino-cli / https://arduino.github.io/arduino-cli/
+; C-c C-c ; upload to arduino
+; C-c C-v ; verify
+; C-c C-m ; serial monitor
+; C-c C-x ; open w arduino IDE
+
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 ; (load "indent-region-example.el")  ; look at a nice emacs-list example :^)
-; (load "open-file-with-program.el") ; currently not working?
+; (load "open-file-with-program.el") ; currently not working
 
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (setq package-list
       '(
-        ;; dumb-jump ; M-. to jump to thing def
         moe-theme
         color-theme-sanityinc-tomorrow
         nyan-mode        
         web-mode
-        markdown-mode))
+        markdown-mode
 
-(package-initialize)
+        ;; dumb-jump ; M-. to jump to thing def
+        ;; org-superstar ; https://github.com/integral-dw/org-superstar-mode/tree/master
+        ;; org-pandoc-import ; https://github.com/tecosaur/org-pandoc-import
+        ))
+
 ; fetch list of available packages
+(package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
+
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
-
-
 
 ; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 ; M-. to jump to def, https://github.com/jacktasia/dumb-jump
@@ -171,11 +181,24 @@
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-mode))
 
+;; markdown-mode
+;; (setq markdown---???--markup-hiding nil);
 
-;; open-with (broken?)
-;; https://github.com/garberw/openwith
-;; if this one is still broken, look @ https://github.com/jpkotta/openwith/blob/master/openwith.el
-;; Open files from dired with other applications
+;; org-mode
+;; - https://orgmode.org/worg/orgcard.html
+;; - https://zzamboni.org/post/beautifying-org-mode-in-emacs/
+(setq org-hide-emphasis-markers t)
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+
+
+;; open-with
+;; - Open files from dired with other applications
+
+;; original source, I think broken on m1 macOS (?)
+;; - https://github.com/garberw/openwith
+;; if this one is still broken, look @:
+;; - https://github.com/jpkotta/openwith/blob/master/openwith.el
+
 ; (when (require 'openwith nil 'noerror)
 ;   (setq openwith-associations
 ;         (list
@@ -236,4 +259,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(put 'downcase-region 'disabled nil)
+

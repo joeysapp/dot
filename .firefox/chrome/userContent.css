@@ -54,6 +54,19 @@ body { background: transparent !important;}
     }
 }
 
+/* gmail */
+.submit_as_link {
+  /* make the load-in "Load Gmail classic easier to click */
+  background-color: lightblue;
+  padding-top: 100vh;
+  font-weight: bolder;
+}
+
+#stb, .msgb {
+  /* bottom container that contains above link. it just gets display: none'd */
+  display: flex !important;
+}
+
 /* youtube */
 ytd-watch-felxy {
   /* hiding the search bar */

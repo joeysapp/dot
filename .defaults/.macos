@@ -74,6 +74,7 @@ done 2>/dev/null &
 
 ; echo '\n\n== Energy settings'
 ; sudo pmset -a lidwake 1                                                        ; echo enable lid waking up laptop
+; sudo pmset -a disablesleep 1                                                   ; echo turn off sleep, so closing lid does not put to sleep.
 ; sudo pmset -c sleep 0                                                          ; echo sleep never while charging
 ; sudo pmset -b sleep 5                                                          ; echo sleep in 5 mins on battery
 ; sudo pmset -a standbydelay 86400                                               ; echo standby delay to 24 hours, default is 1

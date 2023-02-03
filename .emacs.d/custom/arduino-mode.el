@@ -18,7 +18,7 @@
   "The directory of libraries for arduino-cli to compile with. Must be absolute path."
   :group 'arduino
   :type 'string)
-(defcustom arduino-port "/dev/cu.usbserial-10"
+(defcustom arduino-port "/dev/cu.usbserial-110"
   "The port where the board can be accessed. Find via arduino-cli board list."
   :group 'arduino
   :type 'string)

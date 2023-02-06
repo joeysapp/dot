@@ -121,7 +121,14 @@
 ;; |__|                         |_____|
 ;;
 (add-to-list 'load-path "~/.emacs.d/custom")
-'
+
+(load "org-download.el")
+(setq-default org-download-method 'directory)
+(setq-default org-download-image-dir "~/Documents/images-emacs")
+(setq-default org-download-timestamp t)
+(setq-default org-download-backend 'curl) ; 'wget, url-retrieve is default
+(add-hook 'dired-mode-hook 'org-download-enable) ; d&d to dired
+
 (load "figlet.el") ; (figlet-get-font-list)
 
 (load "arduino-mode.el")
@@ -143,6 +150,7 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (setq package-list
       '(
         moe-theme
@@ -246,6 +254,8 @@
  '(js-jsx-detect-syntax nil)
  '(js-jsx-syntax t)
  '(outline-minor-mode-cycle t)
+ '(package-selected-packages
+   '(org-download web-mode spinner sesman queue parseedn org-superstar nyan-mode moe-theme markdown-mode dumb-jump color-theme-sanityinc-tomorrow clojure-mode))
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)

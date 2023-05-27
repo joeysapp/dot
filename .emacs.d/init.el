@@ -122,6 +122,7 @@
 ;;
 (add-to-list 'load-path "~/.emacs.d/custom")
 
+(load "async-1.9.7/async.el")
 (load "org-download.el")
 (setq-default org-download-method 'directory)
 (setq-default org-download-image-dir "~/Documents/images-emacs")
@@ -197,6 +198,11 @@
 ;; - https://zzamboni.org/post/beautifying-org-mode-in-emacs/
 (setq org-hide-emphasis-markers t)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+
+(add-hook 'python-mode-hook
+          (function (lambda ()
+                      (setq indent-tabs-mode nil
+                            tab-width 2))))
 
 
 ;; open-with

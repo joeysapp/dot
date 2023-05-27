@@ -22,12 +22,12 @@
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 # Default postgres directory for all postgres/pg_ctl commands, etc.
-export PGDATA="/Users/zooey/Documents/code/db/postgres/database"
+export PGDATA="/Users/zooey/Documents/code/site/db/postgres/database"
 export PGPORT="9002"
 
 # Site + DB project
-export DBPATH="/Users/zooey/Documents/code/db"
-export SITEPATH="/Users/zooey/Documents/code/joeysapp.github.io"
+export DBPATH="/Users/zooey/Documents/code/site/db"
+export SITEPATH="/Users/zooey/Documents/code/site/frontend"
 
 # Not sure if this does anything?
 export PG_COLOR="auto"
@@ -35,10 +35,6 @@ export PG_COLOR="auto"
 # For compilers to find postgresql@15 you may need to set:
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
-
-
-
-
 
 #         __ __
 # .-----.|__|  |_
@@ -220,3 +216,6 @@ echo ' [shell]      <C-r> for hist search
 echo $DIV
 ~/.dot/bin/list-launch-info.sh | lolcat
 echo $DIV
+
+
+

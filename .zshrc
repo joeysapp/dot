@@ -1,92 +1,76 @@
-
 #                  __
 #    .-----.-----.|  |--.----.----.
 #  __|-- __|__ --||     |   _|  __|
 # |__|_____|_____||__|__|__| |____|
 # ------------------------------------------------------------
-# reload after saving .zshrc
-# source ./zshrc
+# To reload after saving .zshrc:
+# $ source ./zshrc
+#
+# [todo]
+# * RC probably shouldn't contain unique stuff, and should be in .zprofile.
+#   Although, it is nice to have pretty printing in sshes into the shell.
+#   If other things run a shell (like venv) though, they'll see all of this.
+#
+# [future-styling-ideas]
+# - https://github.com/zsh-users/zsh/tree/master/Functions/Misc
+# - https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zstyle%2B
+#
 
-# todo(@joeysapp):
-#    * read through these:
-#      - https://github.com/zsh-users/zsh/tree/master/Functions/Misc
-#      - https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zstyle%2B
-# 
 
-#     __ __
-# .--|  |  |--.
-# |  _  |  _  |
-# |_____|_____|
-# ----------------------------------------
-# Add in all our needed terminal commands
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-
-# Default postgres directory for all postgres/pg_ctl commands, etc.
-export PGDATA="/Users/zooey/Documents/code/site/db/postgres/database"
-export PGPORT="9002"
-
-# Site + DB project
-export DBPATH="/Users/zooey/Documents/code/site/db"
-export SITEPATH="/Users/zooey/Documents/code/site/frontend"
-
-# Not sure if this does anything?
-export PG_COLOR="auto"
-
-# For compilers to find postgresql@15 you may need to set:
-# export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
-
-#         __ __
-# .-----.|__|  |_
-# |  _  ||  |   _|
-# |___  ||__|____|
-# |_____|
+#    _____     _______         __   __   __
+#  _|  |  |_  |     __|.-----.|  |_|  |_|__|.-----.-----.-----.
+# |_       _| |__     ||  -__||   _|   _|  ||     |  _  |__ --|
+# |_       _| |_______||_____||____|____|__||__|__|___  |_____|
+#   |__|__|                                       |_____|
 # ------------------------------------------------------------
-# todo: Make this work for .dot/annex too
-# todo: Add .gitconfig to .dot
-# [alias]
-#         branches = branch --all -vvv --color=auto
+## - Autocompletion
+# https://thevaluable.dev/zsh-completion-guide-examples/
+zstyle ':completion:*' menu select 
+zstyle ':completion:*' file-list all # shows a list, not just rows
+# https://askubuntu.com/a/854365 # autocomplete of user scripts
+zstyle ':completion:\*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+# places descriptions above autocomplete
+zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
+autoload -Uz compinit && compinit
 
-# https://stackoverflow.com/questions/3538774/is-it-possible-to-override-git-command-by-git-alias
-function git {
-#    if [[ "$1" == "branch" && "$@" != *"--help"* && "$@" != *"-h"* ]];
-#    then
-#        shift 1
-#        command git branches "$@"
-    if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
-    then
-        shift 1
-        command echo ""
-        command echo "---------------------------------------------------------"
-        command git branches "$@"
-        command echo "---------------------------------------------------------"
-        command echo ""
-        command git status "$@"
-    else
-        command git "$@"
-    fi
-}
+## -- History
+# https://jdhao.github.io/2021/03/24/zsh_history_setup/
+# the detailed meaning of the below three variable can be found in `man zshparam`.
+# The meaning of these options can be found in man page of `zshoptions`.
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000000   # the number of items for the internal history list
+export SAVEHIST=1000000   # maximum number of items for the history file
+setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
+setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
+setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
+setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+setopt EXTENDED_HISTORY  # record command start time
+# alias show_last_commands="fc -l 1"
 
+# -- Visual
+# echo_bar [char] [%_of_zsh]
+function echo_bar {
+    CHAR_CT=$((COLUMNS * (${2=33.3} / 100.0)));
+    CHAR_CT=${CHAR_CT%.*};
+    printf "${1:=-}%.0s" {1..$CHAR_CT}; echo '';
+};
+# For other stuff: ZSH_WIDTH=$(tput cols); ZSH_HEIGHT=$(tput lines); echo -e "lines\ncols"|tput -S
+autoload -U colors && colors
+export CLICOLOR=0
+export LSCOLORS=gafacadabaegedabagacad
+# export lscolors=Exbhcxdxbxegedabagacad
+# If the PROMPT_SUBST option is set,
+setopt PROMPT_SUBST
+# the prompt string is first subjected to:
+# * parameter expansion
+# * command substitution
+# * arithmetic expansion
+PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
+# Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
+# RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
-#  ___ ___
-# |   |   |.---.-.----.-----.
-# |   |   ||  _  |   _|__ --|
-#  \_____/ |___._|__| |_____|
-# ----------------------------------------
-# export PATH="/usr/local/sbin:$PATH"
-export PATH=".dot/bin:$PATH"
-
-
-#  _______ __ __
-# |   _   |  |__|.---.-.-----.
-# |       |  |  ||  _  |__ --|
-# |___|___|__|__||___._|_____|
-# --------------------------------------------------
-
+# [info about commands]
 # - https://stackoverflow.com/questions/69213355/how-can-i-add-a-flag-to-alias
-
-alias dot="git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
-
 alias ls='LC_COLLATE=C ls -AlFh'
 # A - all files, no . ..
 # l - list format
@@ -109,77 +93,77 @@ alias ls='LC_COLLATE=C ls -AlFh'
 
 
 
-#  _______ __         __     __ __         __     __   __
-# |   |   |__|.-----.|  |--.|  |__|.-----.|  |--.|  |_|__|.-----.-----.
-# |       |  ||  _  ||     ||  |  ||  _  ||     ||   _|  ||     |  _  |
-# |___|___|__||___  ||__|__||__|__||___  ||__|__||____|__||__|__|___  |
-#             |_____|              |_____|                      |_____|
-# --------------------------------------------------------------------------------
-# https://thevaluable.dev/zsh-completion-guide-examples/
-zstyle ':completion:*' menu select 
-zstyle ':completion:*' file-list all # shows a list, not just rows
-# https://askubuntu.com/a/854365 # autocomplete of user scripts
 
-zstyle ':completion:\*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-# places descriptions above autocomplete
-zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
-autoload -Uz compinit && compinit
-
-
-## https://jdhao.github.io/2021/03/24/zsh_history_setup/
-# the detailed meaning of the below three variable can be found in `man zshparam`.
-# The meaning of these options can be found in man page of `zshoptions`.
-export HISTFILE=~/.zsh_history
-export HISTSIZE=1000000   # the number of items for the internal history list
-export SAVEHIST=1000000   # maximum number of items for the history file
-setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
-setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
-setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
-setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
-setopt EXTENDED_HISTORY  # record command start time
-# alias show_last_commands="fc -l 1"
-
-
-## NVM Config
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvmbash_completion
-
-
-
-#  ______         __
-# |      |.-----.|  |.-----.----.-----.
-# |   ---||  _  ||  ||  _  |   _|__ --|
-# |______||_____||__||_____|__| |_____|
-# ----------------------------------------
-
-# zsh /.zsh_colors
-autoload -U colors && colors
-export CLICOLOR=0
-export LSCOLORS=gafacadabaegedabagacad
-# export lscolors=Exbhcxdxbxegedabagacad
-
-# If the PROMPT_SUBST option is set,
-# the prompt string is first subjected to parameter expansion, command substitution and arithmetic expansion.
-setopt PROMPT_SUBST
-PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
-
-# Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
-# RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
-
-
-#  _______                    __
-# |     __|.-----.----.--.--.|__|.----.-----.-----.
-# |__     ||  -__|   _|  |  ||  ||  __|  -__|__ --|
-# |_______||_____|__|  \___/ |__||____|_____|_____|
+#    _____     ______              __              __
+#  _|  |  |_  |   __ \.----.-----.|__|.-----.----.|  |_.-----.
+# |_       _| |    __/|   _|  _  ||  ||  -__|  __||   _|__ --|
+# |_       _| |___|   |__| |_____||  ||_____|____||____|_____|
+#   |__|__|                      |___|
 # ------------------------------------------------------------
-# Link $brew with env
+# [site + db]
+export PATH=".dot/bin:$PATH" 
+# export PATH="/usr/local/sbin:$PATH"
+export DBPATH="/Users/zooey/Documents/code/site/db"
+export SITEPATH="/Users/zooey/Documents/code/site/frontend"
+# [postgres]
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PGDATA="/Users/zooey/Documents/code/site/db/postgres/database" # setup default dir for all postgres/pg_ctl commands
+export PGPORT="9002"
+export PG_COLOR="auto" # Not sure if this does anything on zsh.
+# For compilers to find postgresql@15 you may need to set:
+# export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
+# [dot]
+DOT_BASE="git --git-dir=$HOME/.dot/.git --work-tree=$HOME"
+function dot {
+    if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
+    then
+        shift 1; echo_bar - 100;
+        eval "$DOT_BASE branches $@"
+        echo_bar - 100;
+        eval "$DOT_BASE status $@"
+    else
+        eval "$DOT_BASE $@"
+    fi
+}
+
+
+#    _____     _______               __
+#  _|  |  |_  |_     _|.-----.-----.|  |.-----.
+# |_       _|   |   |  |  _  |  _  ||  ||__ --|
+# |_       _|   |___|  |_____|_____||__||_____|
+#   |__|__|
+# ------------------------------------------------------------
+# [ brew ]
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-#  ______        __         __                __
-# |   __ \.----.|__|.-----.|  |_.-----.--.--.|  |_.-----.
-# |    __/|   _||  ||     ||   _|  _  |  |  ||   _|__ --|
-# |___|   |__|  |__||__|__||____|_____|_____||____|_____|
+# [ git ]
+
+# Add this to your .gitprofile:
+# [alias]
+#         branches = branch --all -vvv --color=auto
+# * https://stackoverflow.com/questions/3538774/is-it-possible-to-override-git-command-by-git-alias
+
+# `git status` will now show all remotes and their branches
+function git {
+    if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
+    then
+        shift 1; echo_bar - 100;
+        command git branches "$@"
+        echo_bar - 100;
+        command git status "$@"
+    else
+        command git "$@"
+    fi
+}
+
+
+
+#    _____     _______         __               __
+#  _|  |  |_  |     __|.-----.|  |.---.-.-----.|  |--.
+# |_       _| |__     ||  _  ||  ||  _  |__ --||     |
+# |_       _| |_______||   __||__||___._|_____||__|__|
+#   |__|__|            |__|
 # ------------------------------------------------------------
 
 # env | lolcat
@@ -206,20 +190,19 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # df | lolcat --spread=4
 # $a = figlet -k -f chunky "o     helo" | lolcat
 
-DIV="----------------------------------------"
-echo $DIV
 echo "  pg_ctl -l \$PGDATA'/log' start
   cd \$DBPATH;   nodemon nodemon/server.js
   cd \$SITEPATH; npm run start" | lolcat
 
-echo $DIV
+echo_bar
 echo ' [shell]      <C-r> for reverse hist search
  [shell]      <C-l> to clear shell
  [*]          <C-tab>, <C-shift-TAB> for tab switch
  [emacs]      <M-x> outline-show-all to unfold md files, or <something>
  [emacs]      <C-x r N>  insert increasing num in region' | lolcat
 
-echo $DIV
+echo_bar
 ~/.dot/bin/list-launch-info.sh | lolcat
-echo $DIV
+echo_bar
+
 

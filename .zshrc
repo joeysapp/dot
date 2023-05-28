@@ -168,7 +168,13 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
 
-
+#  _______                    __
+# |     __|.-----.----.--.--.|__|.----.-----.-----.
+# |__     ||  -__|   _|  |  ||  ||  __|  -__|__ --|
+# |_______||_____|__|  \___/ |__||____|_____|_____|
+# ------------------------------------------------------------
+# Link $brew with env
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 #  ______        __         __                __
 # |   __ \.----.|__|.-----.|  |_.-----.--.--.|  |_.-----.
@@ -207,15 +213,13 @@ echo "  pg_ctl -l \$PGDATA'/log' start
   cd \$SITEPATH; npm run start" | lolcat
 
 echo $DIV
-echo ' [shell]      <C-r> for hist search
- [shell]      <C-l> for clear shell
- [*]          <C-tab> for tab switch
- <M-x> outline-show-all to unfold md files
- --> learn org-mode?' | lolcat
+echo ' [shell]      <C-r> for reverse hist search
+ [shell]      <C-l> to clear shell
+ [*]          <C-tab>, <C-shift-TAB> for tab switch
+ [emacs]      <M-x> outline-show-all to unfold md files, or <something>
+ [emacs]      <C-x r N>  insert increasing num in region' | lolcat
 
 echo $DIV
 ~/.dot/bin/list-launch-info.sh | lolcat
 echo $DIV
-
-
 

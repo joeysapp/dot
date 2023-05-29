@@ -286,11 +286,14 @@ function site_status {
         do
             # Handle two nodemon processes
             ID=$((i))
+            IDX=''
+            if [[ $ID > 1 ]];
+            then IDX="[$ID]"; fi;
             F_PID=$(echo $FRONTEND | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
             F_START=$(echo $FRONTEND | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
             F_UTIME=$(echo $FRONTEND | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
             F_CMD=$(echo $FRONTEND | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            echo '  << Frontend['$ID'] online >> ('$F_PID') since ['$F_START'] with uptime '$F_UTIME | lolcat
+            echo '  << Frontend'$IDX' online >> ('$F_PID') since ['$F_START'] with uptime '$F_UTIME | lolcat
         done;
     else
         echo '  << Frontend offline >>'
@@ -321,26 +324,40 @@ function site_status {
         echo ''
     fi;
 }
-function pg_is_up {
+function postgres_status {
     PG_STATUS=$(eval pg_ctl status);
+    PG_PID=$(echo $PG_STATUS | cut -f 6 -d " " | tr -s "\n" "," | cut -f 1 -d "," | cut -f 1 -d ")");
+    PG=$(
+        eval ps auxww |
+        grep "$PG_PID" |
+        grep "[p]ostgres" |
+        tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
+    )
+    PG_PROC_CT=$(echo $PG | ag '\n' | wc -l);
     if [[ "$PG_STATUS" != *"no server running"* ]];
     then
-        return 0
+        for i in $(seq 1 $PG_PROC_CT)
+        do
+            # Handle two nodemon processes
+            ID=$((i))
+            IDX=''
+            if [[ $ID > 1 ]];
+            then IDX="[$ID]"; fi;
+            PG_PID=$(echo $PG | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
+            PG_START=$(echo $PG | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            PG_UTIME=$(echo $PG | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            PG_CMD=$(echo $PG | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            echo '  << Postgres'$IDX' online >> ('$PG_PID') since ['$PG_START'] with uptime '$PG_UTIME' ['$PG_CMD']' | lolcat
+        done;
     else
-        return 1
-    fi
+        echo '  << Postgres offline >> ->\n\tpg_ctl -l $PGDATA/log start'
+        echo ''
+    fi;
 }
 
 
 echo_bar
-PGSTATUS=$(eval pg_ctl status)
-if pg_is_up;
-then
-    echo "  << Postgres online >> ("${PGSTATUS:32:5}"" | lolcat
-else
-    echo '  << Postgres offline >> ->\n\tpg_ctl -l $PGDATA/log start'
-    echo ''
-fi;
+postgres_status
 site_status
 
 # echo "  cd \$DBPATH; nodemon nodemon/server.js; cd \$SITEPATH; npm run start" | lolcat

@@ -1,13 +1,16 @@
 #!/bin/zsh
 # 2023-05-28: Mostly a learning experience with zsh/gnu,
 #             Could definitely be improved - pretty slow (probably because I'm evaling each ps >_>
+
+# https://dba.stackexchange.com/questions/99428/how-can-i-get-my-servers-uptime
+
 PG_STATUS=$(eval pg_ctl status);
 PG_PID=$(echo $PG_STATUS | cut -f 6 -d " " | tr -s "\n" "," | cut -f 1 -d "," | cut -f 1 -d ")");
 PG=$(
     eval ps auxww |
         grep "$PG_PID" |
         grep "[p]ostgres" |
-        tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
+        tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11,12") -d " "
   )
 PG_PROC_CT=$(echo $PG | ag '\n' | wc -l);
 if [[ "$PG_STATUS" != *"no server running"* ]];
@@ -21,11 +24,14 @@ then
         then IDX="[$ID]"; fi;
         PG_PID=$(echo $PG | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
         PG_START=$(echo $PG | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-        PG_UTIME=$(echo $PG | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+        # PG_START=$(eval ps -p $PG_PID -o lstart=)
+        # https://dba.stackexchange.com/questions/99428/how-can-i-get-my-servers-uptime
+        # PG_UTIME=$(echo $PG | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+        PG_ETIME=$(eval ps -p $PG_PID -o etime=)
         PG_CMD=$(echo $PG | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-        echo '  << Postgres'$IDX' online >> ('$PG_PID') since ['$PG_START'] with uptime '$PG_UTIME' ['$PG_CMD']' | lolcat
+        echo '<< Postgres'$IDX' online >> ('$PG_PID') since ['$PG_START'] for '$PG_ETIME # ['$PG_CMD']'
     done;
 else
-    echo '  << Postgres offline >> ->\n\tpg_ctl -l $PGDATA/log start'
-    echo ''
+    echo '<< Postgres offline >> -> pg_ctl -l $PGDATA/log start'
 fi;
+return 0

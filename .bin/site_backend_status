@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+BACKEND=$(
+    eval ps auxww |
+        grep '[nodemon] nodemon/server.js' |
+        tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
+       )
+# echo $BACKEND
+B_PROC_CT=$(echo $BACKEND | ag '\n' | wc -l);
+if [[ "$BACKEND" == *"nodemon nodemon/server.js"* ]];    
+then
+    for i in $(seq 1 $B_PROC_CT)
+    do
+        # Handle two nodemon processes
+        ID=$((i))
+        B_PID=$(echo $BACKEND | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
+        B_START=$(echo $BACKEND | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+        # B_UTIME=$(echo $BACKEND | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+        B_ETIME=$(eval ps -p $PG_PID -o etime=)
+        B_CMD=$(echo $BACKEND | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+        echo '<< Backend['$ID'] online >> ('$B_PID') since ['$B_START'] for '$B_ETIME
+    done;
+else
+    echo '<<  Backend offline >> -> cd $DBPATH; nodemon nodemon/server.js'
+fi;
+return 0;

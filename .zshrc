@@ -188,82 +188,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # df | lolcat --spread=4
 # $a = figlet -k -f chunky "o     helo" | lolcat
 
-#     args           command and arguments
-#     comm           command
-#     command        command and arguments
-#     cpu            short-term CPU usage factor (for scheduling)
-#     etime          elapsed running time
-#     flags          the process flags, in hexadecimal (alias f)
-#     gid            processes group id (alias group)
-#     inblk          total blocks read (alias inblock)
-#     jobc           job control count
-#     ktrace         tracing flags
-#     ktracep        tracing vnode
-#     lim            memoryuse limit
-#     logname        login name of user who started the session
-#     lstart         time started
-#     majflt         total page faults
-#     minflt         total page reclaims
-#     msgrcv         total messages received (reads from pipes/sockets)
-#     msgsnd         total messages sent (writes on pipes/sockets)
-#     nice           nice value (alias ni)
-#     nivcsw         total involuntary context switches
-#     nsigs          total signals taken (alias nsignals)
-#     nswap          total swaps in/out
-#     nvcsw          total voluntary context switches
-#     nwchan         wait channel (as an address)
-#     oublk          total blocks written (alias oublock)
-#     p_ru           resource usage (valid only for zombie)
-#     paddr          swap address
-#     pagein         pageins (same as majflt)
-#     pgid           process group number
-#     pid            process ID
-#     ppid           parent process ID
-#     pri            scheduling priority
-#     prsna          persona
-#     re             core residency time (in seconds; 127 = infinity)
-#     rgid           real group ID
-#     rss            resident set size
-#     ruid           real user ID
-#     ruser          user name (from ruid)
-#     sess           session ID
-#     sig            pending signals (alias pending)
-#     sigmask        blocked signals (alias blocked)
-#     sl             sleep time (in seconds; 127 = infinity)
-#     start          time started
-#     state          symbolic process state (alias stat)
-#     svgid          saved gid from a setgid executable
-#     svuid          saved UID from a setuid executable
-#     tdev           control terminal device number
-#     time           accumulated CPU time, user + system (alias cputime)
-#     tpgid          control terminal process group ID
-#     tsess          control terminal session ID
-#     tsiz           text size (in Kbytes)
-#     tt             control terminal name (two letter abbreviation)
-#     tty            full name of control terminal
-#     ucomm          name to be used for accounting
-#     uid            effective user ID
-#     upr            scheduling priority on return from system call (alias usrpri)
-#     user           user name (from UID)
-#     utime          user CPU time (alias putime)
-#     vsz            virtual size in Kbytes (alias vsize)
-#     wchan          wait channel (as a symbolic name)
-#     wq             total number of workqueue threads
-#     wqb            number of blocked workqueue threads
-#     wqr            number of running workqueue threads
-#     wql            workqueue limit status (C = constrained thread limit, T = total thread limit)
-#     xstat          exit or stop status (valid only for stopped or zombie process)
-#
-#
-
 
 echo_bar
-
-# site_status # Kind of slow, tbh.
-site_db_status
-site_status
-
-# echo "  cd \$DBPATH; nodemon nodemon/server.js; cd \$SITEPATH; npm run start" | lolcat
+status | lolcat # kind of slow tbh
 
 echo_bar
 echo ' [shell] <C-r> hist search, <C-l> clear, <C-tab> switch tab

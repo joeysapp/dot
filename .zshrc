@@ -70,7 +70,13 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
 # RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
-# [linux commands]
+
+
+#  __                        __               __
+# |  |_.-----.----.--------.|__|.-----.---.-.|  |
+# |   _|  -__|   _|        ||  ||     |  _  ||  |
+# |____|_____|__| |__|__|__||__||__|__|___._||__|
+# ------------------------------------------------------------
 alias arp='function _arp(){ arp $@ | column -t };_arp'
 
 # - https://stackoverflow.com/questions/69213355/how-can-i-add-a-flag-to-alias
@@ -117,16 +123,16 @@ export PG_COLOR="auto" # Not sure if this does anything on zsh.
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 # [dot]
-DOT_BASE="git --git-dir=$HOME/.dot/.git --work-tree=$HOME"
 function dot {
     if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
     then
         shift 1; echo_bar - 100;
-        eval "$DOT_BASE branches $@"
+        command git --git-dir=$HOME/.dot/.git --work-tree=$HOME branches $@
         echo_bar - 100;
-        eval "$DOT_BASE status $@"
+        command git --git-dir=$HOME/.dot/.git --work-tree=$HOME status $@
     else
-        eval "$DOT_BASE" "$@"
+        command git --git-dir=$HOME/.dot/.git --work-tree=$HOME $@
+        # eval $DOT_BASE "$@" // Issue with string evals lola
     fi
 }
 

@@ -70,7 +70,9 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
 # RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
-# [info about commands]
+# [linux commands]
+alias arp='function _arp(){ arp $@ | column -t };_arp'
+
 # - https://stackoverflow.com/questions/69213355/how-can-i-add-a-flag-to-alias
 alias ls='LC_COLLATE=C ls -AlFh'
 # A - all files, no . ..
@@ -124,7 +126,7 @@ function dot {
         echo_bar - 100;
         eval "$DOT_BASE status $@"
     else
-        eval "$DOT_BASE $@"
+        eval "$DOT_BASE" "$@"
     fi
 }
 
@@ -271,14 +273,22 @@ function site_status {
         grep '[npm] run start' |
         tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
     )
-    if [[ "$FRONTEND" == *"npm run start"* ]];
+    F_PROC_CT=$(echo $FRONTEND | ag '\n' | wc -l);
+    if [[ "$FRONTEND" == *"npm run start"* ]];    
     then
-        F_START=$(echo $FRONTEND | cut -f 9 -d " ")
-        F_UTIME=$(echo $FRONTEND | cut -f 10 -d " ")
-        F_CMD=$(echo $FRONTEND | cut -f 11- -d " ")
-        echo 'Site/frontend up since: ['$F_START'] with uptime: '$F_UTIME' -> $ '$F_CMD
+        for i in $(seq 1 $F_PROC_CT)
+        do
+            # Handle two nodemon processes
+            ID=$((i))
+            F_PID=$(echo $FRONTEND | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
+            F_START=$(echo $FRONTEND | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            F_UTIME=$(echo $FRONTEND | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            F_CMD=$(echo $FRONTEND | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            echo '  << Frontend['$ID'] online >> ('$F_PID') since ['$F_START'] with uptime '$F_UTIME | lolcat
+        done;
     else
-        echo 'Site/frontend down'
+        echo '  << Frontend offline >>'
+        echo ''
     fi;
 
     BACKEND=$(
@@ -287,21 +297,22 @@ function site_status {
         tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
     )
     # echo $BACKEND
-
-    B_PROC_CT=$(echo $BACKEND | grep '\n' | wc -l);
+    B_PROC_CT=$(echo $BACKEND | ag '\n' | wc -l);
     if [[ "$BACKEND" == *"nodemon nodemon/server.js"* ]];    
     then
-        for i in $(seq 2 $(($B_PROC_CT + 1)))
+        for i in $(seq 1 $B_PROC_CT)
         do
-            B_START=$(echo $BACKEND | cut -f 9 -d " ")
             # Handle two nodemon processes
-            B_START=$(echo $B_START | tr -s "\n" ",")
-            B_UTIME=$(echo $BACKEND | cut -f 10 -d " " | tr -s "\n" ",")
-            B_CMD=$(echo $BACKEND | cut -f 11- -d " " | tr -s "\n" ",")
-            echo 'Site/backend['$i'] up since: ['$(echo $B_START | cut -f $i -d ",")'] with uptime: '$(echo $B_UTIME | cut -f $i -d ",") '-> $ '$(echo $B_CMD | cut -f $i -d ",")
+            ID=$((i))
+            B_PID=$(echo $BACKEND | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
+            B_START=$(echo $BACKEND | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            B_UTIME=$(echo $BACKEND | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            B_CMD=$(echo $BACKEND | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+            echo '  << Backend['$ID'] online >> ('$B_PID') since ['$B_START'] with uptime '$B_UTIME | lolcat
         done;
     else
-        echo 'Site/backend down'
+        echo '  << Backend offline >> ->\n\tcd '$DBPATH'; nodemon backend/server.js'
+        echo ''
     fi;
 }
 function pg_is_up {
@@ -315,18 +326,15 @@ function pg_is_up {
 }
 
 
-
 echo_bar
 PGSTATUS=$(eval pg_ctl status)
 if pg_is_up;
 then
-    echo "  << Postgres online >> "${PGSTATUS:26:12}" [proc at "${PGSTATUS:39:-1}"]" | lolcat
+    echo "  << Postgres online >> ("${PGSTATUS:32:5}"" | lolcat
 else
-    echo '  << Postgres offline >>' | lolcat
-    echo '  pg_ctl -l $PGDATA/log start'
+    echo '  << Postgres offline >> ->\n\tpg_ctl -l $PGDATA/log start'
+    echo ''
 fi;
-echo_bar
-
 site_status
 
 # echo "  cd \$DBPATH; nodemon nodemon/server.js; cd \$SITEPATH; npm run start" | lolcat

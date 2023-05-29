@@ -1,7 +1,7 @@
-# Dot
+# .dot
 Managing files (configs, run commands, fonts, ...) across computers because `rsync`ing and `mv`ing gets tedious
 
-## Usage
+## Install & use
 Creating a unique git directory and aliasing to `dot` so `git status` doesn't show everything in every subfolder under `/Users/you/*`. 
 ```bash
 cd $HOME
@@ -32,22 +32,3 @@ dot reset --hard origin/master
 ## Reading
 * [https://www.edwardthomson.com/blog/managing_dotfiles_with_git.htm](https://www.edwardthomson.com/blog/managing_dotfiles_with_git.html)
 * [Ask HN: What do you use to manage dotfiles? (https://news.ycombinator.com/item?id=11070797)](https://news.ycombinator.com/item?id=11070797)
-
-# misc git notes
-## create remote (backup location)
-```
-cd ~/git/
-mkdir Documents/foo.git
-cd Documents/foo.git
-git init --bare
-? chown -R zooey .
-? chgrp -R staff .
-```
-## add remote to local repo (laptop
-```
-git remote add origin zooey@[ip]:~/Users/zooey/git/Documents/foo.git
-git remote -v
-git add [thing]
-git commit [comment]
-git push -u origin master
-```

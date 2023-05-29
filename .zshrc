@@ -200,5 +200,5 @@ echo_bar
 status;
 echo_bar
 
-launch_info | lolcat; echo_bar
+# launch_info | lolcat; echo_bar
 

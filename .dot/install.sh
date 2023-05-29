@@ -9,14 +9,12 @@ brew install npm
 echo 'Installing python@3.10..'
 brew install python@3.10
 
-echo 'Installing figlet..'
+echo 'Installing fun scripts..'
 brew install figlet
-
-echo 'Installing cowsay..'
 brew install cowsay
-
-echo 'Installing lolcat..'
 brew install lolcat
+brew install imagemagick
+
 
 echo 'Installing ag/the_silver_searcher'..
 brew install ag

@@ -24,6 +24,10 @@
 ;; - [ ] just make your own arduino-mode lol
 ;; [ ] - https://github.com/atomontage/xterm-color
 
+;; emacs further reading:
+;; https://www.linux.com/news/emacs-tips-making-outlines/
+;; https://devhints.io/org-mode
+
 ;; elisp notes
 ;;   (message "foo")
 ;;   (insert "foo")

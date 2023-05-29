@@ -16,6 +16,17 @@
 # - https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zstyle%2B
 #
 
+#  __     __
+# |  |--.|__|.-----.
+# |  _  ||  ||     |
+# |_____||__||__|__|
+# ------------------------------------------------------------
+# * source ~/.dot/bin/site-status.sh
+# vs...
+# * https://dev.to/lukeojones/1up-your-zsh-abilities-by-autoloading-your-own-functions-2ngp
+# * https://unix.stackexchange.com/a/526429
+fpath=(~/.dot/bin $fpath);
+autoload -U $fpath[1]/*(.:t)
 
 #    _____     _______         __   __   __
 #  _|  |  |_  |     __|.-----.|  |_|  |_|__|.-----.-----.-----.
@@ -48,14 +59,6 @@ setopt EXTENDED_HISTORY  # record command start time
 # alias show_last_commands="fc -l 1"
 
 # -- Visual
-# echo_bar [char] [%_of_zsh]
-function echo_bar {
-    CHAR_CT=$((COLUMNS * (${2=33.3} / 100.0))); # convert percent to amt of console cols
-    # For other stuff:
-    # ZSH_WIDTH=$(tput cols); ZSH_HEIGHT=$(tput lines); echo -e "lines\ncols"|tput -S
-    CHAR_CT=${CHAR_CT%.*}; # convert to int
-    printf "${1:=-}%.0s" {1..$CHAR_CT}; echo '';
-};
 autoload -U colors && colors
 export CLICOLOR=0
 export LSCOLORS=gafacadabaegedabagacad
@@ -123,18 +126,7 @@ export PG_COLOR="auto" # Not sure if this does anything on zsh.
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 # [dot]
-function dot {
-    if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
-    then
-        shift 1; echo_bar - 100;
-        command git --git-dir=$HOME/.dot/.git --work-tree=$HOME branches $@
-        echo_bar - 100;
-        command git --git-dir=$HOME/.dot/.git --work-tree=$HOME status $@
-    else
-        command git --git-dir=$HOME/.dot/.git --work-tree=$HOME $@
-        # eval $DOT_BASE "$@" // Issue with string evals lola
-    fi
-}
+
 
 
 #    _____     _______               __
@@ -154,17 +146,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # * https://stackoverflow.com/questions/3538774/is-it-possible-to-override-git-command-by-git-alias
 
 # `git status` will now show all remotes and their branches
-function git {
-    if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
-    then
-        shift 1; echo_bar - 100;
-        command git branches "$@"
-        echo_bar - 100;
-        command git status "$@"
-    else
-        command git "$@"
-    fi
-}
 
 
 
@@ -267,98 +248,12 @@ function git {
 #
 #
 
-function site_status {
-    # FRONTEND_STATUS=eval ps -o tty,start,etime,pid,vsz,pcpu,pmem,args | grep '[npm] run start'
-    # BACKEND_STATUS=eval ps -o tty,start,etime,pid,vsz,pcpu,pmem,args | grep '[nodemon] nodemon/server.js'
-
-    LABEL="user\t\t pid\t %cpu %me vsize\t     rss   tt\t stat\t start  time\tcommand"
-    # todo: printf "${1:=-}%.0s" {1..$CHAR_CT}; echo '';
-    # user, pid, %cpu, %me, virtualsize, rss, tt, stat, start, time, command
-    FRONTEND=$(
-        eval ps auxww |
-        grep '[npm] run start' |
-        tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
-    )
-    F_PROC_CT=$(echo $FRONTEND | ag '\n' | wc -l);
-    if [[ "$FRONTEND" == *"npm run start"* ]];    
-    then
-        for i in $(seq 1 $F_PROC_CT)
-        do
-            # Handle two nodemon processes
-            ID=$((i))
-            IDX=''
-            if [[ $ID > 1 ]];
-            then IDX="[$ID]"; fi;
-            F_PID=$(echo $FRONTEND | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
-            F_START=$(echo $FRONTEND | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            F_UTIME=$(echo $FRONTEND | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            F_CMD=$(echo $FRONTEND | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            echo '  << Frontend'$IDX' online >> ('$F_PID') since ['$F_START'] with uptime '$F_UTIME | lolcat
-        done;
-    else
-        echo '  << Frontend offline >>'
-        echo ''
-    fi;
-
-    BACKEND=$(
-        eval ps auxww |
-        grep '[nodemon] nodemon/server.js' |
-        tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
-    )
-    # echo $BACKEND
-    B_PROC_CT=$(echo $BACKEND | ag '\n' | wc -l);
-    if [[ "$BACKEND" == *"nodemon nodemon/server.js"* ]];    
-    then
-        for i in $(seq 1 $B_PROC_CT)
-        do
-            # Handle two nodemon processes
-            ID=$((i))
-            B_PID=$(echo $BACKEND | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
-            B_START=$(echo $BACKEND | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            B_UTIME=$(echo $BACKEND | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            B_CMD=$(echo $BACKEND | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            echo '  << Backend['$ID'] online >> ('$B_PID') since ['$B_START'] with uptime '$B_UTIME | lolcat
-        done;
-    else
-        echo '  << Backend offline >> ->\n\tcd '$DBPATH'; nodemon backend/server.js'
-        echo ''
-    fi;
-}
-function postgres_status {
-    PG_STATUS=$(eval pg_ctl status);
-    PG_PID=$(echo $PG_STATUS | cut -f 6 -d " " | tr -s "\n" "," | cut -f 1 -d "," | cut -f 1 -d ")");
-    PG=$(
-        eval ps auxww |
-        grep "$PG_PID" |
-        grep "[p]ostgres" |
-        tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
-    )
-    PG_PROC_CT=$(echo $PG | ag '\n' | wc -l);
-    if [[ "$PG_STATUS" != *"no server running"* ]];
-    then
-        for i in $(seq 1 $PG_PROC_CT)
-        do
-            # Handle two nodemon processes
-            ID=$((i))
-            IDX=''
-            if [[ $ID > 1 ]];
-            then IDX="[$ID]"; fi;
-            PG_PID=$(echo $PG | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
-            PG_START=$(echo $PG | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            PG_UTIME=$(echo $PG | cut -f 10 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            PG_CMD=$(echo $PG | cut -f 11- -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-            echo '  << Postgres'$IDX' online >> ('$PG_PID') since ['$PG_START'] with uptime '$PG_UTIME' ['$PG_CMD']' | lolcat
-        done;
-    else
-        echo '  << Postgres offline >> ->\n\tpg_ctl -l $PGDATA/log start'
-        echo ''
-    fi;
-}
-
 
 echo_bar
-postgres_status
-site_status
+
+# site_status # Kind of slow, tbh.
+site_db_status
+# site_status
 
 # echo "  cd \$DBPATH; nodemon nodemon/server.js; cd \$SITEPATH; npm run start" | lolcat
 
@@ -367,7 +262,8 @@ echo ' [shell] <C-r> hist search, <C-l> clear, <C-tab> switch tab
  [emacs] <M-x> outline-show-all to unfold, <C-x r N> insert nums in region' | lolcat
 
 echo_bar
-~/.dot/bin/list-launch-info.sh | lolcat
+# ~/.dot/bin/launch_info | lolcat
+launch_info
 echo_bar
 
 

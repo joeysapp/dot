@@ -1,9 +1,0 @@
-# ecbar [char] [%_of_zsh]
-ecbar () {
-    CHAR_CT=$((COLUMNS * (${2=33.3} / 100.0))); # convert percent to amt of console cols
-    # For other stuff:
-    # ZSH_WIDTH=$(tput cols); ZSH_HEIGHT=$(tput lines); echo -e "lines\ncols"|tput -S
-    CHAR_CT=${CHAR_CT%.*}; # convert to int
-    printf "${1:=-}%.0s" {1..$CHAR_CT}; echo '';
-}
-ecbar

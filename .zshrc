@@ -21,11 +21,19 @@
 # |  _  ||  ||     |
 # |_____||__||__|__|
 # ------------------------------------------------------------
+
+# General way, very slow...
+# But autoloaded seem to execute WAY WAY faster...?
+# export PATH="$HOME/.bin:$PATH"
+# chmod u+x script.sh
+# ln -s script.sh ~/.bin/script
+
+# ZSH specific way:
 # * source ~/.dot/bin/site-status.sh
 # vs...
 # * https://dev.to/lukeojones/1up-your-zsh-abilities-by-autoloading-your-own-functions-2ngp
 # * https://unix.stackexchange.com/a/526429
-fpath=(~/.dot/bin $fpath);
+fpath=(~/.bin $fpath);
 autoload -U $fpath[1]/*(.:t)
 
 #    _____     _______         __   __   __
@@ -253,7 +261,7 @@ echo_bar
 
 # site_status # Kind of slow, tbh.
 site_db_status
-# site_status
+site_status
 
 # echo "  cd \$DBPATH; nodemon nodemon/server.js; cd \$SITEPATH; npm run start" | lolcat
 

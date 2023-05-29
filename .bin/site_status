@@ -1,3 +1,4 @@
+#!/bin/zsh
 # 2023-05-28: Mostly a learning experience with zsh/gnu,
 #             Could definitely be improved - pretty slow (probably because I'm evaling each ps >_>
 

@@ -2,39 +2,42 @@
 # 2023-05-28: Mostly a learning experience with zsh/gnu,
 #             Could definitely be improved - pretty slow (probably because I'm evaling each ps >_>
 
-
-# FRONTEND_STATUS=eval ps -o tty,start,etime,pid,vsz,pcpu,pmem,args | grep '[npm] run start'
-# BACKEND_STATUS=eval ps -o tty,start,etime,pid,vsz,pcpu,pmem,args | grep '[nodemon] nodemon/server.js'
-
-LABEL="user\t\t pid\t %cpu %me vsize\t     rss   tt\t stat\t start  time\tcommand"
-# todo: printf "${1:=-}%.0s" {1..$CHAR_CT}; echo '';
-
 # eval ps auxww
 # user, pid, %cpu, %me, virtualsize, rss, tt, stat, start, time, command
-# Note - if you really want the args, you need ps auxww. But this doesn't have the etime.
+# Note - if you really want the args, you need ps auxww. But this doesn't have the etime..
 
+RES=""
 FRONTEND=$(
     eval ps -o user,pid,%cpu,%mem,vsize,rss,tt,stat,start,utime,etime,command |
         grep '[npm] run start' |
         tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11,12") -d " "
 )
-F_PROC_CT=$(echo $FRONTEND | ag '\n' | wc -l);
+PROC_CT=$(echo $FRONTEND | ag '\n' | wc -l);
+if [[ PROC_CT == 0 && $1 != 1 ]]; then return 0
+fi;
+
 if [[ "$FRONTEND" == *"npm"* ]];    
 then
-    for i in $(seq 1 $F_PROC_CT)
+    for i in $(seq 1 $PROC_CT)
     do
         # Handle two nodemon processes
         ID=$((i))
         IDX=''
         if [[ $ID > 1 ]];
         then IDX="[$ID]"; fi;
-        F_PID=$(echo $FRONTEND | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
-        F_START=$(echo $FRONTEND | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-        F_CMD=$(echo $FRONTEND | cut -f 12 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-        F_ETIME=$(echo $FRONTEND | cut -f 11 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
-        echo '<< Frontend'$IDX' online >> ('$F_PID') since ['$F_START'] for '$F_ETIME
+        PID=$(echo $FRONTEND | cut -f 2 -d " " | tr -s "\n" "," | cut -f $ID -d ",")
+        START=$(echo $FRONTEND | cut -f 9 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+        CMD=$(echo $FRONTEND | cut -f 12 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+        ETIME=$(echo $FRONTEND | cut -f 11 -d " " | tr -s "\n" ","  | cut -f $ID -d ",")
+        if [[ $ID > 1 ]]; then RES="$RES\n"; fi;
+        RES="$RES<< Frontend"$IDX" >> ("$PID") since ["$START"] for "$ETIME
     done;
+    if [[ $1 ]]; then echo $RES; fi;
+    return 0;
 else
-    echo '<< Frontend offline >> -> cd $SITEPATH; npm run start'
+    if [[ $1 ]]; then
+        echo '<< Frontend offline >> -> cd $SITEPATH; npm run start'
+    fi;
+    return 1;
 fi;
-return 0;
+

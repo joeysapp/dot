@@ -1,4 +1,29 @@
-site_db_status; site_frontend_status; site_backend_status
+# 2023-05-29 trying to conditionally lolcat them to show if they're up or down
+
+# (site_db_status 1; site_frontend_status 1; site_backend_status 1) | awk '{ return $0,1 }'
+
+if site_db_status; then
+   echo "$(site_db_status 1)" | lolcat
+else
+   echo "$(site_db_status 1)"
+fi;
+
+
+if site_frontend_status; then
+   echo "$(site_frontend_status 1)" | lolcat
+else
+   echo "$(site_frontend_status 1)"
+fi;
+
+
+if site_backend_status; then
+   echo "$(site_backend_status 1)" | lolcat
+else
+   echo "$(site_backend_status 1)"
+fi;
+
+
+
 #     args           command and arguments
 #     comm           command
 #     command        command and arguments

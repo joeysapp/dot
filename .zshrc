@@ -21,16 +21,16 @@
 # |  _  ||  ||     |
 # |_____||__||__|__|
 # ------------------------------------------------------------
+# (todo/read) - https://zsh.sourceforge.io/Doc/Release/Functions.html
 
-# General way, very slow...
-# But autoloaded seem to execute WAY WAY faster...?
+# General bash/shell way, very slow for my funny site ps stuff
+# (autoloaded seem to execute WAY WAY faster)
+# [old]
 # export PATH="$HOME/.bin:$PATH"
 # chmod u+x script.sh
 # ln -s script.sh ~/.bin/script
 
-# ZSH specific way:
-# * source ~/.dot/bin/site-status.sh
-# vs...
+# [zsh way]
 # * https://dev.to/lukeojones/1up-your-zsh-abilities-by-autoloading-your-own-functions-2ngp
 # * https://unix.stackexchange.com/a/526429
 fpath=(~/.bin $fpath);
@@ -188,17 +188,17 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # df | lolcat --spread=4
 # $a = figlet -k -f chunky "o     helo" | lolcat
 
+echo_bar
+(
+echo '[shell] <C-r> hist search, <C-l> clear, <C-tab> switch tab'
+echo '[emacs] <M-x> outline-show-all to unfold, <C-x r N> insert nums in region'
+echo '[git]   git submodule update --remote to pull upstream branch'
+) | lolcat
 
 echo_bar
-status | lolcat # kind of slow tbh
-
-echo_bar
-echo ' [shell] <C-r> hist search, <C-l> clear, <C-tab> switch tab
- [emacs] <M-x> outline-show-all to unfold, <C-x r N> insert nums in region' | lolcat
-
-echo_bar
-# ~/.dot/bin/launch_info | lolcat
-launch_info
+# Kind of slow tbqh
+status;
 echo_bar
 
+launch_info | lolcat; echo_bar
 

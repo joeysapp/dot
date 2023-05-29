@@ -1,6 +1,10 @@
 # Raspberry Pi
 Notes about the usage of raspberrypi
 
+# TODO w/ switch+nic
+Switch to 10.0.0.0/8 :^)
+* https://en.wikipedia.org/wiki/Private_network
+
 # Custom "ip-addr", "PTRs", "reverse DNS lookup"
 To have custom hosts in your `arp -a` and local networking, do the following:
 1. Setup pi-hole, assign static LAN address and point router to use that as its DNS.

@@ -124,7 +124,7 @@ if [[ $VERBOSE == "true" ]]; then
    params+=( "--human-readable" )
    params+=( "--stats" )
 fi;
-[[ $RELATIVE s== "true" ]] && params+=( "--relative" )
+[[ $RELATIVE == "true" ]] && params+=( "--relative" )
 
 params+=( "--exclude=.git" )
 params+=( "--exclude=node_modules" )

@@ -82,7 +82,6 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt INC_APPEND_HISTORY # append command to history file immediately after execution
 setopt EXTENDED_HISTORY  # record command start time
-setopt 
 setopt SHARE_HISTORY
 setopt HIST_VERIFY
 

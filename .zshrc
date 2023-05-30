@@ -15,7 +15,6 @@
 # - https://github.com/zsh-users/zsh/tree/master/Functions/Misc
 # - https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zstyle%2B
 #
-
 #  __     __
 # |  |--.|__|.-----.
 # |  _  ||  ||     |
@@ -42,6 +41,12 @@ autoload -U $fpath[1]/*(.:t)
 # |_       _| |_______||_____||____|____|__||__|__|___  |_____|
 #   |__|__|                                       |_____|
 # ------------------------------------------------------------
+setopt nobeep;
+# setopt no_list_beep;
+
+# Set zsh $SECONDS to be float (Wall clock time, not cpu time)
+typeset -F SECONDS
+
 ## - Autocompletion
 # https://thevaluable.dev/zsh-completion-guide-examples/
 zstyle ':completion:*' menu select 
@@ -51,6 +56,19 @@ zstyle ':completion:\*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 # places descriptions above autocomplete
 zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
 autoload -Uz compinit && compinit
+export CLICOLOR=true
+
+# Revmoing / from WORDCHARS to allow meta movement/del with paths
+
+# export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # default
+# Prevent <M-del> with arrow keys from deleting full path
+export WORDCHARS='~!#$%^&*(){}[]<>?.+;-'
+MOTION_WORDCHARS='~!#$%^&*(){}[]<>?.+;-/'
+# But allow <M-movement> keys to navigate full paths
+# https://unix.stackexchange.com/questions/537178/zsh-using-different-wordchars-for-kill-word-and-forward-word-backward-word
+''{back,for}ward-word() WORDCHARS=$MOTION_WORDCHARS zle .$WIDGET
+zle -N backward-word
+zle -N forward-word
 
 ## -- History
 # https://jdhao.github.io/2021/03/24/zsh_history_setup/
@@ -59,12 +77,14 @@ autoload -Uz compinit && compinit
 export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000   # the number of items for the internal history list
 export SAVEHIST=1000000   # maximum number of items for the history file
-setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
 setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
+setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
-setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+setopt INC_APPEND_HISTORY # append command to history file immediately after execution
 setopt EXTENDED_HISTORY  # record command start time
-# alias show_last_commands="fc -l 1"
+setopt 
+setopt SHARE_HISTORY
+setopt HIST_VERIFY
 
 # -- Visual
 autoload -U colors && colors

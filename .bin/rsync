@@ -1,13 +1,14 @@
 # ------------------------------------------------------------
-#   
-#   .----.-----.--.--.-----.----.
-#   |   _|__ --|  |  |     |  __|
-#   |__| |_____|___  |__|__|____|
-#              |_____|
-#   
-#   wrapper around _updated_ rsync to make transfers real good
-# 
+#    ___                                 ___
+#  ,'  _| .----.-----.--.--.-----.----. |_  `.
+#  |  |   |   _|__ --|  |  |     |  __|   |  |
+#  |  |_  |__| |_____|___  |__|__|____|  _|  |
+#  `.___|            |_____|            |___,'
+#  
+#   rsyc wrapper to transfer over 500mbyte/s, locally, usb-c, NIC
 #   $ rsync [-Rv] <source> <dest>
+# ------------------------------------------------------------
+#   https://gist.github.com/KartikTalwar/4393116
 # ------------------------------------------------------------
 # [todo]
 #   * add this to a cron job or daemon
@@ -144,15 +145,8 @@ params+=( "--exclude=.DS_Store" )
 # params+=( "--prune-empty-dirs" )
 
 
-
-
-
 # find similar file for basis if no dest file
 # params+=( "--fuzzy" )
-
-
-
-
 
 
 # skip files that are newer on the receiver
@@ -161,6 +155,7 @@ params+=( "--exclude=.DS_Store" )
 
 # [gist optimization]
 # archive mode, -rlptgoD which is [todo]
+# archive mode - rescursive, preserves owner, preserves permissions, preserves modification times, preserves group, copies symlinks as symlinks, preserves device files.
 params+=( "--archive" )
 # preserve ACLS (implies --perms)
 params+=( "--acls" )
@@ -191,20 +186,6 @@ start=`date +%s`
         "${params[@]}" \
         -e "ssh -T -c arcfour -o Compression=no -x" \
         $1 $2
-
-
-
-#        --exclude node_modules \
-#        --exclude .DS_Store \
-#        --relative \
-#        --human-readable \
-#        -a -H -A -x -v \
-#        --numeric-ids \
-#        --delete \
-#        --progress \
-#        -e "ssh -T -c arcfour -o Compression=no -x" \
-#        $1 $2
-       
 
 end=`date +%s`
 duration=$(echo "$end - $start" | bc -l)

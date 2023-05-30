@@ -1,0 +1,164 @@
+# ------------------------------------------------------------
+#   
+#   .----.-----.--.--.-----.----.
+#   |   _|__ --|  |  |     |  __|
+#   |__| |_____|___  |__|__|____|
+#              |_____|
+#   
+#   wrapper around _updated_ rsync to make transfers real good
+# 
+#   $ rsync [-Rv] <source> <dest>
+# ------------------------------------------------------------
+# [todo]
+#   * add this to a cron job or daemon
+#   * add ability to pass in our own flags
+#   * get gdate from coreutils, macos doesn't support %N
+#   * do we want a --relative option?
+
+# [requirements]
+# macOS catalina still ships with an old rsync. back it up and `brew install rsync`
+# rsync-2.6.9, protocol version 29 from 2006
+# rsync-3.2.7, protocol version 31 from 2022
+#    (almost x3 faster)
+
+
+
+# [usage]
+# [directories]
+# sync interprets a dir with no trailing slash as "copy this directory"
+# and a directory with a trailing slash as "copy the contents of this directory"
+#
+# To copy all items in audio-local to music:
+# rsync     audio-local/    user@hostname:/Documents/music
+#
+# To copy audio-local and put it inside music:
+# rsync     audio-local     user@hostname:/Documents/music
+
+
+# [files]
+# Files can be {} e.g. {/etc,/root/backups,/home/ultralazer}
+# *  /Documents/{music,code,text}
+
+
+# [relative vs implicit]
+# The -R flag will make imports relative, e.g. their full path will be created.
+# 
+# $ rsync ~/Documents/lit/tech/docs-shell-bashguide.pdf foo/
+# $ rm foo/docs-shell-bashguide.pdf                                           
+# $ rsync -R ~/Documents/lit/tech/docs-shell-bashguide.pdf foo/
+# $ ls foo/Users/zooey/Documents/lit/tech/             
+
+
+
+
+# [source/gist]
+# * https://gist.github.com/KartikTalwar/4393116
+# ------------------------------------------------------------
+# The fastest remote directory rsync over ssh archival I can muster (40MB/s over 1gb NICs)
+# This creates an archive that does the following:
+# 
+# rsync (Everyone seems to like -z, but it is much slower for me)
+# 
+#     a: archive mode - rescursive, preserves owner, preserves permissions, preserves modification times, preserves group, copies symlinks as symlinks, preserves device files.
+#     H: preserves hard-links
+#     A: preserves ACLs
+#     X: preserves extended attributes
+#     x: don't cross file-system boundaries
+#     v: increase verbosity
+#     --numeric-ds: don't map uid/gid values by user/group name
+#     --delete: delete extraneous files from dest dirs (differential clean-up during sync)
+#     --progress: show progress during transfer
+# 
+# ssh
+# 
+#     T: turn off pseudo-tty to decrease cpu load on destination.
+#     c arcfour: use the weakest but fastest SSH encryption. Must specify "Ciphers arcfour" in sshd_config on destination.
+#     o Compression=no: Turn off SSH compression.
+#     x: turn off X forwarding if it is on by default.
+#    
+
+MINARG=-1
+MAXARG=4
+SOURCEIDX=1
+
+RELATIVE="false"
+VERBOSE="false"
+
+USAGE="Usage: rsync [-v] [-R] <source> <destination>"
+if [[ $# -gt "MAXARG" || $# -lt "$MINARG" ]]
+then
+  echo $USAGE
+  return $E_WRONGARGS
+  # prints this: rsync:93: bad option: -h
+fi;
+
+# ${OPTARG}
+params=()
+while getopts 'vR' opt; do
+  case "${opt}" in
+    v)
+        VERBOSE="true"
+        ;;
+    R)
+        RELATIVE="true"
+        ;;
+    \?)
+        echoerr "Invalid option -$OPTARG"
+        echo $USAGE
+        return $E_WRONGARGS
+        ;;
+    *)
+        echo $USAGE
+        return $E_WRONGARGS
+        ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if [[ $VERBOSE == "true" ]]; then
+   params+=( "--progress" )
+   params+=( "--human-readable" )
+   params+=( "--stats" )
+fi;
+[[ $RELATIVE -eq "true" ]] && params+=( "--relative" )
+
+
+params+=( "--exclude=.git" )
+params+=( "--exclude=node_modules" )
+params+=( "--exclude=.DS_Store" )
+params+=( "-aHAxv" )
+params+=( "--numeric-ids" )
+params+=( "--delete" )
+
+start=`date +%s`
+/opt/homebrew/bin/rsync \
+        "${params[@]}" \
+        -e "ssh -T -c arcfour -o Compression=no -x" \
+        $1 $2
+
+
+
+#        --exclude node_modules \
+#        --exclude .DS_Store \
+#        --relative \
+#        --human-readable \
+#        -a -H -A -x -v \
+#        --numeric-ids \
+#        --delete \
+#        --progress \
+#        -e "ssh -T -c arcfour -o Compression=no -x" \
+#        $1 $2
+       
+
+end=`date +%s`
+duration=$(echo "$end - $start" | bc -l)
+ms=$duration
+ms=$(( $duration * 1000 ));
+
+if [[ $ms -lt 1000 ]]; then
+   echo "???ms elasped"
+elif [[ $ms -lt $((1000 * 60)) ]]; then
+   echo "~$(( $ms / 1000 ))s elasped"
+else
+   echo "~$(( $ms / ( 1000 * 60 ) )) minutes elasped";
+fi;

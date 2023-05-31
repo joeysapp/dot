@@ -87,7 +87,8 @@ setopt HIST_VERIFY
 
 # -- Visual
 # zsh function loading in fg[], bg[], _bold, _no_bold
-autoload -U colors && colors
+# autoload -U colors && colors
+autoload -U ~/.bin/colors_ext && colors_ext
 export CLICOLOR=0
 export LSCOLORS=gafacadabaegedabagacad
 # export lscolors=Exbhcxdxbxegedabagacad
@@ -222,7 +223,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 echo_bar
 (
 echo '[shell] <C-r> hist search, <C-l> clear, <C-tab> switch tab'
-echo '[emacs] <M-x> outline-show-all to unfold, <C-x r N> insert nums in region'
+echo '[emacs] <M-x> outline-show-all to unfold'
+echo '[emacs] <C-x r N> insert nums in region'
+echo '[emacs] <M-;> to comment region'
+echo '[emacs] <C-x-tab> to indent'
 echo '[git]   git submodule update --remote to pull upstream branch'
 ) | lolcat
 

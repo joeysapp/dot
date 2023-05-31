@@ -163,6 +163,7 @@
         nyan-mode        
         web-mode
         markdown-mode
+        python-mode
 
         ;; dumb-jump ; M-. to jump to thing def
         ;; org-superstar ; https://github.com/integral-dw/org-superstar-mode/tree/master
@@ -203,11 +204,11 @@
 (setq org-hide-emphasis-markers t)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
+;; [?] If you don't have the mode-hook, this seems to mess with other mode's tab-width..?
 (add-hook 'python-mode-hook
           (function (lambda ()
                       (setq indent-tabs-mode nil
                             tab-width 2))))
-
 
 ;; open-with
 ;; - Open files from dired with other applications
@@ -265,7 +266,7 @@
  '(js-jsx-syntax t)
  '(outline-minor-mode-cycle t)
  '(package-selected-packages
-   '(org-download web-mode spinner sesman queue parseedn org-superstar nyan-mode moe-theme markdown-mode dumb-jump color-theme-sanityinc-tomorrow clojure-mode))
+   '(python-mode org-download web-mode spinner sesman queue parseedn org-superstar nyan-mode moe-theme markdown-mode dumb-jump color-theme-sanityinc-tomorrow clojure-mode))
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)

@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # ------------------------------------------------------------
 #   .----.-----.--.--.-----.----.
 #   |   _|__ --|  |  |     |  __|
@@ -78,6 +79,7 @@
 #     X: preserves extended attributes
 #     x: don't cross file-system boundaries
 #     v: increase verbosity
+
 #     --numeric-ds: don't map uid/gid values by user/group name
 #     --delete: delete extraneous files from dest dirs (differential clean-up during sync)
 #     --progress: show progress during transfer

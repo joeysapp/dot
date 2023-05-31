@@ -56,7 +56,7 @@ zstyle ':completion:\*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 # places descriptions above autocomplete
 zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
 autoload -Uz compinit && compinit
-export CLICOLOR=true
+
 
 # Revmoing / from WORDCHARS to allow meta movement/del with paths
 
@@ -86,20 +86,32 @@ setopt SHARE_HISTORY
 setopt HIST_VERIFY
 
 # -- Visual
+# zsh function loading in fg[], bg[], _bold, _no_bold
 autoload -U colors && colors
 export CLICOLOR=0
 export LSCOLORS=gafacadabaegedabagacad
 # export lscolors=Exbhcxdxbxegedabagacad
-# If the PROMPT_SUBST option is set,
+
+
 setopt PROMPT_SUBST
+# If the PROMPT_SUBST option is set,
 # the prompt string is first subjected to:
 # * parameter expansion
 # * command substitution
 # * arithmetic expansion
+
+
+
 PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
+# SUPER cool theme and info here:
+#        * https://aperiodic.net/phil/prompt/
+# more info: # info: https://www.manpagez.com/man/1/zshmisc/
+#     all from https://stackoverflow.com/questions/19901044/what-is-k-f-in-oh-my-zsh-theme
+#        or https://stackoverflow.com/a/19901630
+
+# old prompts
 # Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
 # RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
-
 
 
 #  __                        __               __
@@ -220,4 +232,3 @@ status;
 echo_bar
 
 # launch_info | lolcat; echo_bar
-

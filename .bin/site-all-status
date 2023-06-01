@@ -1,25 +1,25 @@
 # 2023-05-29 trying to conditionally lolcat them to show if they're up or down
 
-# (site_db_status 1; site_frontend_status 1; site_backend_status 1) | awk '{ return $0,1 }'
+# (site-pg-status 1; site-react-status 1; site-server-status 1) | awk '{ return $0,1 }'
 
-if site_db_status; then
-   echo "$(site_db_status 1)" | lolcat
+if site-pg-status; then
+   echo "$(site-pg-status 1)" | lolcat
 else
-   echo "$(site_db_status 1)"
+   echo "$(site-pg-status 1)"
 fi;
 
 
-if site_frontend_status; then
-   echo "$(site_frontend_status 1)" | lolcat
+if site-react-status; then
+   echo "$(site-react-status 1)" | lolcat
 else
-   echo "$(site_frontend_status 1)"
+   echo "$(site-react-status 1)"
 fi;
 
 
-if site_backend_status; then
-   echo "$(site_backend_status 1)" | lolcat
+if site-server-status; then
+   echo "$(site-server-status 1)" | lolcat
 else
-   echo "$(site_backend_status 1)"
+   echo "$(site-server-status 1)"
 fi;
 
 

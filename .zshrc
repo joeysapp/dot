@@ -86,24 +86,19 @@ setopt SHARE_HISTORY
 setopt HIST_VERIFY
 
 # -- Visual
-# zsh function loading in fg[], bg[], _bold, _no_bold
+# [todo] zsh function loading in fg[], bg[], _bold, _no_bold
+autoload -U ~/.bin/colors-extended && colors-extended
 # autoload -U colors && colors
-autoload -U ~/.bin/colors_ext && colors_ext
 
-# CLICOLOR
 export LSCOLORS=gafacadabaegedabagacad
 # export lscolors=Exbhcxdxbxegedabagacad
 
-
-
-
-setopt PROMPT_SUBST
 # If the PROMPT_SUBST option is set,
 # the prompt string is first subjected to:
 # * parameter expansion
 # * command substitution
 # * arithmetic expansion
-
+setopt PROMPT_SUBST
 
 
 PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
@@ -220,7 +215,7 @@ alias git="~/.bin/git-print"
 # df | lolcat --spread=4
 # $a = figlet -k -f chunky "o     helo" | lolcat
 
-echo_bar
+echo-bar
 (
 echo '[shell] <C-r> hist search, <C-l> clear, <C-tab> switch tab'
 echo '[emacs] <M-x> outline-show-all to unfold'
@@ -230,9 +225,9 @@ echo '[emacs] <C-x-tab> to indent'
 echo '[git]   git submodule update --remote to pull upstream branch'
 ) | lolcat
 
-echo_bar
+echo-bar
 # Kind of slow tbqh
-status;
-echo_bar
+site-all-status;
+echo-bar
 
-# launch_info | lolcat; echo_bar
+# launch_info | lolcat; echo-bar

@@ -126,21 +126,21 @@
 ;;
 (add-to-list 'load-path "~/.emacs.d/custom")
 
-(load "async-1.9.7/async.el")
-(load "org-download.el")
-(setq-default org-download-method 'directory)
-(setq-default org-download-image-dir "~/Documents/images-emacs")
-(setq-default org-download-timestamp t)
-(setq-default org-download-backend 'curl) ; 'wget, url-retrieve is default
-(add-hook 'dired-mode-hook 'org-download-enable) ; d&d to dired
+; (load "async-1.9.7/async.el")
+; (load "org-download.el")
+; (setq-default org-download-method 'directory)
+; (setq-default org-download-image-dir "~/Documents/images-emacs")
+; (setq-default org-download-timestamp t)
+; (setq-default org-download-backend 'curl) ; 'wget, url-retrieve is default
+; (add-hook 'dired-mode-hook 'org-download-enable) ; d&d to dired
 
 (load "figlet.el") ; (figlet-get-font-list)
 
-(load "arduino-mode.el")
-(autoload 'arduino-mode "arduino-mode" "Major mode for editing Arduino code." t)
-(autoload 'ede-arduino-preferences-file "ede-arduino" "Preferences file of Arduino." t)
-(add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
-(add-to-list 'auto-mode-alist '("\\.pde\\'" . arduino-mode))
+; (load "arduino-mode.el")
+; (autoload 'arduino-mode "arduino-mode" "Major mode for editing Arduino code." t)
+; (autoload 'ede-arduino-preferences-file "ede-arduino" "Preferences file of Arduino." t)
+; (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
+; (add-to-list 'auto-mode-alist '("\\.pde\\'" . arduino-mode))
 
 ; requires https://github.com/arduino/arduino-cli / https://arduino.github.io/arduino-cli/
 ; C-c C-c ; upload to arduino
@@ -266,7 +266,7 @@
  '(js-jsx-syntax t)
  '(outline-minor-mode-cycle t)
  '(package-selected-packages
-   '(python-mode org-download web-mode spinner sesman queue parseedn org-superstar nyan-mode moe-theme markdown-mode dumb-jump color-theme-sanityinc-tomorrow clojure-mode))
+   '(python-mode web-mode nyan-mode moe-theme markdown-mode dumb-jump color-theme-sanityinc-tomorrow clojure-mode))
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)

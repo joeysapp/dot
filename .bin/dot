@@ -5,9 +5,9 @@ local cmd="/usr/bin/git"
 if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
 then
     shift 1;
-    echo_bar - 66;
+    echo-bar - 66;
     command $cmd --git-dir=$HOME/.dot/.git --work-tree=$HOME branches $@
-    echo_bar - 66;
+    echo-bar - 66;
     command $cmd --git-dir=$HOME/.dot/.git --work-tree=$HOME status $@
 else
     command $cmd --git-dir=$HOME/.dot/.git --work-tree=$HOME $@

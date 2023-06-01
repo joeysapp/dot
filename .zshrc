@@ -90,6 +90,7 @@ setopt HIST_VERIFY
 autoload -U ~/.bin/colors-extended && colors-extended
 # autoload -U colors && colors
 
+export CLICOLOR=0 # Need to set this for LS to be pretty :^)
 export LSCOLORS=gafacadabaegedabagacad
 # export lscolors=Exbhcxdxbxegedabagacad
 
@@ -162,7 +163,9 @@ export PGPORT="9002"
 # For compilers to find postgresql@15 you may need to set:
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
-# [dot]
+
+
+
 
 
 

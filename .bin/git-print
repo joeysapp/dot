@@ -4,9 +4,10 @@ local cmd="/usr/bin/git"
 
 # Check to see if in git directory - if not, exit
 if [ -d .git ]; then
-    # allow rest of script to run
+    # We are in a git dir, allow rest of script to run
 else
   $cmd rev-parse --git-dir 2> /dev/null;
+  printf "\e[038;5;202m$PWD is not a git directory.\n"
   return 1
 fi;
 # This is the same as above in one line:

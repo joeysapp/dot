@@ -3,7 +3,7 @@
 
 #export LS_COLORS="di=31;41:ln=31;41:so=31;41:pi=31;41:ex=31;41:bd=31;41:cd=31;41:su=31;41:sg=31;41:tw=31;41:ow=31;41:"
 
-# I don't think this works
+# I don't think any of this works
 #/usr/bin/tic -x -o ~/.terminfo ~/.config/truecolor/xterm-24bit.terminfo
 #export TERM=xterm-24bit
 #set -g default-terminal "xterm-24bit"

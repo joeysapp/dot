@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+# Opens a new macos terminal with the supplied command.
+# Definitely hacky, but a decent way to script in stuff for launchctl.
+# note: It behaves as expected - it will display the exit code from the command
+
+# [todo] Is it possible to have the term stay open after the command exits?
+
+run-command(){
+    local tmp=$(mktemp) 
+    echo "rm $tmp; cd '$PWD'; $*" > $tmp
+    chmod 755 $tmp ; open -a Terminal $tmp
+}
+
+run-command "$@"

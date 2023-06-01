@@ -39,6 +39,10 @@
     <key>RunAtLoad</key>
     <true/>
 
+    <!-- if this agent is terminated for any reason (i.e. crash or kill) it will automatically restart. -->
+    <key>KeepAlive</key>
+    <true/>
+
     <key>StandardErrorPath</key>
     <string>/Users/zooey/.log/launchctl</string>
     <key>StandardOutPath</key>

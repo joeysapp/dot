@@ -41,7 +41,10 @@
 
     <!-- if this agent is terminated for any reason (i.e. crash or kill) it will automatically restart. -->
     <key>KeepAlive</key>
-    <true/>
+    <dict>
+      <key>SuccessfulExit</key>
+      <false/>
+    </dict>
 
     <key>StandardErrorPath</key>
     <string>/Users/zooey/.log/launchctl</string>

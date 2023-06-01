@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+local cmd="/usr/bin/git"
+
+# Check to see if in git directory - if not, exit
+if [ -d .git ]; then
+    # allow rest of script to run
+else
+  $cmd rev-parse --git-dir 2> /dev/null;
+  return 1
+fi;
+# This is the same as above in one line:
+# [ -d .git ] && echo .git || git rev-parse --git-dir > /dev/null 2>&1
+
+
+if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
+then
+    shift 1;
+    echo_bar - 50;
+    command $cmd branches "$@"
+    echo_bar - 50;
+    command $cmd status "$@"
+else
+    command $cmd "$@"
+fi
+return 0

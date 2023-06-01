@@ -89,9 +89,12 @@ setopt HIST_VERIFY
 # zsh function loading in fg[], bg[], _bold, _no_bold
 # autoload -U colors && colors
 autoload -U ~/.bin/colors_ext && colors_ext
-export CLICOLOR=0
+
+# CLICOLOR
 export LSCOLORS=gafacadabaegedabagacad
 # export lscolors=Exbhcxdxbxegedabagacad
+
+
 
 
 setopt PROMPT_SUBST
@@ -161,7 +164,6 @@ export SITEPATH="/Users/zooey/Documents/code/site/frontend"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PGDATA="/Users/zooey/Documents/code/site/db/postgres/database" # setup default dir for all postgres/pg_ctl commands
 export PGPORT="9002"
-export PG_COLOR="auto" # Not sure if this does anything on zsh.
 # For compilers to find postgresql@15 you may need to set:
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
@@ -179,14 +181,12 @@ export PG_COLOR="auto" # Not sure if this does anything on zsh.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # [ git ]
+alias git="~/.bin/git-print"
 
-# Add this to your .gitprofile:
+# Add this to your .gitprofile for git/git-print to display all remotes/branches
 # [alias]
 #         branches = branch --all -vvv --color=auto
 # * https://stackoverflow.com/questions/3538774/is-it-possible-to-override-git-command-by-git-alias
-
-# `git status` will now show all remotes and their branches
-
 
 
 #    _____     _______         __               __

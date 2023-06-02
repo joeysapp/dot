@@ -195,6 +195,8 @@
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-mode))
 
+;; plists
+(add-to-list 'auto-mode-alist '("\\.plist\\'" . xml-mode))
 ;; markdown-mode
 ;; (setq markdown---???--markup-hiding nil);
 

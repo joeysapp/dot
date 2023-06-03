@@ -122,6 +122,7 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # |   _|  -__|   _|        ||  ||     |  _  ||  |
 # |____|_____|__| |__|__|__||__||__|__|___._||__|
 # ------------------------------------------------------------
+alias lr="launchctl-reload $1"
 alias arp='function _arp(){ arp $@ | column -t };_arp'
 
 # credits https://gist.github.com/natelandau/10654137#file-bash_profile-L87

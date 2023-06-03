@@ -1,6 +1,56 @@
-#/bin/zsh
+#!/usr/bin/env zsh
 # Script to unload and reload LaunchAgents via full plist path
-launchctl unload $1
-echo "launchctl unload $1\nloadctl load -w $1"
-echo "[$(date)] $0 $1\nlaunchctl unload $1\nlaunchctl load -w $1" > ~/.log/launchctl
-launchctl load -w $1
+# [opts]
+# -R will clear the log file
+
+if [[ $# -lt 1 ]]; then
+    return
+else 
+fi;
+
+local doReset=1
+# handle calling from aliases and manually
+local receivedCmd="$1"
+if [[ "$receivedCmd" = "-r" ]]; then
+    receivedCmd="$2"
+    doReset=0
+elif [[ $2 = "-r" ]]; then
+    doReset=0
+fi;
+echo $receivedCmd;
+echo $0 $1 $2
+
+local cmdPath=$receivedCmd
+local cmdDir=${cmdPath%/*}
+local cmdFname=${cmdPath##*/}
+local serviceLabel=${cmdFname%.plist}
+local serviceState=$(launchctl list | grep $serviceLabel)
+
+
+# over-thinking it, wc -l was returning "       1" and I thought launchctl list was doing that.
+# local serviceState=$(launchctl print gui/$(id -u) | grep $serviceLabel)
+# isDisabled=${isDisabled##*> } for print-disabled
+# serviceState=${serviceState##*= } # for print 
+
+res="$(date)"
+
+if [ "$serviceState" != "" ]; then
+    echo "Unloading" $serviceLabel
+   launchctl unload $cmdPath
+   echo "launchctl unload $cmdPath"
+   res="$res\nlaunchctl unload $cmdPath"
+else
+fi;
+
+sleep 0.01
+echo "launchctl load -w $cmdPath"
+res="$res\nlaunchctl load -w $cmdPath"
+
+echo "doReset is"$doReset
+if [[ $doReset == 0 ]];
+then
+        echo $res > ~/.log/launchctl;
+else
+        echo $res >> ~/.log/launchctl
+fi;
+launchctl load -w $cmdPath

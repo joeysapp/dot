@@ -1,0 +1,6 @@
+#/bin/zsh
+# Script to unload and reload LaunchAgents via full plist path
+launchctl unload $1
+echo "launchctl unload $1\nloadctl load -w $1"
+echo "[$(date)] $0 $1\nlaunchctl unload $1\nlaunchctl load -w $1" > ~/.log/launchctl
+launchctl load -w $1

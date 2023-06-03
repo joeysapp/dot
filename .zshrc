@@ -7,6 +7,8 @@
 # $ source ./zshrc
 #
 # [todo]
+# https://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution
+# https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html#tee-invocation
 # * RC probably shouldn't contain unique stuff, and should be in .zprofile.
 #   Although, it is nice to have pretty printing in sshes into the shell.
 #   If other things run a shell (like venv) though, they'll see all of this.
@@ -48,7 +50,9 @@ setopt nobeep;
 # setopt no_list_beep;
 
 # Set zsh $SECONDS to be float (Wall clock time, not cpu time)
-# (but not date.) e.g. printf "$(date +"%Y-%m-%dT%H:%M:%S")"
+# (but not date, just $SECONDS. lol.) like via printf "$(date +"%Y-%m-%dT%H:%M:%S")"
+# ... or:
+# zmodload zsh/datetime -> strftime "%F %T [$epochtime[2]]" $epochtime[1]
 typeset -F SECONDS
 
 ## - Autocompletion
@@ -62,10 +66,8 @@ zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
 autoload -Uz compinit && compinit
 
 
-# Revmoing / from WORDCHARS to allow meta movement/del with paths
-
-# export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # default
-# Prevent <M-del> with arrow keys from deleting full path
+# Removing '/' from WORDCHARS to allow meta movement/del with paths
+#     > this is the default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 export WORDCHARS='~!#$%^&*(){}[]<>?.+;-'
 MOTION_WORDCHARS='~!#$%^&*(){}[]<>?.+;-/'
 # But allow <M-movement> keys to navigate full paths
@@ -130,7 +132,7 @@ alias arp='function _arp(){ arp $@ | column -t };_arp'
 alias mans='function _mansearch(){ man $1 | grep -iC2 --color=always $2 | less};_mansearch'
 
 # - https://stackoverflow.com/questions/69213355/how-can-i-add-a-flag-to-alias
-alias ls='LC_COLLATE=C ls -AlFh'
+alias ls='LC_COLLATE=C ls -AlFh@'
 # A - all files, no . ..
 # l - list format
 # F - long show / after directories

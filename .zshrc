@@ -158,14 +158,23 @@ alias ls='LC_COLLATE=C ls -AlFh'
 # |_       _| |___|   |__| |_____||  ||_____|____||____|_____|
 #   |__|__|                      |___|
 # ------------------------------------------------------------
-# [site + db]
-export PATH=".dot/bin:$PATH" 
+# [dot]
+export PATH=".dot/bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
-export DBPATH="/Users/zooey/Documents/code/site/db"
-export SITEPATH="/Users/zooey/Documents/code/site/frontend"
+
+# [site]
+export SITE_FRONTEND_PATH="/Users/zooey/Documents/code/site/frontend"
+export SITE_SERVER_PATH="/Users/zooey/Documents/code/site/server"
+launchctl setenv SITE_FRONTEND_PATH $SITE_FRONTEND_PATH
+launchctl setenv SITE_SERVER_PATH $SITE_SERVER_PATH
+export JS_COMMON_UPDATE_DOWNSTREAM="/Users/zooey/Documents/code/javascript/common/update-downstream.sh"
+launchctl setenv JS_COMMON_UPDATE_DOWNSTREAM $JS_COMMON_UPDATE_DOWNSTREAM
+
+
 # [postgres]
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-export PGDATA="/Users/zooey/Documents/code/site/db/postgres/database" # setup default dir for all postgres/pg_ctl commands
+# setup default dir for all postgres/pg_ctl commands
+export PGDATA="/Users/zooey/Documents/code/site/db/postgres/database"
 export PGPORT="9002"
 # For compilers to find postgresql@15 you may need to set:
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"

@@ -96,8 +96,36 @@ setopt HIST_VERIFY
 autoload -U ~/.bin/colors-extended && colors-extended
 # autoload -U colors && colors
 
+# LS colors - you can find info about this with `man ls | less +/LSCOLOR`
 export CLICOLOR=0 # Need to set this for LS to be pretty :^)
-export LSCOLORS=gafacadabaegedabagacad
+# export LSCOLORS=gafacadabaegedabagacad # [fg][bg], so first thing dir is cyan fg, black bg.
+
+
+# a     black
+# b     red
+# c     green
+# d     brown
+# e     blue
+# f     magenta
+# g     cyan
+# h     light grey
+# A     bold black, usually shows up as dark grey
+# B     bold red
+# C     bold green
+# D     bold brown, usually shows up as yellow
+# E     bold blue
+# F     bold magenta
+# G     bold cyan
+# H     bold light grey; looks like bright white
+# x     default foreground or background
+
+# 11 items, one char for bgfg, so 22 chars:
+# dir, symlink, socket, pipe, exec, block special, char spec, ex-w-setuid-bi-set, ex-w-setgid-bit-set,
+# dir-writable-to-others-w-sticky-bit, dir-writable-to-others-wo,sticky-bit
+# export LSCOLORS=ga  fa  ca  da  ba  eg  ed  ab  ag  ac  ad
+# export LSCOLORS=gx  fx  cx  dx  Bh  Eg  ed  ab  ag  ac  ad
+export LSCOLORS=gx  fx  cx  dx  Bh  Eg  ed  ab  ag  ac  ad
+# making executables bold red, char special bold blue
 # export lscolors=Exbhcxdxbxegedabagacad
 
 # If the PROMPT_SUBST option is set,
@@ -129,7 +157,13 @@ alias lr="launchctl-reload $1"
 alias arp='function _arp(){ arp $@ | column -t };_arp'
 
 # credits https://gist.github.com/natelandau/10654137#file-bash_profile-L87
-alias mans='function _mansearch(){ man $1 | grep -iC2 --color=always $2 | less};_mansearch'
+# alias mans='function _mansearch(){ man $1 | grep -iC2 --color=always $2 | less};_mansearch'
+alias mans='man $1 | less +/$2'
+
+# [chmod octals]
+# 000, for rwx. so 001 (1) is --x, 010 (2) is -w-, 110 (6) is rw-, 111 (7) is rwx, in order so
+# chmod 755 [file] gives rwx to owner, r-x to group, r-x to others
+# chmod 700 [file] gives rwx to owner, --- to group, --- to others.
 
 # - https://stackoverflow.com/questions/69213355/how-can-i-add-a-flag-to-alias
 alias ls='LC_COLLATE=C ls -AlFh@'
@@ -139,18 +173,24 @@ alias ls='LC_COLLATE=C ls -AlFh@'
 # h - human readable sizes
 # S - sorted largest file at bottom (mebibytes, 2^20)
 # si - sorted by (megabytes, 10^6)
+
+
 #
 # -rw-r--r--@  1 zooey  staff    14K Jul 27 20:31 .DS_Store
 # drwx------+ 44 zooey  staff   1.4K Jul 27 19:40 .Trash/
 # drwxr-xr-x   5 zooey  staff   160B Jul 27 17:13 .config
-
+# 
+# @ at the end of the permissions denotes file has extended attributes
+# * com.apple-quarantine is added to files that have just been downloaded,
+#                        and will then ask the user if they want to allow it to open
+# 
 # dir/  group
-# file  perms    links
-# |owner |        |  [file owner]
-# |perms | others |  user  group
-# |  |   |   |    |   |      |
-# |  |   |   |    |   |      |
-# d rwx r-x r-x   5 zooey  staff   160B Jul 27 17:13 .config
+# file  perms    links            
+# |owner |        |  [file owner] [
+# |perms | others |  user  group  xattr
+# |  |   |   |    |   |      |    |
+# |  |   |   |    |   |      |    |
+# d rwx r-x r-gx   5 zooey  staff  @       160B Jul 27 17:13 .config
 
 
 

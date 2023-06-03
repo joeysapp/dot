@@ -17,9 +17,9 @@ fi;
 if [[ "$1" == "status" && "$@" != *"--help"* && "$@" != *"-h"* ]];
 then
     shift 1;
-    echo_bar - 50;
+    echo-bar - 50;
     command $cmd branches "$@"
-    echo_bar - 50;
+    echo-bar - 50;
     command $cmd status "$@"
 else
     command $cmd "$@"

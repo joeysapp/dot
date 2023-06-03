@@ -1,16 +1,9 @@
 <!-- For this to work, you need to setenv LC_ALL -->
 <!-- 2023-06-01 00:53:25.398 CDT [47945] FATAL:  postmaster became multithreaded during startup -->
 <!-- 2023-06-01 00:53:25.398 CDT [47945] HINT:  Set the LC_ALL environment variable to a valid locale. -->
-
 <!-- do this: -->
 <!-- launchctl setenv LC_ALL "en_us.UTF.8" -->
 <!-- why? https://serverfault.com/questions/750827/postgresql-fails-on-startup-fatal-postmaster-became-multithreaded-during-star -->
-
-<!-- Test via: -->
-<!-- launchctl unload ~/Library/LaunchAgents/self.pg.startup.plist; -->
-<!-- echo "\n\n\n" > ~/.log/launchctl; -->
-<!-- launchctl load -w ~/Library/LaunchAgents/self.pg.startup.plist -->
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -22,30 +15,16 @@
       <!-- [todo] figure out launchd.conf or something, idk. -->
       <string>/opt/homebrew/opt/postgresql@15/bin/postgres</string>
       <string>-D</string>
-      <string>/Users/zooey/Documents/code/site/db/postgres/database</string>      
+      <string>/Users/zooey/Documents/code/site/server/postgres/database</string>      
       <string>-p 9002</string>
-
-      <!-- pg_ctl does not work, having `postgres` user e.g. accessing the .conf file: -->
-      <!-- <string>bash</string> -->
-      <!-- <string>-l</string> -->
-      <!-- <string>-c</string> -->
-      <!-- <string>/Users/zooey/.bin/pg-startup</string> -->
     </array>
-
-    <!-- This didn't work either (for pg_ctl instead of postgres) -->
-    <!-- <key>UserName</key> -->
-    <!-- <string>postgres</string> -->
-
     <key>RunAtLoad</key>
     <true/>
-
-    <!-- if this agent is terminated for any reason (i.e. crash or kill) it will automatically restart. -->
     <key>KeepAlive</key>
     <dict>
       <key>SuccessfulExit</key>
       <false/>
     </dict>
-
     <key>StandardErrorPath</key>
     <string>/Users/zooey/.log/launchctl</string>
     <key>StandardOutPath</key>

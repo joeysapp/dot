@@ -174,8 +174,9 @@ launchctl setenv JS_COMMON_UPDATE_DOWNSTREAM $JS_COMMON_UPDATE_DOWNSTREAM
 # [postgres]
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 # setup default dir for all postgres/pg_ctl commands
-export PGDATA="/Users/zooey/Documents/code/site/db/postgres/database"
+export PGDATA="$SITE_SERVER_PATH/postgres/database"
 export PGPORT="9002"
+launchctl setenv LC_ALL "en_us.UTF.8"
 # For compilers to find postgresql@15 you may need to set:
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"

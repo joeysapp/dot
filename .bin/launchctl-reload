@@ -17,8 +17,6 @@ if [[ "$receivedCmd" = "-r" ]]; then
 elif [[ $2 = "-r" ]]; then
     doReset=0
 fi;
-echo $receivedCmd;
-echo $0 $1 $2
 
 local cmdPath=$receivedCmd
 local cmdDir=${cmdPath%/*}
@@ -45,8 +43,6 @@ fi;
 sleep 0.01
 echo "launchctl load -w $cmdPath"
 res="$res\nlaunchctl load -w $cmdPath"
-
-echo "doReset is"$doReset
 if [[ $doReset == 0 ]];
 then
         echo $res > ~/.log/launchctl;

@@ -1,7 +1,7 @@
 <!-- For this to work, you need to setenv LC_ALL -->
 <!-- 2023-06-01 00:53:25.398 CDT [47945] FATAL:  postmaster became multithreaded during startup -->
 <!-- 2023-06-01 00:53:25.398 CDT [47945] HINT:  Set the LC_ALL environment variable to a valid locale. -->
-<!-- do this: -->
+<!-- do this in zshrc: -->
 <!-- launchctl setenv LC_ALL "en_us.UTF.8" -->
 <!-- why? https://serverfault.com/questions/750827/postgresql-fails-on-startup-fatal-postmaster-became-multithreaded-during-star -->
 <?xml version="1.0" encoding="UTF-8"?>

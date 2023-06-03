@@ -48,6 +48,7 @@ setopt nobeep;
 # setopt no_list_beep;
 
 # Set zsh $SECONDS to be float (Wall clock time, not cpu time)
+# (but not date.) e.g. printf "$(date +"%Y-%m-%dT%H:%M:%S")"
 typeset -F SECONDS
 
 ## - Autocompletion
@@ -165,10 +166,7 @@ export PATH=".dot/bin:$PATH"
 # [site]
 export SITE_FRONTEND_PATH="/Users/zooey/Documents/code/site/frontend"
 export SITE_SERVER_PATH="/Users/zooey/Documents/code/site/server"
-launchctl setenv SITE_FRONTEND_PATH $SITE_FRONTEND_PATH
-launchctl setenv SITE_SERVER_PATH $SITE_SERVER_PATH
-export JS_COMMON_UPDATE_DOWNSTREAM="/Users/zooey/Documents/code/javascript/common/update-downstream.sh"
-launchctl setenv JS_COMMON_UPDATE_DOWNSTREAM $JS_COMMON_UPDATE_DOWNSTREAM
+export JS_COMMON_PATH="/Users/zooey/Documents/code/javascript/common"
 
 
 # [postgres]

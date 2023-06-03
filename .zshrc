@@ -124,9 +124,18 @@ export CLICOLOR=0 # Need to set this for LS to be pretty :^)
 # dir-writable-to-others-w-sticky-bit, dir-writable-to-others-wo,sticky-bit
 # export LSCOLORS=ga  fa  ca  da  ba  eg  ed  ab  ag  ac  ad
 # export LSCOLORS=gx  fx  cx  dx  Bh  Eg  ed  ab  ag  ac  ad
-export LSCOLORS=gx  fx  cx  dx  Bh  Eg  ed  ab  ag  ac  ad
+# not sure if spaces are okay?
+export LSCOLORS=gxfxcxdxBhEgedabagacad
 # making executables bold red, char special bold blue
 # export lscolors=Exbhcxdxbxegedabagacad
+
+# https://michurin.github.io/xterm256-color-picker/
+# I don't think this works, compiled this into .terminfo/78.. either the : or ; version.
+# investigate the 24bit stuff here: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+# also look into adding dircolors: https://unix.stackexchange.com/questions/91937/mac-os-x-dircolors-not-found
+# https://stackoverflow.com/questions/36158093/terminal-color-using-terminfo/36163656#36163656
+# ... As a result, the compiled default zsh does not support 24bit color. lol.
+# export TERM=xterm-24bit
 
 # If the PROMPT_SUBST option is set,
 # the prompt string is first subjected to:

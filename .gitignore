@@ -1,9 +1,8 @@
+# emacs buffers
 *#*
+
+# macos
 *.DS_STORE
 
-
-# Dot stuffs
-!~/.emacs.d/*
-!~/.firefox/*
-!~/.dot/*
-!~/.gitignore
+# Node
+*node_modules/*

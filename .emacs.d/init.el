@@ -4,12 +4,10 @@
 ;; |  -__|        |  _  |  __|__ --|__|  _  |,' ,'|  ||     ||  |   _|__|  -__|
 ;; |_____|__|__|__|___._|____|_____|__|_____/__/  |__||__|__||__|____|__|_____|
 
-
-;; * C-x <tab> <arrow-keys> lets you indent a region easer than C-x t
-;; * M-x describe-variable <name> shows you all of the environment variables and info.
-;; * C-h l ; history of keystrokes in buffer
-;; * C-x a : 
-;; 
+;; * <C-x tab arrow-key>                 ; lets you indent a region easer than C-x t
+;; * <M-x> describe-variable <name>      ; shows you all of the environment variables and info.
+;; * <C-h l>                             ; history of keystrokes in buffer
+;; * <C-x z> & <z>                       ; will keep repeating command
 
 ;; init inspirations:
 ;; - https://github.com/Fanael/init.el/blob/master/init.el
@@ -77,6 +75,7 @@
 ;;             |_____|
 ; Emacs defaults/overrides
 (global-set-key (kbd "C-z") nil) ;; (suspend-frame), minimizes frame on macOS
+(global-set-key (kbd "C-x C-z") nil) ;; (suspend-frame), minimizes frame on macOS
 (global-set-key (kbd "C-x C-u") nil) ;; (upcase-region), annoying
 (put 'downcase-region 'disabled nil) ;; 
 (global-set-key (kbd "C-t") nil) ;; (transpose-chars) ; swaps chars around, "useless" (lol)
@@ -86,7 +85,6 @@
 ; (global-set-key (kbd "<backtab>") nil) ; equivalent of above
 
 ; Custom keybinds
-(global-set-key (kbd "C-t") 'figlet-figletify-region-comment)
 (global-set-key (kbd "C-q") 'eval-last-sexp)
 
 
@@ -134,7 +132,10 @@
 ; (setq-default org-download-backend 'curl) ; 'wget, url-retrieve is default
 ; (add-hook 'dired-mode-hook 'org-download-enable) ; d&d to dired
 
+(load "osascript.el") ; (osascript-eval-region), (osascript-eval-current-buffer) ; (osascript-run-file) a file
+
 (load "figlet.el") ; (figlet-get-font-list)
+(global-set-key (kbd "C-t") 'figlet-figletify-region-comment)
 
 ; (load "arduino-mode.el")
 ; (autoload 'arduino-mode "arduino-mode" "Major mode for editing Arduino code." t)

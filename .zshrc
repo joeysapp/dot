@@ -10,6 +10,9 @@
 # * RC probably shouldn't contain unique stuff, and should be in .zprofile.
 #   Although, it is nice to have pretty printing in sshes into the shell.
 #   If other things run a shell (like venv) though, they'll see all of this.
+# * Lots of helpful startup scripts/aliases to add from here:
+# * https://gist.github.com/natelandau/10654137#file-bash_profile-L87
+
 #
 # [future-styling-ideas]
 # - https://github.com/zsh-users/zsh/tree/master/Functions/Misc
@@ -120,6 +123,9 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # |____|_____|__| |__|__|__||__||__|__|___._||__|
 # ------------------------------------------------------------
 alias arp='function _arp(){ arp $@ | column -t };_arp'
+
+# credits https://gist.github.com/natelandau/10654137#file-bash_profile-L87
+alias mans='function _mansearch(){ man $1 | grep -iC2 --color=always $2 | less};_mansearch'
 
 # - https://stackoverflow.com/questions/69213355/how-can-i-add-a-flag-to-alias
 alias ls='LC_COLLATE=C ls -AlFh'

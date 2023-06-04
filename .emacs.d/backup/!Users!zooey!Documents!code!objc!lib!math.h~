@@ -1,0 +1,5 @@
+#import <math.h>
+
+int pow(int x, int n);
+
+int parseInt(char* string);

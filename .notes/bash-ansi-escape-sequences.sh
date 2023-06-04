@@ -1,3 +1,5 @@
+# https://notes.burke.libbey.me/ansi-escape-codes/
+
 # further reading on ansi escape codes and escape codes, and tput
 # https://stackoverflow.com/questions/25879183/can-terminal-app-be-made-to-respect-ansi-escape-codes
 

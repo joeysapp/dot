@@ -36,7 +36,7 @@ then
     return 0;
 else
     if [[ $1 ]]; then
-        echo '<< Frontend offline >> -> cd $SITEPATH; npm run start'
+        echo '<< Frontend offline >> -> cd $SITE_FRONTEND_PATH; npm run start'
     fi;
     return 1;
 fi;

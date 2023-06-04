@@ -1,0 +1,55 @@
+/*
+
+  2022-08-19: attempt #001
+*/
+
+#include <stdio.h> // https://en.cppreference.com/w/c/io
+#include <stdlib.h>
+
+int main(int argc, char** argv) {
+
+  // fopen - If successful, returns a pointer to the new file stream.
+  // The stream is fully buffered unless filename refers to an
+  // interactive device. On error, returns a null pointer.
+  // POSIX requires that errno be set in this case.
+  const char* fname = "/ex1-lastfm.csv";
+  FILE* csv_pointer = fopen("ex1-lastfm.csv", "r");
+
+  if (!csv_pointer) {
+    perror("\nFile opening failed!");
+    return EXIT_FAILURE;
+  }
+
+  char** headers;
+  char** scrobbles;
+
+  int idx;
+  int c; // int, not char to handle EOF (negative value on end)
+         // https://en.cppreference.com/w/c/io/fgetc
+
+  while ((c = fgetc(csv_pointer)) != EOF) {
+    printf("%c", c);
+
+    if (idx == 0) {
+      headers[idx] = (char)c; // includes NULL for end of string?
+    }
+    else if (idx == 1) {
+      idx = 0;
+    }
+
+    if (c == '\n') {
+      printf("");
+      idx++;
+    }
+  }
+
+  if (ferror(csv_pointer)) {
+    puts("\n\nI/O error while reading");
+  } else if (feof(csv_pointer)) {
+    puts("\n\nEOF reached successfully");
+  }
+
+  fclose(csv_pointer);
+  remove(fname);
+  return EXIT_SUCCESS;
+};

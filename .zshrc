@@ -285,14 +285,18 @@ alias git="~/.bin/git-print"
 
 echo-bar
 (
-echo '[shell] <C-r> hist search, <C-l> clear, <C-tab> switch tab'
 echo '[emacs] <M-x> outline-show-all to unfold'
 echo '[emacs] <C-x r N> insert nums in region'
 echo '[emacs] <M-;> to comment region'
 echo '[emacs] <C-x-tab> to indent'
-echo '[git]   git submodule update --remote to pull upstream branch'
+echo '[emacs] <M-!> shell command'
+echo '[bash]  be careful with commands, easy to accidentally overwrite something'
+echo "[bash]  $fg[bold]launchctl list | sudo tee ~/foo.txt$fg[reset]"
+echo '        pipes stdout to your tty print and the file!'
 ) | lolcat
 
+echo-bar
+launchctl list | grep -v 'com.apple'
 echo-bar
 # Kind of slow tbqh
 site-all-status;

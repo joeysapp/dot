@@ -1,0 +1,26 @@
+/*
+  Write a function that returns the average of two floating-point
+  numbers. Write a small program ot test your function and log the
+  output. Next, put the function in a separate source file but
+  "forget" to declare the function in the file that has your main
+  routine. What happens? Now add the function declaration to the
+  file with your main program and verify that the declaration
+  fixes the problem.
+*/
+
+#import <stdio.h>
+
+
+double div(double _n, double _d) {
+
+
+}
+
+int main(int argc, char** argv) {
+  double numerator = 1.0;
+  double denominator = 1.0;
+  double result = divide(numerator, denominator);
+
+  printf("(%f / %f) = %f", numerator, denominator, result);
+  return 0;
+}

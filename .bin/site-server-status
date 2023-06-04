@@ -3,14 +3,14 @@
 RES=""
 BACKEND=$(
     eval ps auxww |
-        grep '[nodemon] nodemon/server.js' |
+        grep '[nodemon] src/server.js' |
         tr -s " " | cut -f $(printf "1,2,3,4,5,6,7,8,9,10,11-") -d " "
        )
 # echo $BACKEND
 B_PROC_CT=$(echo $BACKEND | ag '\n' | wc -l);
 if [[ B_PROC_CT == 0 && $1 != 1 ]]; then return 0
 fi;
-if [[ "$BACKEND" == *"nodemon nodemon/server.js"* ]];    
+if [[ "$BACKEND" == *"nodemon src/server.js"* ]];    
 then
     for i in $(seq 1 $B_PROC_CT)
     do
@@ -32,7 +32,7 @@ then
     return 0;
 else
     if [[ $1 ]];
-    then echo '<< Backend offline >> -> cd $DBPATH; nodemon nodemon/server.js'
+    then echo '<< Server offline >> -> cd $SITE_SERVER_PATH; nodemon src/server.js'
     fi;
     return 1;
 fi;

@@ -1,0 +1,140 @@
+                  __         __
+.-----.----.----.|__|.-----.|  |_
+|__ --|  __|   _||  ||  _  ||   _|
+|_____|____|__|  |__||   __||____|
+                     |__|
+================================================================================
+
+; note that there's other Adobe stuff..
+; like font/pdf support.. so be careful with rm -rf 
+sudo find / -name "*Adobe*" 2>/dev/null | while read thing
+do
+echo $thing
+done
+
+; Be careful with rm -rf this..
+; /Applications/Inkscape.app/Contents/Resources/share/inkscape/keys/adobe-illustrator-cs2.xml
+; /Desktop/how-to-delete-adobe.png
+; /Users/.../.dot/bin/clean-adobe lol
+
+; 2>/dev/null pipes error messages elsewhere
+
+sudo find / -name "*adobe*" 2>/dev/null | while read thing
+do
+echo $thing
+done
+
+                         __ __
+.----.-----.-----.--.--.|  |  |_.-----.
+|   _|  -__|__ --|  |  ||  |   _|__ --|
+|__| |_____|_____|_____||__|____|_____|
+================================================================================
+$USER = "zooey"
+$TMP = "4zwwvgrs1sx3dh993jlwplqr0000gn"
+
+/private/tmp/adobegc.log
+/System/Volumes/Data/private/tmp/adobegc.log
+/Library/Application\ Support/Adobe
+/Library/Application\ Supprt/*adobe
+/Library/Preferences/com.adobe*
+/Library/LaunchDaemons/com.adobe*
+/System/Volumes/Data/Library/Application\ Support/Adobe
+/System/Volumes/Data/Library/Application\ Support/*adobe
+/System/Volumes/Data/Library/Preferences/com.adobe*
+/System/Volumes/Data/LaunchDaemons/com.adobe*
+/private/var/folders/pc/$TMP/C/com.adobe.cep.CEPHtmlEngine\ Helper
+/System/Volumes/Data/private/var/folders/pc/$TMP/T/com.adobe.Photoshop
+/System/Volumes/Data/private/var/folders/pc/$TMP/T/Adobe/UXP/PluginsTemp/Internal/com.adobe.photoshop.personalization
+/System/Volumes/Data/private/var/folders/pc/$TMP/T/Adobe/UXP/PluginsTemp/Internal/com.adobe.ccx.start
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/com.adobe.HDInstall
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/com.adobe.cep.CEPHtmlEngine Helper
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/com.adobe.Photoshop
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/com.adobe.acc.HEXHelper.GPU
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/adobe.com.Adobe-Spaces-Helper
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/com.adobe.acc.AdobeDesktopService
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/com.adobe.sniffer
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/com.adobe.gcclient
+/System/Volumes/Data/private/tmp/87A4C567-F4C9-4293-AD53-D67D5F61942B/Install.app/Contents/Resources/images/adobelogo.svg
+/System/Volumes/Data/private/tmp/87A4C567-F4C9-4293-AD53-D67D5F61942B/Install.app/Contents/Library/LaunchServices/com.adobe.acc.installer.v2
+/System/Volumes/Data/private/tmp/46703EE8-6FD3-4835-8746-8F75A6C2CBEA/Install.app/Contents/Resources/images/adobelogo.svg
+/System/Volumes/Data/private/tmp/46703EE8-6FD3-4835-8746-8F75A6C2CBEA/Install.app/Contents/Library/LaunchServices/com.adobe.acc.installer.v2
+/System/Volumes/Data/Users/$USER/Library/Application\ Support/Adobe/UXP/PluginsData/Internal/com.adobe.photoshop.personalization
+/System/Volumes/Data/Users/$USER/Library/Application\ Support/Adobe/UXP/PluginsData/Internal/com.adobe.ccx.start
+/System/Volumes/Data/Users/$USER/Library/Saved\ Application\ State/com.adobe.Photoshop.savedState
+/System/Volumes/Data/Users/$USER/Library/WebKit/com.adobe.Photoshop
+/System/Volumes/Data/Users/$USER/Library/Preferences/com.adobe.HDInstall.plist
+/System/Volumes/Data/Users/$USER/Library/Preferences/com.adobe.CSXS.9.plist
+/System/Volumes/Data/Users/$USER/Library/Preferences/ByHost/com.adobe.headlightscc.22E22630-E37B-53AA-AE0B-7103E4809EAB.plist
+/System/Volumes/Data/Users/$USER/Library/Preferences/com.adobe.crashreporter.plist
+/System/Volumes/Data/Users/$USER/Library/Preferences/com.adobe.acc.AdobeDesktopService.plist
+/System/Volumes/Data/Users/$USER/Library/Preferences/com.adobe.Photoshop.plist
+/System/Volumes/Data/Users/$USER/Library/Preferences/com.adobe.Photoshop.uxp_com.adobe.photoshop.personalization.plist
+/System/Volumes/Data/Users/$USER/Library/Preferences/adobe.com.Adobe-Spaces-Helper.plist
+/System/Volumes/Data/Users/$USER/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/System/Volumes/Data/Users/$USER/Library/HTTPStorages/com.adobe.acc.AdobeDesktopService.binarycookies
+/System/Volumes/Data/Users/$USER/Library/HTTPStorages/com.adobe.HDInstall
+/System/Volumes/Data/Users/$USER/Library/HTTPStorages/com.adobe.Photoshop
+/System/Volumes/Data/Users/$USER/Library/Logs/CSXS/CEPHtmlEngine9-PHXS-21.2.0-com.adobe.ccx.start-renderer.log
+/System/Volumes/Data/Users/$USER/Library/Logs/CSXS/CEPHtmlEngine9-PHXS-21.2.0-com.adobe.ccx.start.log
+/System/Volumes/Data/Users/$USER/Library/Logs/CSXS/CEPHtmlEngine9-PHXS-21.2.0-com.adobe.DesignLibraries.angular-renderer.log
+/System/Volumes/Data/Users/$USER/Library/Logs/CSXS/CEPHtmlEngine9-PHXS-21.2.0-com.adobe.DesignLibraries.angular.log
+/System/Volumes/Data/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags
+/System/Volumes/Data/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/System/Volumes/Data/Users/$USER/Library/Caches/com.adobe.Photoshop
+/System/Volumes/Data/Users/$USER/Library/Caches/CSXS/cep_cache/PHXS_21.2.0_com.adobe.DesignLibraries.angular
+/System/Volumes/Data/Users/$USER/Library/Caches/CSXS/cep_cache/PHXS_21.2.0_com.adobe.ccx.start
+/private/var/folders/pc/$TMP/T/com.adobe.Photoshop
+/private/var/folders/pc/$TMP/T/Adobe/UXP/PluginsTemp/Internal/com.adobe.photoshop.personalization
+/private/var/folders/pc/$TMP/T/Adobe/UXP/PluginsTemp/Internal/com.adobe.ccx.start
+/private/var/folders/pc/$TMP/C/com.adobe.HDInstall
+/private/var/folders/pc/$TMP/C/com.adobe.cep.CEPHtmlEngine Helper
+/private/var/folders/pc/$TMP/C/com.adobe.Photoshop
+/private/var/folders/pc/$TMP/C/com.adobe.acc.HEXHelper.GPU
+/private/var/folders/pc/$TMP/C/adobe.com.Adobe-Spaces-Helper
+/private/var/folders/pc/$TMP/C/com.adobe.acc.AdobeDesktopService
+/private/var/folders/pc/$TMP/C/com.adobe.sniffer
+/private/var/folders/pc/$TMP/C/com.adobe.gcclient
+/private/tmp/87A4C567-F4C9-4293-AD53-D67D5F61942B/Install.app/Contents/Resources/images/adobelogo.svg
+/private/tmp/87A4C567-F4C9-4293-AD53-D67D5F61942B/Install.app/Contents/Library/LaunchServices/com.adobe.acc.installer.v2
+/private/tmp/46703EE8-6FD3-4835-8746-8F75A6C2CBEA/Install.app/Contents/Resources/images/adobelogo.svg
+/private/tmp/46703EE8-6FD3-4835-8746-8F75A6C2CBEA/Install.app/Contents/Library/LaunchServices/com.adobe.acc.installer.v2
+/Users/$USER/Library/Application\ Support/Adobe/UXP/PluginsData/Internal/com.adobe.photoshop.personalization
+/Users/$USER/Library/Application\ Support/Adobe/UXP/PluginsData/Internal/com.adobe.ccx.start
+/Users/$USER/Library/Saved\ Application\ State/com.adobe.Photoshop.savedState
+/Users/$USER/Library/WebKit/com.adobe.Photoshop
+/Users/$USER/Library/Preferences/com.adobe.HDInstall.plist
+/Users/$USER/Library/Preferences/com.adobe.CSXS.9.plist
+/Users/$USER/Library/Preferences/ByHost/com.adobe.headlightscc.22E22630-E37B-53AA-AE0B-7103E4809EAB.plist
+/Users/$USER/Library/Preferences/com.adobe.crashreporter.plist
+/Users/$USER/Library/Preferences/com.adobe.acc.AdobeDesktopService.plist
+/Users/$USER/Library/Preferences/com.adobe.Photoshop.plist
+/Users/$USER/Library/Preferences/com.adobe.Photoshop.uxp_com.adobe.photoshop.personalization.plist
+/Users/$USER/Library/Preferences/adobe.com.Adobe-Spaces-Helper.plist
+/Users/$USER/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/Users/$USER/Library/HTTPStorages/com.adobe.acc.AdobeDesktopService.binarycookies
+/Users/$USER/Library/HTTPStorages/com.adobe.HDInstall
+/Users/$USER/Library/HTTPStorages/com.adobe.Photoshop
+/Users/$USER/Library/Logs/CSXS/CEPHtmlEngine9-PHXS-21.2.0-com.adobe.ccx.start-renderer.log
+/Users/$USER/Library/Logs/CSXS/CEPHtmlEngine9-PHXS-21.2.0-com.adobe.ccx.start.log
+/Users/$USER/Library/Logs/CSXS/CEPHtmlEngine9-PHXS-21.2.0-com.adobe.DesignLibraries.angular-renderer.log
+/Users/$USER/Library/Logs/CSXS/CEPHtmlEngine9-PHXS-21.2.0-com.adobe.DesignLibraries.angular.log
+/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags
+/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/Users/$USER/Library/Caches/com.adobe.Photoshop
+/Users/$USER/Library/Caches/CSXS/cep_cache/PHXS_21.2.0_com.adobe.DesignLibraries.angular
+/Users/$USER/Library/Caches/CSXS/cep_cache/PHXS_21.2.0_com.adobe.ccx.start
+/System/Volumes/Data/Users/$USER/Library/Saved\ Application\ State/com.adobe.Photoshop.savedState
+/System/Volumes/Data/private/var/folders/pc/$TMP/C/com.adobe.cep.CEPHtmlEngine Helper
+/System/Volumes/Data/Users/$USER/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/System/Volumes/Data/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags
+/System/Volumes/Data/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags
+/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/Users/$USER/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/Users/$USER/Library/Saved\ Application\ State/com.adobe.Photoshop.savedState
+/Users/$USER/Library/Application\ Support/Adobe/UXP/PluginsData/Internal/com.adobe.photoshop.personalization
+/Users/$USER/Library/Application\ Support/Adobe/UXP/PluginsData/Internal/com.adobe.ccx.start
+/System/Volumes/Data/Users/$USER/Library/Saved\ Application\ State/com.adobe.Photoshop.savedState
+/System/Volumes/Data/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags
+/System/Volumes/Data/Users/$USER/Library/Group\ Containers/JQ525L2MZD.com.adobe.JQ525.flags/Library/Application\ Scripts/JQ525L2MZD.com.adobe.JQ525.flags
+/System/Volumes/Data/Users/$USER/Library/Application\ Support/Adobe/UXP/PluginsData/Internal/com.adobe*

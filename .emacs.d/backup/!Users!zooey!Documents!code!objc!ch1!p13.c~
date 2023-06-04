@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main(int argc, char** argv) {  
+  char* foo = "test";
+  puts(foo);
+
+  foo = "bar";
+  puts(foo);
+
+  // this doesn't work because constant strings
+  // are placed in a read-only memory block
+  foo[2] = 'a';
+  puts(foo);
+
+  return 0;
+}

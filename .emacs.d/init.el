@@ -87,13 +87,7 @@
 ; Custom keybinds
 (global-set-key (kbd "C-q") 'eval-last-sexp)
 
-
-
-;;   ___
-;; .'  _|.----.---.-.--------.-----.
-;; |   _||   _|  _  |        |  -__|
-;; |__|  |__| |___._|__|__|__|_____|
-;;
+; Visuals
 (load-theme 'moe-light t)
 (nyan-mode t)
 (tool-bar-mode -1)
@@ -124,6 +118,7 @@
 ;;
 (add-to-list 'load-path "~/.emacs.d/custom")
 
+; [currently-deprecated]
 ; (load "async-1.9.7/async.el")
 ; (load "org-download.el")
 ; (setq-default org-download-method 'directory)
@@ -131,6 +126,8 @@
 ; (setq-default org-download-timestamp t)
 ; (setq-default org-download-backend 'curl) ; 'wget, url-retrieve is default
 ; (add-hook 'dired-mode-hook 'org-download-enable) ; d&d to dired
+
+(load "emacs-frame.el")
 
 (load "osascript.el") ; (osascript-eval-region), (osascript-eval-current-buffer) ; (osascript-run-file) a file
 
@@ -195,6 +192,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
 
 ;; plists
 (add-to-list 'auto-mode-alist '("\\.plist\\'" . xml-mode))
@@ -248,6 +246,17 @@
 ;          ))
 ;   (openwith-mode 1))
 
+
+;;                __                          __
+;; .-----.-----. |  |.---.-.--.--.-----.----.|  |--.
+;; |  _  |     | |  ||  _  |  |  |     |  __||     |
+;; |_____|__|__| |__||___._|_____|__|__|____||__|__|
+;; ============================================================
+; (split-window-below true)
+; (command-history)
+; (other-window 1 nil)
+
+(view-lossage)
 
 
 

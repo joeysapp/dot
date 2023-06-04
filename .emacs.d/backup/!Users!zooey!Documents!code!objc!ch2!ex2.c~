@@ -1,0 +1,10 @@
+
+
+#include <stdio.h> // https://en.cppreference.com/w/c/io
+#include <stdlib.h>
+
+int main(int argc, char** argv) {
+
+
+
+};

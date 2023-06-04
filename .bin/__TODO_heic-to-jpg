@@ -1,0 +1,14 @@
+# https://alvinalexander.com/macos/how-convert-many-HEIC-images-to-JPG-PNG/
+
+# WARNING: make a backup copy of all your images before
+#          running this code.
+
+extension=HEIC
+for inFile in `ls *.${extension}`
+do
+    baseFilename=`basename $inFile .${extension}`
+    outFile="${baseFilename}.jpg"
+    echo "$inFile --> $outFile"
+    magick $inFile $outFile
+    mogrify -resize 50% $outFile   # make the image 50% of the original size
+done

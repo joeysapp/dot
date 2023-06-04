@@ -1,0 +1,338 @@
+;;; -*- coding: utf-8; mode: lisp-data -*-
+(("/Users/zooey/.emacs.d/init.el" . 4187)
+ ("/Users/zooey/.zshrc" . 9184)
+ ("/Users/zooey/.emacs.d/custom/"
+  (dired-filename . "/Users/zooey/.emacs.d/custom/.."))
+ ("/Users/zooey/.emacs.d/"
+  (dired-filename . "/Users/zooey/.emacs.d/init.el"))
+ ("/Users/zooey/.emacs.d/elpa/"
+  (dired-filename . "/Users/zooey/.emacs.d/elpa/.."))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/tsconfig.json"))
+ ("/Users/zooey/Documents/code/javascript/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/.."))
+ ("/Users/zooey/Documents/code/"
+  (dired-filename . "/Users/zooey/Documents/code/site"))
+ ("/Users/zooey/Documents/code/site/server/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/src"))
+ ("/Users/zooey/Documents/code/site/server/src/lib/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/src/lib/.."))
+ ("/Users/zooey/Documents/code/site/server/src/endpoints/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/src/endpoints/site.js"))
+ ("/Users/zooey/Documents/code/site/server/src/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/src/.."))
+ ("/Users/zooey/Documents/code/site/frontend/src/"
+  (dired-filename . "/Users/zooey/Documents/code/site/frontend/src/SocketContext.jsx"))
+ ("/Users/zooey/Documents/code/site/server/src/endpoints/site.js" . 5169)
+ ("/Users/zooey/Documents/code/site/"
+  (dired-filename . "/Users/zooey/Documents/code/site/_server-v0_USEFUL"))
+ ("/Users/zooey/Documents/code/site/frontend/src/SocketContext.jsx" . 9639)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/imgui/hash.js" . 263)
+ ("/Users/zooey/Documents/code/javascript/common/utils/javascript.js" . 1345)
+ ("/Users/zooey/Documents/code/site/_server-v0_USEFUL/" . 717)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/vectors/hash.js" . 1920)
+ ("/Users/zooey/Documents/code/site/_server-v0_USEFUL/utils/"
+  (dired-filename . "/Users/zooey/Documents/code/site/_server-v0_USEFUL/utils/clientjs.js"))
+ ("/Users/zooey/Documents/code/site/_server-v0_USEFUL/utils/clientjs.js" . 23953)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/checks/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/checks/is-symbol.js"))
+ ("/Users/zooey/Documents/code/site/server/src/server.js" . 1846)
+ ("/Users/zooey/"
+  (dired-filename . "/Users/zooey/Documents"))
+ ("/Users/zooey/Documents/"
+  (dired-filename . "/Users/zooey/Documents/code"))
+ ("/Users/zooey/Documents/code/site/frontend/.git/config" . 547)
+ ("/Users/zooey/Documents/code/site/server/.git/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/.git/.."))
+ ("/Users/zooey/Documents/code/site/server/postgres/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/postgres/.."))
+ ("/Users/zooey/Documents/code/site/server/public/images/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/public/images/.."))
+ ("/Users/zooey/Documents/code/site/server/public/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/public/.."))
+ ("/Users/zooey/Documents/code/javascript/common/README.md" . 1542)
+ ("/Users/zooey/Documents/code/javascript/common/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/common/utils"))
+ ("/Users/zooey/Documents/code/javascript/common/utils/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/common/utils/node.mjs"))
+ ("/Users/zooey/Documents/code/site/frontend/src/components/data/Table.jsx" . 1828)
+ ("/Users/zooey/Documents/code/site/frontend/src/components/data/"
+  (dired-filename . "/Users/zooey/Documents/code/site/frontend/src/components/data/.."))
+ ("/Users/zooey/Documents/code/site/frontend/src/components/"
+  (dired-filename . "/Users/zooey/Documents/code/site/frontend/src/components/.."))
+ ("/Users/zooey/Documents/code/site/server/src/endpoints/websockets.js" . 5049)
+ ("/Users/zooey/Documents/code/javascript/common/utils/proto.mjs" . 6025)
+ ("/Users/zooey/Documents/code/javascript/common/utils/csv.js" . 1383)
+ ("/Users/zooey/Documents/code/site/frontend/"
+  (dired-filename . "/Users/zooey/Documents/code/site/frontend/src"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/imgui"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/imgui/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/imgui/hash.js"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/vectors/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/vectors/hash.js"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/math/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/math/CHANGELOG.md"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/morton/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/morton/raw.js"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/morton/raw.js" . 492)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/api/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/api/.."))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/ast"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/ast/" . 958)
+ ("/Users/zooey/Documents/code/site/frontend/src/lib/"
+  (dired-filename . "/Users/zooey/Documents/code/site/frontend/src/lib/thi-ng"))
+ ("/Users/zooey/Documents/code/site/frontend/src/lib/thi-ng/" . 208)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/ast/idgen.ts" . 167)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/ast/ops.ts" . 10103)
+ ("/Users/zooey/Documents/code/site/frontend/src/lib/common/"
+  (dired-filename . "/Users/zooey/Documents/code/site/frontend/src/lib/common/."))
+ ("/Users/zooey/.notes/bash-ansi-escape-sequences.sh" . 51)
+ ("/Users/zooey/.bin/colors-extended" . 653)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/ops.ts"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/ops.ts" . 292)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/nodes.ts" . 1278)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/target.ts" . 182)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/swizzles.ts" . 530)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/function.ts" . 3980)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/syms.ts" . 1824)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/api/terms.ts" . 1278)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/index.js" . 431)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/shader-ast/src/index.ts" . 757)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/morton/mux.js" . 1141)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/morton/zcurve.js" . 179)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/imgui/gui.js" . 2360)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/transducers/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/transducers/last.d.ts"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/transducers/cycle.js" . 396)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/strings/word-wrap.js" . 4061)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/strings/uuid.js" . 487)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/strings/escape.js" . 475)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/strings/currency.js" . 394)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/strings/center.js" . 918)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/strings/case.js" . 986)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/strings/ansi.js" . 337)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/dot/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/dot/serialize.js"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/dot/serialize.js" . 3350)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/dot/src/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/dot/src/api.ts"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/compare/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/compare/src"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/compare/src/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/compare/src/compare.ts"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/compare/numeric.js" . 253)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/compare/keys.js" . 520)
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/hiccup-carbon-icons/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/packages/hiccup-carbon-icons/awake.js"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/tools/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/tools/src"))
+ ("/Users/zooey/Documents/code/javascript/thi-ng/umbrella/tools/src/"
+  (dired-filename . "/Users/zooey/Documents/code/javascript/thi-ng/umbrella/tools/src/adjacency.ts"))
+ ("/Users/zooey/Documents/code/site/frontend/.gitmodules" . 153)
+ ("/Users/zooey/.bin/git-print" . 294)
+ ("/Users/zooey/.bin/site-server-status" . 321)
+ ("/Users/zooey/Documents/code/site/server/.gitignore" . 51)
+ ("/Users/zooey/Documents/code/site/server/package-lock.json" . 9903)
+ ("/Users/zooey/Documents/code/site/frontend/src/.env.json" . 176)
+ ("/Users/zooey/Documents/code/javascript/common/utils/node.mjs" . 808)
+ ("/Users/zooey/Documents/code/site/server/src/library.mjs" . 127)
+ ("/Users/zooey/.bin/" . 1665)
+ ("/Users/zooey/Documents/code/site/server/src/lib/common/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/src/lib/common/utils"))
+ ("/Users/zooey/.bin/site-react-status" . 1502)
+ ("/Users/zooey/Documents/code/site/server/src/lib/common/README.md" . 1006)
+ ("/Users/zooey/Documents/code/site/server/.git/modules/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/.git/modules/src"))
+ ("/Users/zooey/Documents/code/site/server/.git/modules/src/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/.git/modules/src/lib"))
+ ("/Users/zooey/Documents/code/site/server/.git/modules/src/lib/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/.git/modules/src/lib/common"))
+ ("/Users/zooey/Documents/code/site/server/.git/modules/src/lib/common/"
+  (dired-filename . "/Users/zooey/Documents/code/site/server/.git/modules/src/lib/common/config"))
+ ("/Users/zooey/Documents/code/site/server/.git/config" . 475)
+ ("/Users/zooey/Documents/code/site/server/.gitmodules" . 141)
+ ("/Users/zooey/Documents/images/icons/icons-flat-osx-master/"
+  (dired-filename . "/Users/zooey/Documents/images/icons/icons-flat-osx-master/.."))
+ ("/Users/zooey/Documents/images/icons/_macos-usage/"
+  (dired-filename . "/Users/zooey/Documents/images/icons/_macos-usage/.."))
+ ("/Users/zooey/Documents/images/icons/" . 386)
+ ("/Users/zooey/Documents/images/"
+  (dired-filename . "/Users/zooey/Documents/images/.."))
+ ("/Users/zooey/Documents/code/joeysapp.github.io/"
+  (dired-filename . "/Users/zooey/Documents/code/joeysapp.github.io/.."))
+ ("/Users/zooey/.terminfo/78/"
+  (dired-filename . "/Users/zooey/.terminfo/78/.."))
+ ("/Users/zooey/.terminfo/"
+  (dired-filename . "/Users/zooey/.terminfo/.."))
+ ("/Users/zooey/.firefox/chrome/"
+  (dired-filename . "/Users/zooey/.firefox/chrome/.."))
+ ("/Users/zooey/.defaults/"
+  (dired-filename . "/Users/zooey/.defaults/.."))
+ ("/Users/zooey/Documents/code/site/README.md" . 992)
+ ("/Users/zooey/.notes/"
+  (dired-filename . "/Users/zooey/.notes/bash-ansi-escape-sequences.sh"))
+ ("/Users/zooey/.bin/zsh-color-chart.png" . 77135)
+ ("/usr/share/terminfo/31/"
+  (dired-filename . "/usr/share/terminfo/31/.."))
+ ("/usr/share/terminfo/"
+  (dired-filename . "/usr/share/terminfo/6f"))
+ ("/Users/zooey/.notes/bash.sh" . 197)
+ ("/Users/zooey/.notes/bash-regex.md" . 1237)
+ ("/etc/"
+  (dired-filename . "/etc/zshrc"))
+ ("/etc/zshrc" . 731)
+ ("/etc/zshrc_Apple_Terminal" . 9108)
+ ("/Users/zooey/.firefox/"
+  (dired-filename . "/Users/zooey/.firefox/chrome_debugger_profile"))
+ ("/Users/zooey/.defaults/.macos" . 5500)
+ ("/Users/zooey/.terminfo/terminfo-24bit.src" . 26)
+ ("/Users/zooey/.lesshst" . 227)
+ ("/Users/zooey/Documents/images/icons/_macos-usage/favs/"
+  (dired-filename . "/Users/zooey/Documents/images/icons/_macos-usage/favs/Apps-Facetime.icns"))
+ ("/Applications/Discord.app/Contents/"
+  (dired-filename . "/Applications/Discord.app/Contents/_CodeSignature"))
+ ("/Applications/Discord.app/Contents/_CodeSignature/"
+  (dired-filename . "/Applications/Discord.app/Contents/_CodeSignature/CodeResources"))
+ ("/Applications/Discord.app/Contents/_CodeSignature/CodeResources" . 565)
+ ("/Applications/Discord.app/Contents/Info.plist" . 316)
+ ("/Users/zooey/Documents/code/javascript/common/update-downstream.sh" . 392)
+ ("/Users/zooey/.bin/site-pg-status" . 288)
+ ("/Users/zooey/Library/LaunchAgents/self.pg.startup.plist" . 728)
+ ("/Users/zooey/Library/LaunchAgents/"
+  (dired-filename . "/Users/zooey/Library/LaunchAgents/self.site.commonsync.plist"))
+ ("/Users/zooey/Library/LaunchAgents/self.site.commonsync.plist" . 336)
+ (#("/sudo:root@kittenblob:/Library/LaunchAgents/self.site.commonsync.plist" 6 10
+    (tramp-default t)
+    11 21
+    (tramp-default t))
+  . 234)
+ ("/sudo:root@kittenblob:/Library/LaunchDaemons/self.site.commonsync.plist" . 938)
+ ("/usr/local/" . 162)
+ ("/sudo:root@kittenblob:/usr/local/libexec/"
+  (dired-filename . "/sudo:root@kittenblob:/usr/local/libexec/.."))
+ ("/sudo:root@kittenblob:/usr/local/"
+  (dired-filename . "/sudo:root@kittenblob:/usr/local/.."))
+ ("/sudo:root@kittenblob:/Library/LaunchAgents/" . 197)
+ ("/Users/zooey/Library/LaunchAgents/__notes.xml" . 666)
+ ("/Users/zooey/.bin/rsync-fast" . 774)
+ ("/Users/zooey/.bin/__example-opts-scripts-with-options.sh" . 2624)
+ ("/Users/zooey/.bin/launchctl-reload" . 1177)
+ ("/Users/zooey/.emacs.d/custom/__TODO-run-current-file.el" . 365)
+ ("/Users/zooey/.emacs.d/auto-save-list/"
+  (dired-filename . "/Users/zooey/.emacs.d/auto-save-list/.."))
+ ("/Users/zooey/.emacs.d/tramp" . 177)
+ ("/Users/zooey/.emacs.d/custom/figlet.el" . 4866)
+ ("/Users/zooey/.gitignore" . 65)
+ ("/Users/zooey/.emacs.d/custom/osascript.el" . 781)
+ ("/Users/zooey/.zsh__todo-to-add-natelandau" . 46)
+ ("/Users/zooey/.bin/__TODO_heic-to-jpg" . 3)
+ ("/Users/zooey/Library/"
+  (dired-filename . "/Users/zooey/Library/LaunchAgents"))
+ ("/Library/LaunchAgents/"
+  (dired-filename . "/Library/LaunchAgents/.."))
+ ("/Library/"
+  (dired-filename . "/Library/LaunchDaemons"))
+ ("/Library/LaunchDaemons/"
+  (dired-filename . "/Library/LaunchDaemons/net.tunnelblick.tunnelblick.tunnelblickd.plist"))
+ ("/Library/LaunchDaemons/net.tunnelblick.tunnelblick.tunnelblickd.plist" . 475)
+ ("/Users/zooey/.bin/pg-startup" . 571)
+ (#("/sudo:root@kittenblob:/Library/LaunchAgents/self.pg.launch.plist" 6 10
+    (tramp-default t)
+    11 21
+    (tramp-default t))
+  . 338)
+ ("/Users/zooey/.config/"
+  (dired-filename . "/Users/zooey/.config/truecolor"))
+ ("/Users/zooey/.config/truecolor/"
+  (dired-filename . "/Users/zooey/.config/truecolor/xterm-24bit.terminfo"))
+ ("/Users/zooey/.bin/dot" . 179)
+ ("/Users/zooey/.bin/site-all-status" . 485)
+ ("/Users/zooey/.bin/new-term" . 304)
+ ("/Users/zooey/.emacs.d/elpa/python-mode-6.3.0/python-mode-autoloads.el" . 3338)
+ ("/Users/zooey/Library/LaunchAgents/net.tunnelblick.tunnelblick.LaunchAtLogin.plist" . 143)
+ ("/Users/zooey/Library/LaunchAgents/com.valvesoftware.steamclean.plist" . 467)
+ ("/Users/zooey/.dot/content/"
+  (dired-filename . "/Users/zooey/.dot/content/.."))
+ ("/Users/zooey/.dot/"
+  (dired-filename . "/Users/zooey/.dot/install.sh"))
+ ("/Users/zooey/.dot/install.sh" . 631)
+ ("/private/etc/ssh/"
+  (dired-filename . "/private/etc/ssh/ssh_config"))
+ ("/sudo:root@kittenblob:/private/etc/ssh/ssh_config.d/"
+  (dired-filename . "/sudo:root@kittenblob:/private/etc/ssh/ssh_config.d/.."))
+ ("/sudo:root@kittenblob:/private/etc/ssh/sshd_config.d/"
+  (dired-filename . "/sudo:root@kittenblob:/private/etc/ssh/sshd_config.d/.."))
+ ("/sudo:root@kittenblob:/private/etc/ssh/"
+  (dired-filename . "/sudo:root@kittenblob:/private/etc/ssh/sshd_config"))
+ ("/sudo:root@kittenblob:/private/etc/ssh/sshd_config" . 1869)
+ ("/Users/zooey/.ssh/"
+  (dired-filename . "/Users/zooey/.ssh/README.md"))
+ ("/Users/zooey/.ssh/config" . 106)
+ ("/Users/zooey/.ssh/known_hosts" . 93)
+ ("/etc/ssh/"
+  (dired-filename . "/etc/ssh/sshdaemon_ed25519.pub"))
+ ("/Library/LaunchDaemons/ssh.plist" . 403)
+ ("/private/etc/ssh/ssh_config" . 1519)
+ ("/Users/zooey/.ssh/nopass_ed25519" . 412)
+ ("/sudo:root@kittenblob:/private/etc/ssh/ssh_config" . 1252)
+ ("/Users/zooey/.ssh/nopass_ed25519.pub" . 97)
+ ("/private/etc/ssh/sshd_config.d/"
+  (dired-filename . "/private/etc/ssh/sshd_config.d/.."))
+ ("/private/etc/ssh/sshd_config" . 926)
+ ("/Users/zooey/.ssh/known_hosts.old" . 1444)
+ ("/Users/zooey/.gitconfig" . 238)
+ ("/Users/zooey/.dot/.git/"
+  (dired-filename . "/Users/zooey/.dot/.git/.."))
+ ("/Users/zooey/.cups/"
+  (dired-filename . "/Users/zooey/.cups/.."))
+ ("/Users/zooey/Public/"
+  (dired-filename . "/Users/zooey/Public/.."))
+ ("/Users/zooey/.m2/"
+  (dired-filename . "/Users/zooey/.m2/repository"))
+ ("/Users/zooey/.m2/repository/"
+  (dired-filename . "/Users/zooey/.m2/repository/net"))
+ ("/Users/zooey/.config/flipperdevices.com/"
+  (dired-filename . "/Users/zooey/.config/flipperdevices.com/.."))
+ ("/Users/zooey/.config/simple-update-notifier/"
+  (dired-filename . "/Users/zooey/.config/simple-update-notifier/nodemon.json"))
+ ("/Users/zooey/.emacs.d/custom/org-download.el" . 27783)
+ ("/Users/zooey/.emacs.d/custom/org-download-readme.md" . 1099)
+ ("/Users/zooey/Desktop/buildings-1000 spring loop info - oakwood homes originally/Permit.html" . 763)
+ ("/Users/zooey/Desktop/2022-12-05-headphone-iem-research/rankings.md" . 59577)
+ ("/Users/zooey/Desktop/2023-01-03-shipment-tracking.org" . 496)
+ ("/Users/zooey/Desktop/"
+  (dired-filename . "/Users/zooey/Desktop/2022-12-25-christmas-gift-ideas"))
+ ("/Users/zooey/Desktop/2022-12-25-christmas-gift-ideas/"
+  (dired-filename . "/Users/zooey/Desktop/2022-12-25-christmas-gift-ideas/orders.org"))
+ ("/Users/zooey/Desktop/2022-12-25-christmas-gift-ideas/orders.org" . 425)
+ ("/Users/zooey/.zsh_history" . 212104)
+ ("/Users/zooey/.emacs.d/custom/arduino-mode.el" . 9628)
+ ("/Users/zooey/Desktop/2022-12-25-christmas-gift-ideas/notes.org" . 1913)
+ ("/Users/zooey/Desktop/2022-12-25-christmas-gift-ideas/self.org" . 561)
+ ("/Users/zooey/.emacs.d/elpa/org-superstar-1.5.1/org-superstar-autoloads.el" . 1594)
+ ("/Users/zooey/Library/KeyBindings/README.md" . 157)
+ ("/Users/zooey/.defaults/.soundsource/ATH-m50x.txt" . 290)
+ ("/Users/zooey/.defaults/.soundsource/README.md" . 246)
+ ("/Users/zooey/.firefox/user.js" . 1327)
+ ("/Applications/FirefoxPM.app/"
+  (dired-filename . "/Applications/FirefoxPM.app/Contents"))
+ ("/Applications/FirefoxPM.app/Contents/"
+  (dired-filename . "/Applications/FirefoxPM.app/Contents/document.wflow"))
+ ("/Applications/FirefoxPM.app/Contents/document.wflow" . 907)
+ ("/Applications/FirefoxPM.app/Contents/Info.plist" . 1931)
+ ("/Applications/FirefoxPM.app/Contents/Resources/"
+  (dired-filename . "/Applications/FirefoxPM.app/Contents/Resources/ApplicationStub.icns"))
+ ("/Applications/FirefoxPM.app/Contents/MacOS/"
+  (dired-filename . "/Applications/FirefoxPM.app/Contents/MacOS/.."))
+ ("/Users/zooey/.firefox/chrome/userChrome.css" . 1198)
+ ("/Library/Application Support/"
+  (dired-filename . "/Library/Application Support/Adobe"))
+ ("/Users/zooey/Downloads/"
+  (dired-filename . "/Users/zooey/Downloads/.DS_Store"))
+ ("/Users/zooey/.firefox/chrome/userContent.css" . 1816)
+ ("/Users/zooey/.emacs.d/elpa/clojure-mode-5.15.1/clojure-mode-autoloads.el" . 4165))

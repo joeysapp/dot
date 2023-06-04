@@ -1,0 +1,23 @@
+/*
+  Write a function that takes two `Window` structs as arguments.
+  Your function should return 1 if there is a non-zero overlap between the two windows,
+  and 0 otherwise. Write a test program that creates windows and verify it works.
+*/
+
+struct Vec2f {
+  float x;
+  float y;
+}
+
+struct window {
+  Vec2f origin; // bottom left of window
+  float width;
+  float height;
+}
+
+
+int main(int argc, char** argv) {
+
+
+
+}

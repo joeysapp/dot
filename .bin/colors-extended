@@ -2,6 +2,17 @@
 # ... but I don't think this works, compiled this into .terminfo/78.. either the : or ; version.
 # so, use iTerm or just give up on 24bit colors
 
+# also... todo... if you do this:
+# $ terminfo xterm-256colors setaf=\E[%?%p1%{8}%<%t3%p1%d%e%p1%{16}%<%t9%p1%{8}%-%d%e38;5;%p1%d%;m,
+# $ terminfo xterm-24bit     setaf=\E[%?%p1%{8}%<%t3%p1%d%e%p1%{16}%<%t9%p1%{8}%-%d%e38;5;%p1%d%;m,
+# $ terminfo xterm-24bits    setaf=\E[%?%p1%{8}%<%t3%p1%d%e%p1%{16}%<%t9%p1%{8}%-%d%e38;5;%p1%d%;m,
+# $ terminfo xterm-24        no setaf
+# 
+# https://notes.burke.libbey.me/ansi-escape-codes/
+# https://en.wikipedia.org/wiki/ANSI_escape_code
+# https://unix.stackexchange.com/questions/450365/check-if-terminal-supports-24-bit-true-color
+# https://michurin.github.io/xterm256-color-picker/
+
 
 local rc=m	\
 
@@ -9,7 +20,6 @@ typeset -AHg fg bg
 fg[reset]="\e[0$rc"
 fg[bold]="\e[1$rc"
 for idx in $(seq 0 255); do
-    echo "efg" $fg
     fg[$idx]="\e[038;005;$idx$rc"
     bg[$idx]="\e[048;005;$idx$rc";
 done

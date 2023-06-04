@@ -1,0 +1,203 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* INITIAL SETUP: */
+/* about:config -> toolkit.legacyUserProfileCustomizations.stylesheets to true */
+/* about:config -> gfx.webrender.all to true */
+/* https://old.reddit.com/r/FirefoxCSS/comments/gk93p2/help_in_creating_a_transparent_userchromecss/ */
+
+#appcontent {
+background: transparent !important;
+}
+
+#statuspanel {
+    visibility: visible !important;
+    opacity: 0.9 !important;
+    font-family: Monaco !important;
+    z-index: 100000;
+
+    left: 12px !important;
+    top: 99vh !important;
+
+    max-width: 200vw;
+}
+
+#statuspanel-inner{
+    height: auto !important;
+    padding: 0.5rem;
+    border-radius: 24px !important;
+    background: rgba(41, 41, 41, 1) !important;
+
+    z-index: 100000;
+
+
+}
+
+* {
+	font-kerning: normal;
+	border: none !important;
+	background: transparent !important;
+	-moz-appearance: transparent !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	font-variant-ligatures: none;
+	font-kerning: normal;
+	font-kerning: normal;
+	border: none !important;
+	background: transparent !important;
+	-moz-appearance: transparent !important;
+
+    --border-col: rgba(255, 255, 255, 0.33);
+    -webkit-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+
+  /*--tab-block-margin: 0px !important;*/
+  --toolbarbutton-border-radius: 0px !important;
+  --tab-border-radius: 0px !important;
+
+  /* Top bar */
+  --lwt-accent-color: rgba(255, 255, 255, 0.25);
+
+  /* Active tab */
+  /*--lwt-tab-text:*/
+  /*--lwt-selected-tab-background-color:*/
+
+  --toolbarbutton-inner-padding: 0px;
+  --tab-label-mask-size: 0px; /* no fade on tab */
+
+--urlbar-min-height: 25px;
+--urlbar-height: 25px; /* this is when you click on the urlbar? */
+--urlbar-icon-padding: 0px;
+
+--inline-tab-padding: 0px;
+--bookmark-block-padding: 0px;
+}
+
+#TabsToolbar-customization-target {
+  height: 25px !important;
+}
+
+#tabbrowser-tabs {
+    min-height: 0px !important;
+    overflow: hidden;
+    height: 25px !important;
+    left: 75px;
+}
+
+#tabs-newtab-button {
+    max-height: 25px !important;
+}
+
+.titlebar-spacer[type="pre-tabs"], .titlebar-spacer[type="post-tabs"] {
+    width: 8px !important;
+}
+
+#urlbar-search-splitter {
+    max-width: 0px !important;
+}
+
+#urlbar-container, #search-container {
+    max-height: 25px !important;
+    padding-block: 0px !important;
+    margin-inline: 0px !important;
+}
+
+toolbar, #searchbar {
+    max-height: 25px;
+}
+
+toolbar .toolbarbutton-1 {
+    max-height: 25px;
+}
+
+.urlbar-search-splitter {
+    min-width: 0px !important;
+}
+
+.tabbrowser-tab {
+  /* min-width: 12.5vw !important; */ 
+  /* ^ wait so if you close a tab, its always there..? */
+  /* max-width: 12.5vw !important; */
+  font-size: 9px !important;
+
+  min-height: 0px !important;
+  height: 25px !important;
+
+  /* spacing between tabs */
+  padding-inline: 0px !important;
+}
+
+.tab-background {
+    margin: 0px !important;
+}
+
+#urlbar-input[attr=placeholder] {
+    content: "foo";
+}
+
+#urlbar-input::-webkit-input-placeholder::after {
+    color:#666;
+    content:"Line 1\A Line 2\A Line 3\A";
+}
+
+.tab-content, #tabbrowser-arrowscrollbox {
+  padding: 0px !important;
+  padding-left: 12px !important;
+  height: 25px !important;
+  max-height: 25px !important;
+  min-height: 25px !important;
+}
+
+.tab-label {
+white-space: break-spaces !important;
+height: 25px;
+max-height: 25px;
+line-height: 25px !important;
+/*line-height: 12px !important; */
+
+
+}
+
+.tab-close-button {
+
+  /*padding: 0 !important;
+  margin-left: auto;
+  margin-top: 2px*/
+}
+
+.private-browsing-indicator {
+    /*scale: 2;
+    filter: grayscale(1);*/
+    background-image: none !important;
+}
+
+.private-browsing-indicator:after {
+    content: '(private-mode)';
+    line-height: 25px;
+}
+
+#navigator-toolbox-background, .tabbrowser-tab {
+    font-size: 9px;
+    font-family: Monaco, monospace;
+}
+
+#browser {
+    border: 1px solid var(--border-col);
+}
+
+.tabbrowser-tab {
+    font-family: Monaco, monospace !important;
+    font-size: 9px;
+}
+
+.tab-background {
+    border: 1px solid var(--border-col) !important;
+    border-radius: 0 !important;
+}
+
+#navigator-toolbox {
+    border: 1px solid var(--border-col);
+}

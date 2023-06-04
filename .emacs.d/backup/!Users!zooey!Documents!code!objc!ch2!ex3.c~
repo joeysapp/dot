@@ -1,0 +1,26 @@
+/*
+  Page 53
+  Write a function that logs the number of times it has been called.
+  Store the count ina  function scope static variable.
+  Call the function several times to verify that the
+  count is correctly recorded.
+
+  Is there a way to make the count start at a value other than zero?
+*/
+
+#include <stdio.h> // https://en.cppreference.com/w/c/io
+#include <stdlib.h>
+
+
+void countVisitors(int _init) {
+  static int visits;
+  if (visits == 0) visits = _init;
+  visits++;
+  if (visits > 5) printf("Count is: %i\n", visits);
+}
+
+int main(int argc, char** argv) {
+  for (int i = 0; i < 10; i++) {
+    countVisitors(10);
+  }
+};

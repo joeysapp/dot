@@ -1,38 +1,56 @@
 # Extending the built-in zsh `colors` function to have all color codes available
+# ... but I don't think this works, compiled this into .terminfo/78.. either the : or ; version.
+# so, use iTerm or just give up on 24bit colors
 
 
-#export LS_COLORS="di=31;41:ln=31;41:so=31;41:pi=31;41:ex=31;41:bd=31;41:cd=31;41:su=31;41:sg=31;41:tw=31;41:ow=31;41:"
+local rc=m	\
 
-# I don't think any of this works
-#/usr/bin/tic -x -o ~/.terminfo ~/.config/truecolor/xterm-24bit.terminfo
-#export TERM=xterm-24bit
-#set -g default-terminal "xterm-24bit"
-#set -g terminal-overrides ',xterm-24bit:Tc'
-# export TERM=truecolor
-# export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
-
+typeset -AHg fg bg
+fg[reset]="\e[0$rc"
+fg[bold]="\e[1$rc"
+for idx in $(seq 0 255); do
+    echo "efg" $fg
+    fg[$idx]="\e[038;005;$idx$rc"
+    bg[$idx]="\e[048;005;$idx$rc";
+done
+return
 
 
 # http://rtfm.etla.org/xterm/ctlseq.html
 # Set cursor to be v bright
+# ... so confusing, so this works because it's a string (.. I think a Ps?)
 echo -ne "\033]012;rgb:6f/ff/6f\007"
 
 # Set background to be purple
 # echo -ne "\033]11;rgb:53/50/6f\007" 
+
 # Set background back to black
 # echo -ne "\033]011;rgb:00/00/00\007"
+
 # Get the current value with ?
 # printf '\033]11;?\007'
 
 
 
-# further reading on ansi escape codes and escape codes, and tput
-# https://stackoverflow.com/questions/25879183/can-terminal-app-be-made-to-respect-ansi-escape-codes
-# -> learn how to use tput save/return carr: 
-# echo -e "$(tput sc)Hello world$(tput rc)G'day"
-# instead of 
-# esc=$'\033'
-# echo "${esc}7Hello world${esc}8G'day"
+
+
+# investigate the 24bit stuff here: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+# also look into adding dircolors: https://unix.stackexchange.com/questions/91937/mac-os-x-dircolors-not-found
+# https://stackoverflow.com/questions/36158093/terminal-color-using-terminfo/36163656#36163656
+# ... As a result, the compiled default zsh does not support 24bit color. lol.
+# export TERM=xterm-24bit
+
+#export LS_COLORS="di=31;41:ln=31;41:so=31;41:pi=31;41:ex=31;41:bd=31;41:cd=31;41:su=31;41:sg=31;41:tw=31;41:ow=31;41:"
+
+# I don't think any of this works
+# (Trying to add 24bit for LSCOLOR, does not work on 256 macos terminal.)
+#/usr/bin/tic -x -o ~/.terminfo ~/.config/truecolor/xterm-24bit.terminfo
+#/usr/bin/tic -x -o ~/.terminfo ~/.terminfo/78/xterm-24bit.terminfo
+#export TERM=xterm-24bit
+#set -g default-terminal "xterm-24bit"
+#set -g terminal-overrides ',xterm-24bit:Tc'1
+# export TERM=truecolor
+# export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
 
 
@@ -40,53 +58,7 @@ echo -ne "\033]012;rgb:6f/ff/6f\007"
 
 
 
-
-# (Which are ESC [ 	0x9B 	CSI 	Control Sequence Introducer 
-# But if you want to read about ESC ] 	0x9D 	OSC 	Operating System Command 	, 
-# look up stuff like: https://thiagowfx.github.io/2021/12/xterm-enable-ansi-osc-52/
-
-# `ESC [`  is written by:   `\e[`    or     `\033[`
-# https://xtermjs.org/docs/api/vtfeatures/
-
-# OSCs:
-# ESC ] 1 1 Pt -  	Change colors starting with text background to Pt
-# Following will set term background to Pt
-# echo -ne "\033]012;rgb:53/19/6f\007"
-
-# ESC ] 1 2 Pt - Change colors starting with text cursor to Pt
-# FOllowing will set term cursor to purple:
-# echo -ne "\033]012;rgb:53/19/6f\007"
-
-# so now back to CSRS:
-#  Pm	A multiple numeric parameter composed of any number of single numeric parameters, separated by ; character(s). Individual values for the parameters are listed with Ps .
-#  Pt 	A text parameter composed of printable characters. 
-
-# ... so OSC use Pt, CSI uses Pm, and Pm can contain Ps
-# Ps 	A single (usually optional) numeric parameter, composed of one of more digits. 
-
-# So the reason \033]11;rgb:53/19/6f\007 can set the background purple is cause it's taking a Pt, a printable text paramtere
-# We need \033[38;5;<<SOMETHING>>m to utilize the xterm 24-bit (or does it allow 32-bit?)
-
-
-# https://misc.flogisoft.com/bash/tip_colors_and_formatting
-# 
-# for fg_bg in 38 48 ; do # Foreground / Background
-#     for color in {0..255} ; do # Colors
-#         # Display the color
-#         printf "\e[${fg_bg};5;%sm  %3s  \e[0m" $color $color
-#         #
-#         # Display 6 colors per lines
-#         if [ $((($color + 1) % 6)) == 4 ] ; then
-#             echo # New line
-#         fi
-#     done
-#     echo # New line
-# done
-#  
-
-
-
-# Below is the rest of the `colors` zsh function
+# Below is the rest of the `colors` zsh function, but I replaced that above
 
 # Put standard ANSI color codes in shell parameters for easy use.
 # Note that some terminals do not support all combinations.
@@ -173,12 +145,12 @@ color=(
 # but it's clearer to include them all both ways.
 local k
 for k in ${(k)color}; do
-    echo $k
     color[${color[$k]}]=$k;
 done
 
 # Add "fg-" keys for all the text colors, for clarity.
 for k in ${color[(I)[39]?]}; do
+    echo $k
     color[fg-${color[$k]}]=$k;
 done
 
@@ -195,7 +167,7 @@ for k in '' fg- bg-; do
     color[${k}bright-grey]=${color[${k}bright-gray]}
 done
 
-colour=(${(kv)color})	# A case where ksh namerefs would be useful ...
+# colour=(${(kv)color})	# A case where ksh namerefs would be useful ...
 
 # The following are terminal escape sequences used by colored prompt themes.
 local lc=$'\e['
@@ -210,6 +182,7 @@ bold_color="$lc${color[bold]}$rc"
 # Foreground
 typeset -AHg fg fg_bold fg_no_bold
 for k in ${(k)color[(I)fg-*]}; do
+    echo "RAWR": ${color[$k]}
     fg[${k#fg-}]="$lc${color[$k]}$rc"
     fg_bold[${k#fg-}]="$lc${color[bold]};${color[$k]}$rc"
     fg_no_bold[${k#fg-}]="$lc${color[normal]};${color[$k]}$rc"
@@ -222,3 +195,4 @@ for k in ${(k)color[(I)bg-*]}; do
     bg_bold[${k#bg-}]="$lc${color[bold]};${color[$k]}$rc"
     bg_no_bold[${k#bg-}]="$lc${color[normal]};${color[$k]}$rc"
 done
+

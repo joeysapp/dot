@@ -6,6 +6,8 @@
 # To reload after saving .zshrc:
 # $ source ./zshrc
 #
+#  For info about your terminfo, check man terminfo, then /usr/share/terminfo, or /etc/zshrc or /etc/zprofile
+#
 # [todo]
 # https://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution
 # https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html#tee-invocation
@@ -101,6 +103,7 @@ export CLICOLOR=0 # Need to set this for LS to be pretty :^)
 # export LSCOLORS=gafacadabaegedabagacad # [fg][bg], so first thing dir is cyan fg, black bg.
 
 
+# .. So weird, there's /usr/share/terminfo/78/xterm-24 but it seems like it isn't actually
 # a     black
 # b     red
 # c     green
@@ -130,12 +133,6 @@ export LSCOLORS=gxfxcxdxBhEgedabagacad
 # export lscolors=Exbhcxdxbxegedabagacad
 
 # https://michurin.github.io/xterm256-color-picker/
-# I don't think this works, compiled this into .terminfo/78.. either the : or ; version.
-# investigate the 24bit stuff here: https://invisible-island.net/xterm/ctlseqs/ctlseqs.html
-# also look into adding dircolors: https://unix.stackexchange.com/questions/91937/mac-os-x-dircolors-not-found
-# https://stackoverflow.com/questions/36158093/terminal-color-using-terminfo/36163656#36163656
-# ... As a result, the compiled default zsh does not support 24bit color. lol.
-# export TERM=xterm-24bit
 
 # If the PROMPT_SUBST option is set,
 # the prompt string is first subjected to:
@@ -167,7 +164,9 @@ alias arp='function _arp(){ arp $@ | column -t };_arp'
 
 # credits https://gist.github.com/natelandau/10654137#file-bash_profile-L87
 # alias mans='function _mansearch(){ man $1 | grep -iC2 --color=always $2 | less};_mansearch'
-alias mans='man $1 | less +/$2'
+# man-search with paging, press n or N to page.
+# alias mans='man $1 | less +/$2' alias does not work
+alias mans='function _mansearch(){ man $1 | less +/$2 };_mansearch';
 
 # [chmod octals]
 # 000, for rwx. so 001 (1) is --x, 010 (2) is -w-, 110 (6) is rw-, 111 (7) is rwx, in order so

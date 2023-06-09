@@ -74,6 +74,7 @@
 ;; |__|__|_____|___  ||_____|_____|___._|__| |_____|
 ;;             |_____|
 ; Emacs defaults/overrides
+; to read: https://www.masteringemacs.org/article/mastering-key-bindings-emacs
 (global-set-key (kbd "C-z") nil) ;; (suspend-frame), minimizes frame on macOS
 (global-set-key (kbd "C-x C-z") nil) ;; (suspend-frame), minimizes frame on macOS
 (global-set-key (kbd "C-x C-u") nil) ;; (upcase-region), annoying
@@ -126,8 +127,6 @@
 ; (setq-default org-download-timestamp t)
 ; (setq-default org-download-backend 'curl) ; 'wget, url-retrieve is default
 ; (add-hook 'dired-mode-hook 'org-download-enable) ; d&d to dired
-
-(load "emacs-frame.el")
 
 (load "osascript.el") ; (osascript-eval-region), (osascript-eval-current-buffer) ; (osascript-run-file) a file
 
@@ -252,11 +251,14 @@
 ;; |  _  |     | |  ||  _  |  |  |     |  __||     |
 ;; |_____|__|__| |__||___._|_____|__|__|____||__|__|
 ;; ============================================================
+; to read: https://www.masteringemacs.org/article/demystifying-emacs-window-manager
 ; (split-window-below true)
 ; (command-history)
 ; (other-window 1 nil)
 
-(view-lossage)
+; to read: https://github.com/lewang/command-log-mode/blob/master/command-log-mode.el
+; (view-lossage)
+; (command-history)
 
 
 

@@ -182,6 +182,7 @@ alias ls='LC_COLLATE=C ls -AlFh@'
 # S - sorted largest file at bottom (mebibytes, 2^20)
 # si - sorted by (megabytes, 10^6)
 
+alias gitprune='du -sh .git && git remote prune origin && git repack && git prune-packed && git reflog expire --all --expire=now && git gc --aggressive --prune=now && du -sh .git'
 
 #
 # -rw-r--r--@  1 zooey  staff    14K Jul 27 20:31 .DS_Store
@@ -210,7 +211,7 @@ alias ls='LC_COLLATE=C ls -AlFh@'
 #   |__|__|                      |___|
 # ------------------------------------------------------------
 # [dot]
-export PATH=".dot/bin:$PATH"
+export PATH="/Users/zooey/.bin:$PATH"
 # export PATH="/usr/local/sbin:$PATH"
 
 # [site]
@@ -222,7 +223,7 @@ export JS_COMMON_PATH="/Users/zooey/Documents/code/javascript/common"
 # [postgres]
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 # setup default dir for all postgres/pg_ctl commands
-export PGDATA="$SITE_SERVER_PATH/postgres/database"
+export PGDATA="/Users/zooey/Documents/code/site/postgres/database"
 export PGPORT="9002"
 launchctl setenv LC_ALL "en_us.UTF.8"
 # For compilers to find postgresql@15 you may need to set:
@@ -293,6 +294,12 @@ echo '[emacs] <M-!> shell command'
 echo '[bash]  be careful with commands, easy to accidentally overwrite something'
 echo "[bash]  $fg[bold]launchctl list | sudo tee ~/foo.txt$fg[reset]"
 echo '        pipes stdout to your tty print and the file!'
+echo '[regex] an example of needing to escape regex operators. these produce the same result:'
+
+echo  '       .... lol, the -regex here will execute.'
+# echo '        find . -regex \./DSC_007\[0-9\]\.NEF'
+# echo '        find . -regex \./.\*007\[0-9\]\.NEF      <-- see, gotta escape the *!'
+echo '        find -E . -regex "\./.*(07[0-7]).NEF$"'
 ) | lolcat
 
 echo-bar

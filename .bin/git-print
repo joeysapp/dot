@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+# If you don't do this it'll run with 
 local cmd="/usr/bin/git"
 
 # Check to see if in git directory - if not, exit

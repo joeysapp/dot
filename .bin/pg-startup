@@ -14,12 +14,12 @@
 # else
     echo "pg-startup: no server running, beginning boot" $(id -u) $(whoami)
     /opt/homebrew/opt/postgresql@15/bin/pg_ctl \
-        -D /Users/zooey/Documents/code/site/db/postgres/database \
+        -D /Users/zooey/Documents/code/database \
         -U zooey \
-        --log=/Users/zooey/.log/pg \
+        --log=/Users/zooey/Documents/code/database/logfile.log \
         start
     # pg_ctl -l /Users/zooey/.log/pg start
     # ooo, "tailing" the file makes sense :-0 i are detective
-    /usr/bin/tail -f /Users/zooey/.log/pg
+    /usr/bin/tail -f /Users/zooey/Documents/code/database/logfile.log
     return 0;
 # fi;

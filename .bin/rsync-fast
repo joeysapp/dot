@@ -1,5 +1,31 @@
 #!/usr/bin/env zsh
+#
+# Usage:
+# (mount the smb server in finder)
+# rsync-fast -v [file1] /Volumes/[ip address]/location/
+
+echo "just do this: "
+echo "rsync -avHx --numeric-ids --progress -e 'ssh -T -o Compression=no -x' \ \n
+     zooey@localhost:~/Documents/fonts \ \n
+     zooey@localhost:~/Documents/code \ \n
+     zooey@localhost:~/Documents/code-finished \ \n
+     /Volumes/192.168.0.10/root/content/\n" 
+exit
+
+rsync -avHx --numeric-ids --progress \
+      --delete \
+      --relative \
+      --dry-run \
+      --exclude="_*" \
+      --include="*.zip" \
+      -e 'ssh -T -o Compression=no -x' \
+     zooey@localhost:~/Documents/code \
+     zooey@localhost:~/Documents/code-finished \
+     zooey@xaria.local:~/
+
+#      /Volumes/192.168.0.10/root/content/\n
 # ------------------------------------------------------------
+# # CAREFUL - DO NOT PASS IN REGEX TO THIS YET@@@@@@@@@@@@@@
 #   .----.-----.--.--.-----.----.
 #   |   _|__ --|  |  |     |  __|
 #   |__| |_____|___  |__|__|____|
@@ -9,7 +35,14 @@
 #   |______|   _||  _  |__ --||   _|
 #          |__|  |___._|_____||____|
 #   rsyc wrapper to transfer over 500mbyte/s, locally, usb-c, NIC
-#   $ rsync [-Rv] <source> <dest>
+
+#   rsync-fast [-Rv] <source> <dest>
+
+#   rsync-fast --include=""--dry-run /source-diretory/ /dest-directory/
+
+
+#   rsync-fast -av --exclude=\*backup\* --exclude=\*.zip --exclude=\*.zip.bak /source/ user@storage::Kunden/Jobs
+
 # ------------------------------------------------------------
 #   https://gist.github.com/KartikTalwar/4393116
 # ------------------------------------------------------------
@@ -19,6 +52,8 @@
 #   * get gdate from coreutils, macos doesn't support %N
 #   * do we want a --relative option?
 #   * prob should pass through to rsync --help/-h lol
+#   * to do wildcards, look at:
+#     https://stackoverflow.com/questions/21704662/rsync-multiple-folder-sources-using-wildcard-and-filtering-files-using-extension
 
 # [requirements]
 # macOS catalina still ships with an old rsync. back it up and `brew install rsync`
@@ -102,7 +137,7 @@ RELATIVE="false"
 VERBOSE="false"
 
 USAGE="Usage: rsync [-v] [-R] <source> <destination>"
-if [[ $# -gt "MAXARG" || $# -lt "$MINARG" ]] then echo $USAGE; return $E_WRONGARGS; fi;
+# if [[ $# -gt "MAXARG" || $# -lt "$MINARG" ]] then echo $USAGE; return $E_WRONGARGS; fi;
 
 params=()
 while getopts 'vR' opt; do
@@ -112,10 +147,6 @@ while getopts 'vR' opt; do
         ;;
     R)
         RELATIVE="true"
-        ;;
-    \?)
-        echo $USAGE
-        return $E_WRONGARGS
         ;;
   esac
 done
@@ -188,8 +219,13 @@ params+=( "--crtimes" )
 start=`date +%s`
 /opt/homebrew/bin/rsync \
         "${params[@]}" \
-        -e "ssh -T -c arcfour -o Compression=no -x" \
-        $1 $2
+        -e "ssh -T -o Compression=no -x" \
+        "$@"
+
+# Make sure it's quoted for regex exprs?
+# 2023-06-06: Instead of this, do the above so you can pass in whatever.
+#         "$@"     ... this still didn't escape the regex.
+#         -e "ssh -T -c arcfour -o Compression=no -x" \
 
 end=`date +%s`
 duration=$(echo "$end - $start" | bc -l)

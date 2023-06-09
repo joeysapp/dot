@@ -223,7 +223,7 @@ export JS_COMMON_PATH="/Users/zooey/Documents/code/javascript/common"
 # [postgres]
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 # setup default dir for all postgres/pg_ctl commands
-export PGDATA="/Users/zooey/Documents/code/site/postgres/database"
+export PGDATA="/Users/zooey/Documents/code/database"
 export PGPORT="9002"
 launchctl setenv LC_ALL "en_us.UTF.8"
 # For compilers to find postgresql@15 you may need to set:

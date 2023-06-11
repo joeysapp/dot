@@ -12,6 +12,8 @@
 ;; |_____||____|___._|__|  |____|_____|   __|
 ;;                                    |__|
 ;; ----------------------------------------------------------------------
+;; (eval 'load-path)
+
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "")
 ; (set #'display-startup-echo-area-message #'ignore)
@@ -30,6 +32,9 @@
 
 (setq-default indent-tabs-mode nil) ; indent will only insert spaces now
 (put 'set-goal-column 'disabled nil) ; what happens on <enter>, basically auto-indenting (?)
+
+(show-paren-mode t)
+(setq show-paren-style 'parenthesis) ; expression for entire highlight
 
 
 
@@ -66,6 +71,12 @@
 ;;             |_____|
 ;; ----------------------------------------------------------------------
 (load-theme 'moe-light t)
+;; Function/minibuf prompt has wrong face with this...
+; (require 'moe-theme)
+; (setq moe-theme-highlight-buffer-id 1)
+; (setq moe-theme-modeline-color 'cyan)
+; (moe-light)
+
 (nyan-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -225,8 +236,6 @@
  '(js-jsx-syntax t)
  '(list-colors-sort '(hsv-dist . "gray100"))
  '(outline-minor-mode-cycle t)
- '(package-selected-packages
-   '(python-mode web-mode nyan-mode moe-theme markdown-mode color-theme-sanityinc-tomorrow clojure-mode))
  '(py-outline-minor-mode-p nil)
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)

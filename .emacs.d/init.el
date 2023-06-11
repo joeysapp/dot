@@ -1,70 +1,35 @@
-
 ;;                                        __    _____         __ __
 ;; .-----.--------.---.-.----.-----.  .--|  |  /  /__|.-----.|__|  |_   .-----.
 ;; |  -__|        |  _  |  __|__ --|__|  _  |,' ,'|  ||     ||  |   _|__|  -__|
 ;; |_____|__|__|__|___._|____|_____|__|_____/__/  |__||__|__||__|____|__|_____|
-
-;; * <C-x tab arrow-key>                 ; lets you indent a region easer than C-x t
-;; * <M-x> describe-variable <name>      ; shows you all of the environment variables and info.
-;; * <C-h l>                             ; history of keystrokes in buffer
-;; * <C-x z> & <z>                       ; will keep repeating command
-
-;; init inspirations:
+;; ----------------------------------------------------------------------
+;; [init inspirations]
 ;; - https://github.com/Fanael/init.el/blob/master/init.el
-;; 
-;; packages to learn off of:
-;; - https://repo.or.cz/ShellArchive.git/tree
-;;
-;; [ ] Put CtrlD in dot somehow, or git-annex
-;; [ ] Upgrade eval-last-sexp to eval-region-or-last-sexp for C-q
-;; [ ] Improve custom/figlet.el to allow unselected lines - 2022-09-04
-;; - [ ] review figlet/arduino, look at https://stackoverflow.com/questions/30677784/shell-zsh-through-emacs
-;; - [ ] just make your own arduino-mode lol
-;; [ ] - https://github.com/atomontage/xterm-color
-
-;; emacs further reading:
-;; https://www.linux.com/news/emacs-tips-making-outlines/
-;; https://devhints.io/org-mode
-
-;; elisp notes
-;;   (message "foo")
-;;   (insert "foo")
-;;   (defcustom foo 0 "testing")
-;;   (custom-set-variables '(foo 1))
-;;   (setq foo 2)
-;;   (customize-mark-as-set 'foo)
-;;   (setq foo 3)
-;;   (car (get 'foo 'standard-value))   ;; evaluates to 0
-;;   (car (get 'foo 'saved-value))      ;; evaluates to 1
-;;   (car (get 'foo 'customized-value)) ;; evaluates to 2
-;;   foo                                ;; evaluates to 3
-;;  
-;;   (message (if (use-region-p)
-;;                (string (region-beginning))
-;;                (string (line-beginning-position))))
-;;
-;;    (add-hook 'after-init-hook (lambda () (append-to-file "after-init-hook\n" nil  "log.txt")))
-
-
 
 ;;         __               __
 ;; .-----.|  |_.---.-.----.|  |_.--.--.-----.
 ;; |__ --||   _|  _  |   _||   _|  |  |  _  |
 ;; |_____||____|___._|__|  |____|_____|   __|
 ;;                                    |__|
-; (set #'display-startup-echo-area-message #'ignore)
+;; ----------------------------------------------------------------------
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "")
+; (set #'display-startup-echo-area-message #'ignore)
 ; (setq initial-scratch-message "foo") ; (figlet-preview-fonts)
 ; (add-hook 'after-init-hook (lambda () (figlet-preview-fonts)))
+
 (setq create-lockfiles nil)
 (setq make-backup-files nil)
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))) ; for when we do use above
-(when (string= system-type "darwin") ; macOS doesn't support --dired in ls call
+
+ ; macOS doesn't support --dired in ls call
+(when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
+
 (save-place-mode 1) ; saves cursor location in frames (e.g. files/dired)
+
 (setq-default indent-tabs-mode nil) ; indent will only insert spaces now
-(put 'set-goal-column 'disabled nil) ; what happens on <enter>, basically auto-indenting
+(put 'set-goal-column 'disabled nil) ; what happens on <enter>, basically auto-indenting (?)
 
 
 
@@ -73,22 +38,33 @@
 ;; |    <|  -__|  |  ||  _  |  _  |  _  |   _|  _  |
 ;; |__|__|_____|___  ||_____|_____|___._|__| |_____|
 ;;             |_____|
-; Emacs defaults/overrides
-; to read: https://www.masteringemacs.org/article/mastering-key-bindings-emacs
+;; ----------------------------------------------------------------------
+; [todo]: https://www.masteringemacs.org/article/mastering-key-bindings-emacs
+
 (global-set-key (kbd "C-z") nil) ;; (suspend-frame), minimizes frame on macOS
 (global-set-key (kbd "C-x C-z") nil) ;; (suspend-frame), minimizes frame on macOS
-(global-set-key (kbd "C-x C-u") nil) ;; (upcase-region), annoying
-(put 'downcase-region 'disabled nil) ;; 
-(global-set-key (kbd "C-t") nil) ;; (transpose-chars) ; swaps chars around, "useless" (lol)
-(global-set-key (kbd "C-q") nil) ;; (quoted-insert), i think this puts quotes to M-x <here> ?
-;; fold all headers in modes using outline-mode (org, markdown)
+
+; (global-set-key (kbd "C-x C-u") nil) ;; (upcase-region)
+; (global-set-key (kbd "C-x C-l") nil) ;; (downcase-region)
+(put 'downcase-region 'disabled nil) ;; remove warnings for above keybinds
+(put 'upcase-region 'disable nil)
+
+(global-set-key (kbd "C-t") nil) ;; (transpose-chars) ; swaps chars around, but I like figlet :^)
+
+(global-set-key (kbd "C-q") nil) ;; (quoted-insert), I think this puts quotes to M-x <here> ?
+(global-set-key (kbd "C-q") 'eval-last-sexp) ; but I'm used to this now :^)
+
+;; [todo] I don't think this works; fold all headers in modes using outline-mode (org, markdown)
 ; (global-set-key (kbd "<S-tab>") nil)
 ; (global-set-key (kbd "<backtab>") nil) ; equivalent of above
 
-; Custom keybinds
-(global-set-key (kbd "C-q") 'eval-last-sexp)
 
-; Visuals
+;;         __          __
+;; .-----.|  |_.--.--.|  |.-----.
+;; |__ --||   _|  |  ||  ||  -__|
+;; |_____||____|___  ||__||_____|
+;;             |_____|
+;; ----------------------------------------------------------------------
 (load-theme 'moe-light t)
 (nyan-mode t)
 (tool-bar-mode -1)
@@ -101,15 +77,34 @@
 (set-frame-parameter (selected-frame) 'alpha '(95 95))
 (add-to-list 'default-frame-alist '(alpha 95 95))
 
-; fringe/linum
+;; Borders of window
 (global-linum-mode 1)
 (setq linum-format "%4d") ; "%4d \u2502 "  is  pipe to right side of 00 | on the left side
+(fringe-mode '(3 . 0)) ; 6px border of gray60..?
 ; (add-to-list 'default-frame-alist '(left-fringe . 8))
 ; (add-to-list 'default-frame-alist '(right-fringe . 0)) ; right side of window
-(fringe-mode '(3 . 0)) ; 6px border of gray60..?
- ; line separating fringe and content
+;; line separating fringe and content
 ; (set-face-attribute 'fringe nil :background "white" :foreground nil)
 
+
+
+;;  __                 __
+;; |  |--.-----.-----.|  |--.-----.
+;; |     |  _  |  _  ||    <|__ --|
+;; |__|__|_____|_____||__|__|_____|
+;; ------------------------------------------------------------
+;; (add-to-list 'load-path "~/.emacs.d/hooks")
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+
+; [dot] for when I forget to add a shebang <_<
+(add-to-list 'auto-mode-alist '("/\\.bin" . shell-script-mode))
+;; [ref] Future usage help:
+; (expand-file-name)
+; (regexp-quote buffer-file-name)
+; (defun turn-on-auto-fill-hook ()
+;   (cond ((string-match "^/home/foo/bar/rawirousdijf/" buffer-file-name)
+;          (auto-fill-mode 1))))
 
 ;;                   __
 ;; .-----.---.-.----|  |--.---.-.-----.-----.-----.
@@ -117,75 +112,63 @@
 ;; |   __|___._|____|__|__|___._|___  |_____|_____|
 ;; |__|                         |_____|
 ;;
-(add-to-list 'load-path "~/.emacs.d/custom")
-
-; [currently-deprecated]
-; (load "async-1.9.7/async.el")
-; (load "org-download.el")
-; (setq-default org-download-method 'directory)
-; (setq-default org-download-image-dir "~/Documents/images-emacs")
-; (setq-default org-download-timestamp t)
-; (setq-default org-download-backend 'curl) ; 'wget, url-retrieve is default
-; (add-hook 'dired-mode-hook 'org-download-enable) ; d&d to dired
-
+;; ----------------------------------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/packages")
 (load "osascript.el") ; (osascript-eval-region), (osascript-eval-current-buffer) ; (osascript-run-file) a file
 
 (load "figlet.el") ; (figlet-get-font-list)
 (global-set-key (kbd "C-t") 'figlet-figletify-region-comment)
 
 ; (load "arduino-mode.el")
+; [note] requires https://github.com/arduino/arduino-cli / https://arduino.github.io/arduino-cli/
 ; (autoload 'arduino-mode "arduino-mode" "Major mode for editing Arduino code." t)
 ; (autoload 'ede-arduino-preferences-file "ede-arduino" "Preferences file of Arduino." t)
 ; (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 ; (add-to-list 'auto-mode-alist '("\\.pde\\'" . arduino-mode))
-
-; requires https://github.com/arduino/arduino-cli / https://arduino.github.io/arduino-cli/
 ; C-c C-c ; upload to arduino
 ; C-c C-v ; verify
 ; C-c C-m ; serial monitor
 ; C-c C-x ; open w arduino IDE
 
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
-; (load "indent-region-example.el")  ; look at a nice emacs-list example :^)
-; (load "open-file-with-program.el") ; currently not working
+; (load "dumb-jump.el")
+; [ref] https://github.com/jacktasia/dumb-jump
+; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+; M-. to jump to function def
 
-(require 'package)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(require 'package)
 (setq package-list
       '(
         moe-theme
         color-theme-sanityinc-tomorrow
-        nyan-mode        
+
+        nyan-mode
         web-mode
         markdown-mode
         python-mode
+        clojure-mode
 
-        ;; dumb-jump ; M-. to jump to thing def
-        ;; org-superstar ; https://github.com/integral-dw/org-superstar-mode/tree/master
-        ;; org-pandoc-import ; https://github.com/tecosaur/org-pandoc-import
+        ;; dumb-jump
+        ;; arduino-mode
         ))
 
-; fetch list of available packages
+;; Fetch list of available packages
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
+;; If we don't have all the above packages, install them (but need to add melpa!)
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
-
-; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-; M-. to jump to def, https://github.com/jacktasia/dumb-jump
-
 
 
 ;;                    __
 ;; .--------.-----.--|  |.-----.
 ;; |        |  _  |  _  ||  -__|
 ;; |__|__|__|_____|_____||_____|
-
+;; ----------------------------------------------------------------------
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
@@ -195,55 +178,16 @@
 
 ;; plists
 (add-to-list 'auto-mode-alist '("\\.plist\\'" . xml-mode))
-;; markdown-mode
-;; (setq markdown---???--markup-hiding nil);
 
 ;; org-mode
-;; - https://orgmode.org/worg/orgcard.html
-;; - https://zzamboni.org/post/beautifying-org-mode-in-emacs/
+;; [ref] https://orgmode.org/worg/orgcard.html
+;; [ref] https://zzamboni.org/post/beautifying-org-mode-in-emacs/
 (setq org-hide-emphasis-markers t)
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
-;; [?] If you don't have the mode-hook, this seems to mess with other mode's tab-width..?
 (add-hook 'python-mode-hook
           (function (lambda ()
                       (setq indent-tabs-mode nil
                             tab-width 2))))
-
-;; open-with
-;; - Open files from dired with other applications
-
-;; original source, I think broken on m1 macOS (?)
-;; - https://github.com/garberw/openwith
-;; if this one is still broken, look @:
-;; - https://github.com/jpkotta/openwith/blob/master/openwith.el
-
-; (when (require 'openwith nil 'noerror)
-;   (setq openwith-associations
-;         (list
-;          (list (openwith-make-extension-regexp
-;                 '("mpg" "mpeg" "mp3" "mp4"
-;                   "avi" "wmv" "wav" "mov" "flv"
-;                   "ogm" "ogg" "mkv"))
-;                "vlc"
-;                '(file))
-;          (list (openwith-make-extension-regexp
-;                 '("xbm" "pbm" "pgm" "ppm" "pnm"
-;                   "png" "gif" "bmp" "tif" "jpeg" "jpg"))
-;                "Preview"
-;                '(file))
-;          (list (openwith-make-extension-regexp
-;                 '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
-;                "textedit"
-;                '(file))
-;          '("\\.lyx" "lyx" (file))
-;          '("\\.chm" "kchmviewer" (file))
-;          (list (openwith-make-extension-regexp
-;                 '("pdf" "ps" "ps.gz" "dvi"))
-;                "preview"
-;                '(file))
-;          ))
-;   (openwith-mode 1))
 
 
 ;;                __                          __
@@ -251,7 +195,8 @@
 ;; |  _  |     | |  ||  _  |  |  |     |  __||     |
 ;; |_____|__|__| |__||___._|_____|__|__|____||__|__|
 ;; ============================================================
-; to read: https://www.masteringemacs.org/article/demystifying-emacs-window-manager
+; [todo] https://www.masteringemacs.org/article/demystifying-emacs-window-manager
+
 ; (split-window-below true)
 ; (command-history)
 ; (other-window 1 nil)
@@ -261,7 +206,7 @@
 ; (command-history)
 
 
-
+;; [todo] I am lazy
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -281,7 +226,7 @@
  '(list-colors-sort '(hsv-dist . "gray100"))
  '(outline-minor-mode-cycle t)
  '(package-selected-packages
-   '(python-mode web-mode nyan-mode moe-theme markdown-mode dumb-jump color-theme-sanityinc-tomorrow clojure-mode))
+   '(python-mode web-mode nyan-mode moe-theme markdown-mode color-theme-sanityinc-tomorrow clojure-mode))
  '(py-outline-minor-mode-p nil)
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)

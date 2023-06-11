@@ -29,6 +29,14 @@ dot reset --hard origin/master
 
 </details>
 
+## Verifying/Cleanup
+Run this command at `$HOME` to view all tracked files:
+```
+$ dot ls-tree --full-tree -r master --name-only
+```
+[ref]
+https://stackoverflow.com/questions/15606955/how-can-i-make-git-show-a-list-of-the-files-that-are-being-tracked
+
 ## Reading
 * [https://www.edwardthomson.com/blog/managing_dotfiles_with_git.htm](https://www.edwardthomson.com/blog/managing_dotfiles_with_git.html)
 * [Ask HN: What do you use to manage dotfiles? (https://news.ycombinator.com/item?id=11070797)](https://news.ycombinator.com/item?id=11070797)

@@ -185,3 +185,7 @@ valid_ip "$IP2"
 if [ $status1 -eq 0 ] || [ $? -eq 0 ]; then
 
 
+
+#
+# [bash] https://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution
+# [bash] https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html#tee-invocation

@@ -1,26 +1,20 @@
-#                  __
-#    .-----.-----.|  |--.----.----.
-#  __|-- __|__ --||     |   _|  __|
-# |__|_____|_____||__|__|__| |____|
+#               __
+# .-----.-----.|  |--.----.----.
+# |-- __|__ --||     |   _|  __|
+# |_____|_____||__|__|__| |____|
 # ------------------------------------------------------------
-# To reload after saving .zshrc:
-# $ source ./zshrc
+# [term] For info about your terminfo, check man terminfo, then /usr/share/terminfo, or /etc/zshrc or /etc/zprofile
+# [todo-zsh-hightlighting] https://gist.github.com/cofirazak/695bc259b0d39a75b1eaaf40bde8d9c4
+# [todo-zstyle] https://gist.github.com/netheril96/70be43f8627eea5603f1
+# [todo-zstyle] https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zstyle%2B
 #
-#  For info about your terminfo, check man terminfo, then /usr/share/terminfo, or /etc/zshrc or /etc/zprofile
+# [?] zshrc probably shouldn't contain unique stuff, and should be in .zprofile
+#     (If other things run azsh (like venv) though, they'll get all these settings too)
 #
-# [todo]
-# https://www.gnu.org/software/bash/manual/html_node/Process-Substitution.html#Process-Substitution
-# https://www.gnu.org/software/coreutils/manual/html_node/tee-invocation.html#tee-invocation
-# * RC probably shouldn't contain unique stuff, and should be in .zprofile.
-#   Although, it is nice to have pretty printing in sshes into the shell.
-#   If other things run a shell (like venv) though, they'll see all of this.
-# * Lots of helpful startup scripts/aliases to add from here:
-# * https://gist.github.com/natelandau/10654137#file-bash_profile-L87
+# [todo] Lots of helpful startup scripts/aliases to add from here:
+#        https://gist.github.com/natelandau/10654137#file-bash_profile-L87
 
 #
-# [future-styling-ideas]
-# - https://github.com/zsh-users/zsh/tree/master/Functions/Misc
-# - https://github.com/zsh-users/zsh/blob/master/Functions/Misc/zstyle%2B
 #
 #  __     __
 # |  |--.|__|.-----.
@@ -67,42 +61,72 @@ zstyle ':completion:\*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
 autoload -Uz compinit && compinit
 
+# [info] Removing '/' from WORDCHARS to allow meta movement/del with paths
+# [ref] https://unix.stackexchange.com/questions/537178/zsh-using-different-wordchars-for-kill-word-and-forward-word-backward-word
 
-# Removing '/' from WORDCHARS to allow meta movement/del with paths
-#     > this is the default: export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+# This is the default:
+# export WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
 export WORDCHARS='~!#$%^&*(){}[]<>?.+;-'
 MOTION_WORDCHARS='~!#$%^&*(){}[]<>?.+;-/'
-# But allow <M-movement> keys to navigate full paths
-# https://unix.stackexchange.com/questions/537178/zsh-using-different-wordchars-for-kill-word-and-forward-word-backward-word
+
+# [info] ... but allow <M-movement> keys to navigate full paths
 ''{back,for}ward-word() WORDCHARS=$MOTION_WORDCHARS zle .$WIDGET
 zle -N backward-word
 zle -N forward-word
 
-## -- History
-# https://jdhao.github.io/2021/03/24/zsh_history_setup/
-# the detailed meaning of the below three variable can be found in `man zshparam`.
-# The meaning of these options can be found in man page of `zshoptions`.
-export HISTFILE=~/.zsh_history
-export HISTSIZE=1000000   # the number of items for the internal history list
-export SAVEHIST=1000000   # maximum number of items for the history file
-setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
-setopt HIST_FIND_NO_DUPS
-setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
-setopt INC_APPEND_HISTORY # append command to history file immediately after execution
-setopt EXTENDED_HISTORY  # record command start time
-setopt SHARE_HISTORY
+#  __     __         __
+# |  |--.|__|.-----.|  |_.-----.----.--.--.
+# |     ||  ||__ --||   _|  _  |   _|  |  |
+# |__|__||__||_____||____|_____|__| |___  |
+#                                   |_____|
+# ----------------------------------------------------------------------
+# [ref] https://zsh.sourceforge.io/Doc/Release/Options.html#History
+# [ref] https://jdhao.github.io/2021/03/24/zsh_history_setup/
+# [ref] https://apple.stackexchange.com/questions/427561/macos-zsh-sessions-zsh-history-and-setopt-append-history
+
+# [todo] Look at 'man zshparam' and 'man zshoptions'
+# export HISTTIMEFORMAT="[%F %T] " # simple YYYY-M-D time in history -E -10
+
+export HISTFILE=$HOME/log/zsh-hist.csv
+export HISTSIZE=128123312 # The number of lines held in memory
+export SAVEHIST=512128256  # Maximum number of items for the history file
+setopt HIST_FIND_NO_DUPS # Don't show the same command twice in C-s or C-r
+setopt INC_APPEND_HISTORY # Write to histfile immediately after execution
+setopt EXTENDED_HISTORY  # Write ': <start>:<elapsed>;<command>' (since epoch)
+
+# [todo] https://github.com/ohmyzsh/ohmyzsh/issues/3466
+# I don't think this works (for history -E), but 'fc -il 1' works ok.
+# export HIST_STAMPS="[%YYYY-%MM-%DDT%hh:%mm:%ss.Z]"
+# export HISTTIMEFORMAT="[%YYYY-%MM-%DDT%hh:%mm:%ss.Z]"
+
+ # [todo] Whenever the user enters a line with history expansion, don't execute
+#  the line directly; instead, perform history expansion and reload the line into the editing buffer.
 setopt HIST_VERIFY
 
-# -- Visual
+# [todo] see if this is slow
+setopt HIST_LEX_WORDS # This allows proper hist multiline commands, but may slowdown search.  
+
+# setopt SHARE_HISTORY # Share history between multiple terms. OR manually do it with fc -RI
+# setopt HIST_REDUCE_BLANKS  # Do not write commands starting with a space
+# setopt HIST_SAVE_NO_DUPS  # When writing to history, do not write if cmd seen before.
+
+
+#         __          __
+# .-----.|  |_.--.--.|  |.-----.
+# |__ --||   _|  |  ||  ||  -__|
+# |_____||____|___  ||__||_____|
+#             |_____|
+# ----------------------------------------------------------------------
 # [todo] zsh function loading in fg[], bg[], _bold, _no_bold
 autoload -U ~/.bin/colors-extended && colors-extended
 # autoload -U colors && colors
 
-# LS colors - you can find info about this with `man ls | less +/LSCOLOR`
+# LS colors 
+# [info] You can find info about this with `man ls | less +/LSCOLOR`
 export CLICOLOR=0 # Need to set this for LS to be pretty :^)
 # export LSCOLORS=gafacadabaegedabagacad # [fg][bg], so first thing dir is cyan fg, black bg.
 
-
+# https://michurin.github.io/xterm256-color-picker/
 # .. So weird, there's /usr/share/terminfo/78/xterm-24 but it seems like it isn't actually
 # a     black
 # b     red
@@ -122,17 +146,21 @@ export CLICOLOR=0 # Need to set this for LS to be pretty :^)
 # H     bold light grey; looks like bright white
 # x     default foreground or background
 
-# 11 items, one char for bgfg, so 22 chars:
-# dir, symlink, socket, pipe, exec, block special, char spec, ex-w-setuid-bi-set, ex-w-setgid-bit-set,
+# [info] 11 items, one char for bgfg, so 22 chars:
+# the 11 items are: dir, symlink, socket, pipe, exec, block special, char spec, ex-w-setuid-bi-set, ex-w-setgid-bit-set,
 # dir-writable-to-others-w-sticky-bit, dir-writable-to-others-wo,sticky-bit
+# 
 # export LSCOLORS=ga  fa  ca  da  ba  eg  ed  ab  ag  ac  ad
 # export LSCOLORS=gx  fx  cx  dx  Bh  Eg  ed  ab  ag  ac  ad
-# not sure if spaces are okay?
+
 export LSCOLORS=gxfxcxdxBhEgedabagacad
+
 # making executables bold red, char special bold blue
 # export lscolors=Exbhcxdxbxegedabagacad
 
-# https://michurin.github.io/xterm256-color-picker/
+# [ref] https://www.manpagez.com/man/1/zshmisc/
+# [ref] https://stackoverflow.com/questions/19901044/what-is-k-f-in-oh-my-zsh-theme
+# [ref] https://stackoverflow.com/a/19901630
 
 # If the PROMPT_SUBST option is set,
 # the prompt string is first subjected to:
@@ -140,16 +168,11 @@ export LSCOLORS=gxfxcxdxBhEgedabagacad
 # * command substitution
 # * arithmetic expansion
 setopt PROMPT_SUBST
-
-
 PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
-# SUPER cool theme and info here:
-#        * https://aperiodic.net/phil/prompt/
-# more info: # info: https://www.manpagez.com/man/1/zshmisc/
-#     all from https://stackoverflow.com/questions/19901044/what-is-k-f-in-oh-my-zsh-theme
-#        or https://stackoverflow.com/a/19901630
 
-# old prompts
+# [todo] SUPER cool theme: https://aperiodic.net/phil/prompt/
+
+# [old prompts]
 # Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
 # RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
 
@@ -301,6 +324,7 @@ echo '[regex]'
 # echo '        find . -regex \./.\*007\[0-9\]\.NEF      <-- see, gotta escape the *!'
 echo '        find -E . -regex "\./.*(07[0-7]).NEF$"'
 echo "[emacs] replace-regexp \\(trigger\\)\\([RL]\\) \\,(downcase \\2)2force)"
+echo "[emacs] dired W to open file with default application"
 ) | lolcat
 
 # echo-bar

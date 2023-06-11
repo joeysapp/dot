@@ -278,9 +278,11 @@
  '(js-jsx-align->-with-< t)
  '(js-jsx-detect-syntax nil)
  '(js-jsx-syntax t)
+ '(list-colors-sort '(hsv-dist . "gray100"))
  '(outline-minor-mode-cycle t)
  '(package-selected-packages
    '(python-mode web-mode nyan-mode moe-theme markdown-mode dumb-jump color-theme-sanityinc-tomorrow clojure-mode))
+ '(py-outline-minor-mode-p nil)
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)

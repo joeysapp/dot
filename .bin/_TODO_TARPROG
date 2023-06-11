@@ -1,2 +1,0 @@
-#!/bin/zsh
-# tar cf - source/ | pv -s $(($(du -sk source/ | awk '{print $1}') * 1024)) | gzip > source.tar.gz

@@ -1,3 +1,4 @@
+#!/usr/bin/zsh
 # 2023-05-29 trying to conditionally lolcat them to show if they're up or down
 
 # (site-pg-status 1; site-react-status 1; site-server-status 1) | awk '{ return $0,1 }'

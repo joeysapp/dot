@@ -6,22 +6,40 @@
 
 echo "just do this: "
 echo "rsync -avHx --numeric-ids --progress -e 'ssh -T -o Compression=no -x' \ \n
-     zooey@localhost:~/Documents/fonts \ \n
-     zooey@localhost:~/Documents/code \ \n
+     zooey@localhost:~/Documents/work \ \n
+     zooey@localhost:~/Documents/data \ \n
      zooey@localhost:~/Documents/code-finished \ \n
      /Volumes/192.168.0.10/root/content/\n" 
 exit
 
+
+
+# only .zips in the immediate subdirs:
+# https://stackoverflow.com/questions/11111562/rsync-copy-over-only-certain-types-of-files-using-include-option#11111793
+# must cd to Documents to preserve hardlinks (e.g. do not use ~ in rsyncing.)
+cd ~/Documents
+rsync -avHx \
+      --numeric-ids --progress --delete --relative --prune-empty-dirs \
+      --include="/*" --include="*.zip" --exclude="*" \
+      -e 'ssh -T -o Compression=no -x' \
+      "code" "zooey@xaria.local:Documents/" 
+
+# everything in code/ and data/, no _ files
+cd ~/Documents
 rsync -avHx --numeric-ids --progress \
       --delete \
       --relative \
-      --dry-run \
       --exclude="_*" \
-      --include="*.zip" \
       -e 'ssh -T -o Compression=no -x' \
-     zooey@localhost:~/Documents/code \
-     zooey@localhost:~/Documents/code-finished \
-     zooey@xaria.local:~/
+      code \
+      code-finished \
+      data \
+      work \
+      fonts \
+      doc \
+      images \
+      audio-local \
+      zooey@xaria.local:Documents
 
 #      /Volumes/192.168.0.10/root/content/\n
 # ------------------------------------------------------------

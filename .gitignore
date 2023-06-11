@@ -1,5 +1,7 @@
 # emacs buffers
 *#*
+~/.emacs.d/elpa*
+~/.emacs.d/melpa*
 
 # macos
 *.DS_STORE

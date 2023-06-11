@@ -1,2 +1,0 @@
-#/usr/bin/zsh
-pg_ctl -D /opt/homebrew/var/postgres start

@@ -286,24 +286,25 @@ alias git="~/.bin/git-print"
 
 echo-bar
 (
-echo '[emacs] <M-x> outline-show-all to unfold'
+# echo '[emacs] <M-x> outline-show-all to unfold'
+echo '[emacs] <M-!> shell command'
 echo '[emacs] <C-x r N> insert nums in region'
 echo '[emacs] <M-;> to comment region'
 echo '[emacs] <C-x-tab> to indent'
-echo '[emacs] <M-!> shell command'
-echo '[bash]  be careful with commands, easy to accidentally overwrite something'
-echo "[bash]  $fg[bold]launchctl list | sudo tee ~/foo.txt$fg[reset]"
-echo '        pipes stdout to your tty print and the file!'
-echo '[regex] an example of needing to escape regex operators. these produce the same result:'
+echo "[bash]  !! $fg[bold]be careful$fg[reset] with commands, easy to accidentally overwrite something !!"
+echo "[bash]  launchctl list | sudo tee ~/foo.txt; pipes stdout to your tty and file"
+echo '[regex] an example of needing to escape regex operators, all the same result:'
 
-echo  '       .... lol, the -regex here will execute.'
+echo '[regex]       .... lol, the -regex here will execute.'
+echo '[regex]'
 # echo '        find . -regex \./DSC_007\[0-9\]\.NEF'
 # echo '        find . -regex \./.\*007\[0-9\]\.NEF      <-- see, gotta escape the *!'
 echo '        find -E . -regex "\./.*(07[0-7]).NEF$"'
+echo "[emacs] replace-regexp \\(trigger\\)\\([RL]\\) \\,(downcase \\2)2force)"
 ) | lolcat
 
-echo-bar
-launchctl list | grep -v 'com.apple'
+# echo-bar
+# launchctl list | grep -v 'com.apple'
 echo-bar
 # Kind of slow tbqh
 site-all-status;

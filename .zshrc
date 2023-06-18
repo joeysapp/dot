@@ -87,12 +87,18 @@ zle -N forward-word
 # [todo] Look at 'man zshparam' and 'man zshoptions'
 # export HISTTIMEFORMAT="[%F %T] " # simple YYYY-M-D time in history -E -10
 
-export HISTFILE=$HOME/log/zsh-hist.csv
-export HISTSIZE=128123312 # The number of lines held in memory
-export SAVEHIST=512128256  # Maximum number of items for the history file
+# https://www.unix.com/man-page/linux/1/fc/
+alias h="fc -il"
+
+# https://unix.stackexchange.com/questions/1935/extending-history-search-in-zsh
+# uh, where's my history going?
+export HISTFILE=~/log/zsh-hist2.csv
+export HISTSIZE=51100000 # The number of lines held in memory
+export SAVEHIST=51200000  # Maximum number of items for the history file
 setopt HIST_FIND_NO_DUPS # Don't show the same command twice in C-s or C-r
 setopt INC_APPEND_HISTORY # Write to histfile immediately after execution
 setopt EXTENDED_HISTORY  # Write ': <start>:<elapsed>;<command>' (since epoch)
+setopt NO_HIST_BEEP
 
 # [todo] https://github.com/ohmyzsh/ohmyzsh/issues/3466
 # I don't think this works (for history -E), but 'fc -il 1' works ok.

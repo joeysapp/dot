@@ -13,15 +13,18 @@
 # https://unix.stackexchange.com/questions/450365/check-if-terminal-supports-24-bit-true-color
 # https://michurin.github.io/xterm256-color-picker/
 
+# https://www.delftstack.com/howto/c/printf-align-columns-in-c/
+
 
 local rc=m	\
 
-typeset -AHg fg bg
-fg[reset]="\e[0$rc"
-fg[bold]="\e[1$rc"
+typeset -AHg FG BG
+FG[reset]="\e[0$rc"
+FG[bold]="\e[1$rc"
+FG_BOLD="\e[1$rc"
 for idx in $(seq 0 255); do
-    fg[$idx]="\e[038;005;$idx$rc"
-    bg[$idx]="\e[048;005;$idx$rc";
+    FG[$idx]="\33[038;005;$idx$rc"
+    BG[$idx]="\e[048;005;$idx$rc";
 done
 return
 

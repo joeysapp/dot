@@ -126,6 +126,8 @@
 ;; ----------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/packages")
 (load "osascript.el") ; (osascript-eval-region), (osascript-eval-current-buffer) ; (osascript-run-file) a file
+(load "applescript-mode.el")
+(add-to-list 'auto-mode-alist '("\\.scpt\\'" . applescript-mode-mode))
 
 (load "figlet.el") ; (figlet-get-font-list)
 (global-set-key (kbd "C-t") 'figlet-figletify-region-comment)

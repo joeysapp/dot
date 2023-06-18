@@ -17,6 +17,13 @@ To have custom hosts in your `arp -a` and local networking, do the following:
 
 * Source: https://github.com/pi-hole/pi-hole/issues/975#issuecomment-281027117)
 
+# LAN Development
+To allow connections between local hosts while running the pi.hole as a custom DNS server, do the following:
+1. Add `<local-ip-addres> <custom-local-name>` to `/etc/hosts` or `/etc/dnsmasq.d/NN-foo.conf` or `/etc/pihole/custom.list`
+2. `pihole restartdns`
+3. Set your server to startup on the desired port and your `local-ip-address`
+4. All hosts on your network can navigate to `http://<foo>:<port>`
+
 ## Further reading on subnets:
 * 53, ip-addr, "PTRs", reverse DNS lookup
 * https://www.ietf.org/rfc/rfc1878.txt

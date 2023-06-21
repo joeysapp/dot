@@ -1,0 +1,32 @@
+#!/bin/zsh
+# http://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+
+
+usage() { echo "Usage: $0 [-y <row>] [-x <col>]" 1>&2; exit 1; }
+
+while getopts ":y:x:" o; do
+    case "${o}" in
+        y)
+            y=${OPTARG}
+            ((y < 0 || y > 600)) && usage
+            ;;
+        x)
+            x=${OPTARG}
+            ((x < 0 || x > 600)) && usage
+            ;;
+        *)
+            echo "wat"
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+echo $y, $x
+
+if [ -z "${x}" ] || [ -z "${y}" ]; then
+    usage
+fi
+
+# uh, I have this backwards?
+printf '\e[3;%d;%dt' x y

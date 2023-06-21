@@ -1,0 +1,65 @@
+#!/bin/zsh
+# http://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+
+
+# todo
+usage() { echo "Usage: $0 [-y <rows>] [-x <cols>]" 1>&2; exit 1; }
+
+while getopts ":y:x:" o; do
+    case "${o}" in
+        y)
+            y=${OPTARG}
+            ((y <= 0 || y > 2000)) && usage
+            ;;
+        x)
+            x=${OPTARG}
+            ((x <= 0 || x > 2000)) && usage
+            ;;
+        *)
+            echo "wat"
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+echo $y, $x
+
+if [ -z "${x}" ] || [ -z "${y}" ]; then
+    usage
+fi
+
+printf '\e[8;%d;%dt' y x
+
+
+
+# For example, this shell command will set the window to 100x50 characters:
+# 
+# printf '\e[8;50;100t'
+# 
+# Minimize the window for a few seconds, then restore it:
+# 
+# printf '\e[2t' && sleep 3 && printf '\e[1t'
+# 
+# Move the window to the top/left corner of the display:
+# 
+# printf '\e[3;0;0t'
+# 
+# Zoom the window:
+# 
+# printf '\e[9;1t'
+# 
+# Bring the window to the front (without changing keyboard focus):
+# 
+# printf '\e[5t'
+
+
+exit
+
+
+
+
+
+
+echo "s = ${s}"
+echo "p = ${p}"

@@ -211,6 +211,7 @@ alias ls='LC_COLLATE=C ls -AlFh@'
 # S - sorted largest file at bottom (mebibytes, 2^20)
 # si - sorted by (megabytes, 10^6)
 
+alias gitgraph='git log --graph --decorate --oneline $(git rev-list -g --all)'
 alias gitprune='du -sh .git && git remote prune origin && git repack && git prune-packed && git reflog expire --all --expire=now && git gc --aggressive --prune=now && du -sh .git'
 
 #

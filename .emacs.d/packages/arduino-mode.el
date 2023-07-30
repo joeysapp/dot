@@ -1,5 +1,13 @@
 ;; (todo): needs some major reworks - 2022-12-16
 
+
+;; ("C-c C-c") #'arduino-upload)           
+;; ("C-c C-v") #'arduino-verify)           
+;; ("C-c C-m") #'arduino-serial-monitor)   
+;; ("C-c C-x") #'arduino-open-with-arduino)
+
+
+
 ;;; arduino-mode.el --- Major mode for editing Arduino code  -*- lexical-binding: t; -*-
 ;; https://repo.or.cz/arduino-mode.git/tree/refs/heads/master
 

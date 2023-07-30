@@ -1,18 +1,6 @@
 #!/usr/bin/env zsh
-#
-# Usage:
-# (mount the smb server in finder)
-# rsync-fast -v [file1] /Volumes/[ip address]/location/
-
-echo "just do this: "
-echo "rsync -avHx --numeric-ids --progress -e 'ssh -T -o Compression=no -x' \ \n
-     zooey@localhost:~/Documents/work \ \n
-     zooey@localhost:~/Documents/data \ \n
-     zooey@localhost:~/Documents/code-finished \ \n
-     /Volumes/192.168.0.10/root/content/\n" 
+echo "rsync-fast is just notes now XD "
 exit
-
-
 
 # only .zips in the immediate subdirs:
 # https://stackoverflow.com/questions/11111562/rsync-copy-over-only-certain-types-of-files-using-include-option#11111793
@@ -24,7 +12,8 @@ rsync -avHx \
       -e 'ssh -T -o Compression=no -x' \
       "code" "zooey@xaria.local:Documents/" 
 
-# everything in code/ and data/, no _ files
+
+# everything in directories, no _ files (does not exclide .git!)
 cd ~/Documents
 rsync -avHx --numeric-ids --progress \
       --delete \
@@ -40,8 +29,45 @@ rsync -avHx --numeric-ids --progress \
       images \
       audio-local \
       zooey@xaria.local:Documents
-
 #      /Volumes/192.168.0.10/root/content/\n
+
+
+
+# Usage:
+# (mount the smb server in finder)
+# rsync-fast -v [file1] /Volumes/[ip address]/location/
+
+echo "rsync -avHx --numeric-ids --progress -e 'ssh -T -o Compression=no -x' \ \n
+     zooey@localhost:~/Documents/work \ \n
+     zooey@localhost:~/Documents/data \ \n
+     zooey@localhost:~/Documents/code-finished \ \n
+     /Volumes/192.168.0.10/root/content/\n" 
+exit
+
+rsync -avHx --dry-run --numeric-ids --progress -e 'ssh -T -o Compression=no -x' \
+      zooey@localhost:~/Desktop/spacedock-outbound/movies/Interstellar.2014.2014.1080p.BluRay.x264.YIFY.mp4 \
+      /Volumes/192.168.0.10/root/spacedock/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ------------------------------------------------------------
 # # CAREFUL - DO NOT PASS IN REGEX TO THIS YET@@@@@@@@@@@@@@
 #   .----.-----.--.--.-----.----.

@@ -27,7 +27,7 @@ tmux send-keys -tsite "cd $common_dir; find * | entr -s ./update-downstream-on-s
 tmux resize-pane -R 30
 tmux selectp -U
 
-tmux send-keys -tsite "cd ~/Documents/code/site/server/; clear; sudo node src/server.js" Enter
+tmux send-keys -tsite "cd ~/Documents/code/site/server/; clear; sudo node src/main.js" Enter
 
 startup_exec="$site_dir/startup_exec"
 echo "moveto -x 0 -y 0; resize -x 120 -y 40; tmux attach-session -tsite;" > startup_exec
@@ -37,4 +37,4 @@ open -a \
      --fresh --new \
      startup_exec;
 
-exit;
+# exit;

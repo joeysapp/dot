@@ -242,7 +242,9 @@ alias gitprune='du -sh .git && git remote prune origin && git repack && git prun
 # ------------------------------------------------------------
 # [dot]
 export PATH="/Users/zooey/.bin:$PATH"
+export CURL_HOME="/Users/zooey/.config/curl/curl.conf"
 # export PATH="/usr/local/sbin:$PATH"
+
 
 # [site]
 export SITE_FRONTEND_PATH="/Users/zooey/Documents/code/site/frontend"
@@ -252,16 +254,23 @@ export JS_COMMON_PATH="/Users/zooey/Documents/code/javascript/common"
 
 # [postgres]
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
 # setup default dir for all postgres/pg_ctl commands
+# https://www.postgresql.org/docs/current/libpq-envars.html
 export PGDATA="/Users/zooey/Documents/code/database"
 export PGPORT="9002"
+export PGHOST="127.0.0.1"
+# https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOSTADDR
+export PGHOSTADDR="127.0.0.1" # prevent DNS lookup on startup 
+export PGUSER="web"
+# export PGPASSFILE="$PGDATA/TODO"
 launchctl setenv LC_ALL "en_us.UTF.8"
 # For compilers to find postgresql@15 you may need to set:
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 
-
-
+# [java]
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 
 
@@ -271,6 +280,20 @@ launchctl setenv LC_ALL "en_us.UTF.8"
 # |_       _|   |___|  |_____|_____||__||_____|
 #   |__|__|
 # ------------------------------------------------------------
+# Make sure zsh uses all of the files in ~/.bin, letting us use functions defined in those files.
+# https://zsh.sourceforge.io/Doc/Release/Functions.html
+# https://unix.stackexchange.com/questions/33255/how-to-define-and-load-your-own-shell-function-in-zsh
+# fpath=(
+#     ~/.bin
+#     $fpath
+# )
+# autoload -Uz moveto
+
+# https://stackoverflow.com/questions/23524661/how-can-i-calculate-pi-using-bash-command
+# pi={ echo -n "scale=100;"; seq 1 2 200 | xargs -n1 -I{} echo '(16*(1/5)^{}/{}-4*(1/239)^{}/{})';} | paste -sd-+ | bc -l
+# Not a direct answer to your question about using seq, but pi can be easily computed using bc:
+pi=echo "scale=1000; 4*a(1)" | bc -l
+
 # [ brew ]
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -320,6 +343,7 @@ echo-bar
 echo '[emacs] <M-!> shell command'
 echo '[emacs] <C-x r N> insert nums in region'
 echo '[emacs] <M-;> to comment region'
+echo '[emacs] <M-e> and <M-a> for f/w sentences'
 echo '[emacs] <C-x-tab> to indent'
 echo "[bash]  !! $fg[bold]be careful$fg[reset] with commands, easy to accidentally overwrite something !!"
 echo "[bash]  launchctl list | sudo tee ~/foo.txt; pipes stdout to your tty and file"

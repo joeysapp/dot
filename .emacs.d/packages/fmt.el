@@ -17,7 +17,12 @@
             (if (> length window-size)
                 (print "foo")
               (print "bar"))))))
+;; https://www.gnu.org/software/emacs/manual/html_node/eintr/sentence_002dend.html
 
+;; (setq sentence-end "[^.].[.?!]+\\([]\"')}]*\\|<[^>]+>\\)\\($\\| $\\|\t\\| \\)[ \t\n]*\\|\n")
+
+;; This will go to the next comma too
+(setq sentence-end "[^.].[.?!,]+\\([]\"')}]*\\|<[^>]+>\\)\\($\\| $\\|\t\\| \\)[ \t\n]*\\|\n")
 (paragraph-to-lines)
 
 

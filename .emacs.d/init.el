@@ -132,7 +132,10 @@
 (load "figlet.el") ; (figlet-get-font-list)
 (global-set-key (kbd "C-t") 'figlet-figletify-region-comment)
 
-; (load "arduino-mode.el")
+;; (load "fmt.el") ;; todo - fitting paragraphs to ~60char width
+
+
+(load "arduino-mode.el")
 ; [note] requires https://github.com/arduino/arduino-cli / https://arduino.github.io/arduino-cli/
 ; (autoload 'arduino-mode "arduino-mode" "Major mode for editing Arduino code." t)
 ; (autoload 'ede-arduino-preferences-file "ede-arduino" "Preferences file of Arduino." t)

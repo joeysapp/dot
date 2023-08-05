@@ -1,22 +1,94 @@
-#!/usr/bin/env zsh
-echo "rsync-fast is just notes now XD "
-exit
+#!/usr/bin/zsh
+usage() { echo "Usage: $0 [directory] [sync-from-pc-first]" 1>&2; }
 
-# only .zips in the immediate subdirs:
-# https://stackoverflow.com/questions/11111562/rsync-copy-over-only-certain-types-of-files-using-include-option#11111793
-# must cd to Documents to preserve hardlinks (e.g. do not use ~ in rsyncing.)
+arg="-aHx"
+# arg="-avHx --progress"
+
+if [[ $1 == "" ]]; then
+    usage
+    return
+fi
+
+unset dir; cd ~/Documents;
+start=$(date +%s);
+dir=$1
+
+if [[ $2 == "sync" ]]; then
+    start=$(date +%s);
+    echo $FG[bold] "[ Sync $dir/\there\t<-\tpc ]" $FG[reset];
+
+    rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" --exclude="*.git" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+          "/Volumes/192.168.0.10/root/content/$dir/" "$dir/";
+
+    now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+    echo $FG[bold] "[\t$dir/\there\t<-\tpc in $ts ]" $FG[reset]
+fi
+
+start=$(date +%s);
+echo $FG[bold] "[ Sync $dir/\there\t->\tpc ] " $FG[reset];
+
+rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" --exclude="*.git" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+      "$dir/" "/Volumes/192.168.0.10/root/content/$dir/";
+
+now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+echo $FG[bold] "[\t$dir/\there\t->\tpc in $ts ] " $FG[reset]
+
+start=$(date +%s);
+echo $FG[bold] "[ Sync $dir/\there\t->\tthumbdrive ] " $FG[reset];
+
+rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" --exclude="*.git" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+      "$dir/" "/Volumes/Halcyon/Documents/$dir/";
+
+now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+echo $FG[bold] "[\t$dir/\there\t->\tthumbdrive in $ts ]" $FG[reset]
+
+
+return
+
+# The rest is general learning of rsync. May be useful for future features.
+
+# * The order of --include/--exclude matters: https://stackoverflow.com/questions/11111562/
+# * You must cd to Documents to preserve hardlinksx
+# * Don't use ~ in the copied file, be explicit e.g.: user@place:Documents/code
+# * --dry-run first
+# [CAREFUL] - If you use --delete, it will make the directories IDENTICAL. e.g. deleting stuff. Which is helpful when you're moving stuff around.
+# Going from windows TO unix looks like:
+#      "/Volumes/192.168.0.10/root/content/test/" \
+#      "test/";
+# Going from unix TO windows looks like: (lol yes they are identical)
+#      "test/" \
+#      "/Volumes/192.168.0.10/root/content/test/";
+
+# Copy an entire directory from a remote
+# [note] Do not use relative, that will look like: /Documents/test/Volumes/192.168.0.10/root/content/test
+# [note] I believe? This will exclude immediate .git repos and.. all? nested gits? 
+
+# Copy only .zips in the immediate subdirectories of Documents/code/
+cd ~/Documents;
+rsync -avHx \
+      --dry-run \
+      --numeric-ids \
+      --progress \
+#       --delete \
+      --relative \
+      --prune-empty-dirs \
+      --include="/*" \
+      --include="*.zip" \
+      --exclude="*" \
+      -e 'ssh -T -o Compression=no -x' \
+      "models" \
+      /Volumes/Halycon/Documents/;
+
+#      "zooey@xaria.local:Documents/";
+#      /Volumes/192.168.0.10/root/content/;
+
+# Everything in directories, no files beginning w/ _
+# [TODO] does not exclude .git directories
 cd ~/Documents
 rsync -avHx \
-      --numeric-ids --progress --delete --relative --prune-empty-dirs \
-      --include="/*" --include="*.zip" --exclude="*" \
-      -e 'ssh -T -o Compression=no -x' \
-      "code" "zooey@xaria.local:Documents/" 
-
-
-# everything in directories, no _ files (does not exclide .git!)
-cd ~/Documents
-rsync -avHx --numeric-ids --progress \
-      --delete \
+      --numeric-ids \
+      --progress \
+#       --delete \
       --relative \
       --exclude="_*" \
       -e 'ssh -T -o Compression=no -x' \
@@ -28,8 +100,20 @@ rsync -avHx --numeric-ids --progress \
       doc \
       images \
       audio-local \
-      zooey@xaria.local:Documents
-#      /Volumes/192.168.0.10/root/content/\n
+      zooey@xaria.local:Documents;
+#      /Volumes/Halycon/Documents/;
+#      /Volumes/192.168.0.10/root/content/;
+
+# Copying a specify folder into another folder :^)
+rsync -avHx --numeric-ids --progress -e 'ssh -T -o Compression=no -x' \
+      zooey@localhost:~/Desktop/spacedock-outbound/television/ \
+      /Volumes/192.168.0.10/root/content/video/television-tmp/
+
+
+
+
+
+
 
 
 

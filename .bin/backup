@@ -19,9 +19,15 @@ fi
 unset dir; cd ~/Documents;
 start=$(date +%s);
 dir=$1
-prettyname="~/Documents/$dir"
-size_full=$(du -h -d 0 "/Users/zooey/Documents/$dir")
-size=${size_full}
+fpath="/Users/zooey/Documents/$dir"
+
+if [ -d "$fpath" ]; then
+    size_full=$(du -h -d 0 "/Users/zooey/Documents/$dir")
+    size=${size_full}
+else
+    size_full="dir not present"
+    size=${size_full}
+fi
 
 printf "- Syncing $FG[bold][$size]$FG[reset]\n"
 sleep 1

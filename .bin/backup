@@ -1,0 +1,60 @@
+#!/usr/bin/zsh
+usage() { echo "Usage: $0 [directory] [sync-from-pc-first]" 1>&2; }
+
+
+## TODO 2023-08-05:
+## ...Either use --delete or some kind of link to prevent duplication of data while moving stuff around..
+## Or just do this a lot more often to keep stuff 1:1?
+
+# Exclude Node_modules....
+
+arg="-aHx"
+# arg="-avHx --progress"
+
+if [[ $1 == "" ]]; then
+    usage
+    return
+fi
+
+unset dir; cd ~/Documents;
+start=$(date +%s);
+dir=$1
+prettyname="~/Documents/$dir"
+size_full=$(du -h -d 0 "/Users/zooey/Documents/$dir")
+size=${size_full}
+
+printf "- Syncing $FG[bold][$size]$FG[reset]\n"
+sleep 1
+if [[ $2 == "sync" ]]; then
+    start=$(date +%s);
+    printf "[ macbook $FG[bold]$FG[9] <<< $FG[reset] pc\t\t"
+
+    rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
+          --exclude="*.git" --exclude="node_modules" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+          "/Volumes/192.168.0.10/root/content/$dir/" "$dir/";
+
+    now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+    printf "$FG[bold] $ts $FG[reset] ]\n"
+fi
+
+start=$(date +%s);
+printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] pc\t\t"
+
+rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
+      --exclude="*.git" --exclude="node_modules" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+      "$dir/" "/Volumes/192.168.0.10/root/content/$dir/";
+
+now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+printf "$FG[bold] $ts $FG[reset] ]\n"
+
+start=$(date +%s);
+printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] thumbdrive\t"
+
+rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
+      --exclude="*.git" --exclude="node_modules" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+      "$dir/" "/Volumes/Halcyon/Documents/$dir/";
+
+now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+printf "$FG[bold] $ts $FG[reset] ]\n"
+
+return

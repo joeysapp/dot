@@ -1,34 +1,22 @@
 #!/bin/zsh
 # http://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+usage() { echo "Usage: $0 [row] [col]" 1>&2; return 1; }
 
+height=$LINES
+y=$2
+y=$(( $y > 1900 ? 1900 : y ))
+y=$(( $y < 0 ? 0 : y ))
 
-# todo
-usage() { echo "Usage: $0 [-y <rows>] [-x <cols>]" 1>&2; exit 1; }
-
-while getopts ":y:x:" o; do
-    case "${o}" in
-        y)
-            y=${OPTARG}
-            ((y <= 0 || y > 2000)) && usage
-            ;;
-        x)
-            x=${OPTARG}
-            ((x <= 0 || x > 2000)) && usage
-            ;;
-        *)
-            echo "wat"
-            usage
-            ;;
-    esac
-done
-shift $((OPTIND-1))
-
-echo $y, $x
+width=$COLUMNS
+x=$1
+x=$(( $x > 2000 ? 2000 : x ))
+x=$(( $x < 0 ? 0 : x ))
 
 if [ -z "${x}" ] || [ -z "${y}" ]; then
     usage
 fi
 
+printf 'x=%d, y=%d' x y
 printf '\e[8;%d;%dt' y x
 
 
@@ -52,14 +40,3 @@ printf '\e[8;%d;%dt' y x
 # Bring the window to the front (without changing keyboard focus):
 # 
 # printf '\e[5t'
-
-
-exit
-
-
-
-
-
-
-echo "s = ${s}"
-echo "p = ${p}"

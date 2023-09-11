@@ -10,6 +10,7 @@ usage() { echo "Usage: $0 [directory] [sync-from-pc-first]" 1>&2; }
 
 arg="-aHx"
 # arg="-avHx --progress"
+# arg="-aHx --delete" 
 
 if [[ $1 == "" ]]; then
     usage
@@ -29,6 +30,8 @@ else
     size=${size_full}
 fi
 
+# Copy everything from the PC to local macbook before copying to it and others
+# --------------------------------------------------------------------------------
 printf "- Syncing $FG[bold][$size]$FG[reset]\n"
 sleep 1
 if [[ $2 == "sync" ]]; then
@@ -36,31 +39,54 @@ if [[ $2 == "sync" ]]; then
     printf "[ macbook $FG[bold]$FG[9] <<< $FG[reset] pc\t\t"
 
     rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
-          --exclude="*.git" --exclude="node_modules" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+          --exclude="*.git" --exclude="node_modules/*" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
           "/Volumes/192.168.0.10/root/content/$dir/" "$dir/";
 
     now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
     printf "$FG[bold] $ts $FG[reset] ]\n"
 fi
 
+
+# Copy to thumbdrive
+# ----------------------------------------
+start=$(date +%s);
+printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] thumbdrive\t"
+
+rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
+      --exclude="*.git" --exclude="node_modules/*" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+      "$dir/" "/Volumes/Halcyon/Documents/$dir/";
+
+now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+printf "$FG[bold] $ts $FG[reset] ]\n"
+
+
+
+# Copy to other macbook
+# ----------------------------------------
+start=$(date +%s);
+printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] xaria/zooey\t"
+
+rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
+      --exclude="*.git" --exclude="node_modules/*" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+      "$dir/" "/Volumes/zooey/Documents/$dir/";
+
+now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+printf "$FG[bold] $ts $FG[reset] ]\n"
+
+
+# Copy to PC
+# ----------------------------------------
 start=$(date +%s);
 printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] pc\t\t"
 
 rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
-      --exclude="*.git" --exclude="node_modules" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
+      --exclude="*.git" --exclude="node_modules" --exclude="node_modules/*" --exclude="*node_modules*" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
       "$dir/" "/Volumes/192.168.0.10/root/content/$dir/";
 
 now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
 printf "$FG[bold] $ts $FG[reset] ]\n"
 
-start=$(date +%s);
-printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] thumbdrive\t"
 
-rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
-      --exclude="*.git" --exclude="node_modules" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
-      "$dir/" "/Volumes/Halcyon/Documents/$dir/";
 
-now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
-printf "$FG[bold] $ts $FG[reset] ]\n"
 
 return

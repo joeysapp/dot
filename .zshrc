@@ -270,9 +270,7 @@ launchctl setenv LC_ALL "en_us.UTF.8"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 
 # [java]
-export JAVA_HOME=$(/usr/libexec/java_home)
-
-
+export JAVA_HOME="/usr/libexec/java_home"
 
 #    _____     _______               __
 #  _|  |  |_  |_     _|.-----.-----.|  |.-----.
@@ -292,7 +290,9 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 # https://stackoverflow.com/questions/23524661/how-can-i-calculate-pi-using-bash-command
 # pi={ echo -n "scale=100;"; seq 1 2 200 | xargs -n1 -I{} echo '(16*(1/5)^{}/{}-4*(1/239)^{}/{})';} | paste -sd-+ | bc -l
 # Not a direct answer to your question about using seq, but pi can be easily computed using bc:
-pi=echo "scale=1000; 4*a(1)" | bc -l
+function pi() {
+    echo "scale=1000; 4*a(1)" | bc -l
+}
 
 # [ brew ]
 eval "$(/opt/homebrew/bin/brew shellenv)"

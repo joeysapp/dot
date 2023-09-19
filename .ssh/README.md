@@ -1,9 +1,17 @@
 # ssh
 Information for correct ssh/daemon setup, using passwordless pubkey generated client-side meaning you can use git without having to type a password every pull or submodule update.
 
-# File structure
+# Howto
 These are the things you need to configure to have the daemon and client interact nicely.
 
+First, create two keys - one for you as the client, and one for you as the host (sshd)
+```
+$ ssh-keygen -t <algo> -b 4096 -C <comment> -> (client_key, client_key.pub)
+$ ssh-keygen -t <algo> -b 4096 -C <comment> -> (host_key, host_key.pub)
+```
+You may need to activate the client key with `ssh-add ~/.../client_key`.
+
+Now set up the following file structure (you will need to create some, e.g. `__known_hosts`)
 ```
     Client
     Users/<user>/.ssh/ (this repo)
@@ -12,32 +20,29 @@ These are the things you need to configure to have the daemon and client interac
           Host ?nameofhost?
               HostNames ?ipofhost?
               User <user>
-              IdentityFile <path of public key>
+              IdentityFile <path of private key>
     Users/<user>/.ssh/known_hosts
         - File containing known daemons public keys (signed/masked) (ONLY after yes/no/fp)
         127.0.0.1 ssh-rsa AAAAAACCCC..........+RR/
-    Users/<user>/.ssh/cool_key
-    Users/<user>/.ssh/cool_key.pub
-        - Private/public keys, created with $ssh-keygen -t <algo> -b 4096 -C "opt_name"
+    Users/<user>/.ssh/client_key
+    Users/<user>/.ssh/client_key.pub
 
     Daemon
-    </etc/ssh or private/etc/ssh>
+    </etc/ssh or private/etc/ssh, on macos they are symlinked>
     etc/ssh/ssh_config
         - Config file for global client use (lots of stuff)
     etc/ssh/sshd_config
         - Config file for daemon (lots of stuff)
-          AuthorizedKeysFile /etc/ssh/known_clients
+          AuthorizedKeysFile /etc/ssh/__known_clients
           LogLevel DEBUG3
           LogVerbose kex.c:*:1000,*:kex_exchange_identification():*,packet.c:*
           PasswordAuthentication no
-          PubkeyAuthentication yes # this is default yes so w/e
+          PubkeyAuthentication yes # This is default yes, but be explicit
           HostKey /etc/ssh/my_cool_private_daemon_key
-    etc/ssh/known_clients
-        - File containing known client public keys, signed (ONLY after yes/no/fp)
-        ssh-rsa AAAAACC......CCMM+m name_of_key
-    etc/ssh/my_cool_private_daemon_key
-    
-    
+    etc/ssh/__known_clients
+        ssh-rsa AAAAACC......CCMM+m client_key
+    etc/ssh/daemon_key
+    etc/ssh/daemon_key.pub
 ```
 
 # Tips

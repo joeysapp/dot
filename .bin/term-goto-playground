@@ -1,0 +1,49 @@
+#!/bin/zsh
+
+pi=$(echo "scale=1000; 4*a(1)" | bc -l)
+# .... notes: bc -l <<<"scale=4; s(1); c(1)"
+# .....usage?: echo "c(360 * (3.14159/180))" | bc -l
+
+XDR_DISPLAY_W=3024
+XDR_DISPLAY_H=1964
+
+# Dimensions of current display
+# w=$XDR_DISPLAY_W
+# h=$XDR_DISPLAY_H
+w=1920
+h=1024
+
+# Center of given display values
+c_x=$(echo "$w / 2" | bc -l) 
+c_y=$(echo "$h / 2" | bc -l)
+
+term_w=$(tput cols)
+term_h=$(tput lines)
+# term_scl=0.5
+
+# offset from center
+x_off=-500
+y_off=-200
+
+# how big the circle should be :^)
+m=150
+md=1
+
+for n in $(seq 0 1 10); do
+for deg in $(seq 0 5 360); do
+    rad=$(echo "$deg*($pi/180)" | bc -l)
+    cos=$(echo "c($rad)" | bc -l)
+    sin=$(echo "s($rad)" | bc -l)
+    # Where we want our term to go :^)
+    x=$(echo "$c_x + ($m*$cos) + $x_off" | bc -l)
+    y=$(echo "$c_y + ($m*$sin) + $y_off" | bc -l)
+    # printf "(%d, %d)" c_x c_y
+    # echo "[$deg $rad]>[$cos $sin] 4[$x $y]"
+    # printf "(%d %d)\n" x y
+    term_goto x y
+    m=$(echo "$m + $md" | bc -l)
+    sleep 0.001
+done
+done
+
+    # term_goto x y

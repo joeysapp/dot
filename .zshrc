@@ -241,7 +241,9 @@ alias ls='LC_COLLATE=C ls -AlFh@'
 #   |__|__|                      |___|
 # ------------------------------------------------------------
 # [dot]
-export PATH="/Users/zooey/.bin:$PATH"
+export PATH="/Users/zooey/.bin:/Users/zooey/.bin/term:$PATH"
+# export PATH="/Users/zooey/.bin/term:$PATH"
+# export PATH="/Users/zooey/.bin/*:$PATH"
 export CURL_HOME="/Users/zooey/.config/curl/curl.conf"
 # export PATH="/usr/local/sbin:$PATH"
 

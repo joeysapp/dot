@@ -174,7 +174,11 @@ export LSCOLORS=gxfxcxdxBhEgedabagacad
 # * command substitution
 # * arithmetic expansion
 setopt PROMPT_SUBST
+# Shows user and host
 PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
+
+# Only pwd (%/ does that bit, rest is coloring)
+# PS1="%F{039}%K{000}%/%F{015}%K{000} "
 
 # [todo] SUPER cool theme: https://aperiodic.net/phil/prompt/
 
@@ -337,32 +341,22 @@ alias git_prune='du -sh .git && git remote prune origin && git repack && git pru
 # df | lolcat --spread=4
 # $a = figlet -k -f chunky "o     helo" | lolcat
 
-echo-bar
+echo-bar | lolcat
 (
 # echo '[emacs] <M-x> outline-show-all to unfold'
-echo '[emacs] <M-!> shell command'
-echo '[emacs] <C-x r N> insert nums in region'
-echo '[emacs] <M-;> to comment region'
-echo '[emacs] <M-e> and <M-a> for f/w sentences'
-echo '[emacs] <C-x-tab> to indent'
-echo "[bash]  !! $fg[bold]be careful$fg[reset] with commands, easy to accidentally overwrite something !!"
-echo "[bash]  launchctl list | sudo tee ~/foo.txt; pipes stdout to your tty and file"
-echo '[regex] an example of needing to escape regex operators, all the same result:'
-
-echo '[regex]       .... lol, the -regex here will execute.'
-echo '[regex]'
+echo '[emacs] <M-!> shell.. <C-x r N> incr. idx in region.. <M-;> comment region..'
+echo '[emacs] <M-e/a> for fwd/bw sentences.. <C-x-tab> for ez indent.. <W> in dired to open file'
+echo "[emacs] regex repl. is cool:\treplace-regexp \\(trigger\\)\\([RL]\\) \\,(downcase \\2)2force)"
+echo "[bash] Tee usage: launchctl list | sudo tee ~/foo.txt; (pipes stdout to your tty and foo.txt)"
+# echo '[regex] an example of needing to escape regex operators, all the same result:'
+# echo '[regex]       .... lol, the -regex here will execute.'
+# echo '[regex]'
 # echo '        find . -regex \./DSC_007\[0-9\]\.NEF'
 # echo '        find . -regex \./.\*007\[0-9\]\.NEF      <-- see, gotta escape the *!'
-echo '        find -E . -regex "\./.*(07[0-7]).NEF$"'
-echo "[emacs] replace-regexp \\(trigger\\)\\([RL]\\) \\,(downcase \\2)2force)"
-echo "[emacs] dired W to open file with default application"
+# echo '        find -E . -regex "\./.*(07[0-7]).NEF$"'
 ) | lolcat
 
-# echo-bar
+echo-bar | lolcat
 # launchctl list | grep -v 'com.apple'
-echo-bar
-# Kind of slow tbqh
 site-all-status;
-echo-bar
-
-# launch_info | lolcat; echo-bar
+echo-bar | lolcat

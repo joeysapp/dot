@@ -249,6 +249,7 @@ export CURL_HOME="/Users/zooey/.config/curl/curl.conf"
 
 
 # [site]
+export SITE_PATH="/Users/zooey/Documents/code/site"
 export SITE_FRONTEND_PATH="/Users/zooey/Documents/code/site/frontend"
 export SITE_SERVER_PATH="/Users/zooey/Documents/code/site/server"
 export JS_COMMON_PATH="/Users/zooey/Documents/code/javascript/common"

@@ -1,4 +1,7 @@
 #!/bin/zsh
+# Helper script for general .dot usage
+# * Aliases git to dot in home directory
+# * Pretty-prints branches like how git does (set in .zshrc.)
 
 local cmd="/usr/bin/git"
 

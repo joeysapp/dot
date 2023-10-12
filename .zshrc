@@ -241,7 +241,7 @@ alias ls='LC_COLLATE=C ls -AlFh@'
 #   |__|__|                      |___|
 # ------------------------------------------------------------
 # [dot]
-export PATH="/Users/zooey/.bin:/Users/zooey/.bin/term:$PATH"
+export PATH="/Users/zooey/.bin:/Usergs/zooey/.bin/term:$PATH"
 # export PATH="/Users/zooey/.bin/term:$PATH"
 # export PATH="/Users/zooey/.bin/*:$PATH"
 export CURL_HOME="/Users/zooey/.config/curl/curl.conf"
@@ -301,9 +301,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # [ git ]
 alias git="~/.bin/git-print"
-alias git_submodule_fix_dirty_commit='git submodule deinit -f .; git submodule update --init --remote'
-alias git_graph='git log --graph --decorate --oneline $(git rev-list -g --all)'
-alias git_prune='du -sh .git && git remote prune origin && git repack && git prune-packed && git reflog expire --all --expire=now && git gc --aggressive --prune=now && du -sh .git'
+alias git-submodule_fix_dirty_commit='git submodule deinit -f .; git submodule update --init --remote'
+alias git-graph='git log --graph --decorate --oneline $(git rev-list -g --all)'
+alias git-prune='du -sh .git && git remote prune origin && git repack && git prune-packed && git reflog expire --all --expire=now && git gc --aggressive --prune=now && du -sh .git'
 
 
 # Add this to your .gitprofile for git/git-print to display all remotes/branches

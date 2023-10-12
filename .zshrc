@@ -124,7 +124,7 @@ setopt HIST_LEX_WORDS # This allows proper hist multiline commands, but may slow
 #             |_____|
 # ----------------------------------------------------------------------
 # [todo] zsh function loading in fg[], bg[], _bold, _no_bold
-autoload -U ~/.bin/colors-extended && colors-extended
+autoload -U ~/.bin/term-bootup-color-vars && term-bootup-color-vars
 # autoload -U colors && colors
 
 # LS colors 

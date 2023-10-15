@@ -241,19 +241,15 @@ alias ls='LC_COLLATE=C ls -AlFh@'
 #   |__|__|                      |___|
 # ------------------------------------------------------------
 # [dot]
-export PATH="/Users/zooey/.bin:/Usergs/zooey/.bin/term:$PATH"
-# export PATH="/Users/zooey/.bin/term:$PATH"
-# export PATH="/Users/zooey/.bin/*:$PATH"
+export PATH="/Users/zooey/.bin:/Users/zooey/.bin/term:$PATH"
 export CURL_HOME="/Users/zooey/.config/curl/curl.conf"
 # export PATH="/usr/local/sbin:$PATH"
-
 
 # [site]
 export SITE_PATH="/Users/zooey/Documents/code/site"
 export SITE_FRONTEND_PATH="/Users/zooey/Documents/code/site/frontend"
 export SITE_SERVER_PATH="/Users/zooey/Documents/code/site/server"
 export JS_COMMON_PATH="/Users/zooey/Documents/code/javascript/common"
-
 
 # [postgres]
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"

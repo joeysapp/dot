@@ -128,12 +128,12 @@
 (load "osascript.el") ; (osascript-eval-region), (osascript-eval-current-buffer) ; (osascript-run-file) a file
 (load "applescript-mode.el")
 (add-to-list 'auto-mode-alist '("\\.scpt\\'" . applescript-mode-mode))
-
+;; If you open this via finder (e.g. not through a tty/shell session) your $PATH will not point
+;; to where it normally does, and figlet won't work.
 (load "figlet.el") ; (figlet-get-font-list)
 (global-set-key (kbd "C-t") 'figlet-figletify-region-comment)
 
 ;; (load "fmt.el") ;; todo - fitting paragraphs to ~60char width
-
 
 (load "arduino-mode.el")
 ; [note] requires https://github.com/arduino/arduino-cli / https://arduino.github.io/arduino-cli/

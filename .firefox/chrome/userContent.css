@@ -88,15 +88,18 @@ ytd-watch-felxy {
 display: none !important;
 }
 
+/* Turn this back on so you can see your user >_> */
+@-moz-document domain(youtube.com), domain(google.com) {
 #end {
-display: none !important;
+  /* display: none !important; */
 }
 
 #page-manager {
     margin-top: 0px !important;
 }
 
-#player-theater-container {
+#player-theater-container
+{
     max-height: 100vh !important;
     height: 100vh !important;
 }

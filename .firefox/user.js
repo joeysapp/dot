@@ -8,6 +8,9 @@ user_pref('image.webp.enabled', false);
 user_pref('browser.altClickSave', true); // enable legacy alt-click to save
 user_pref("gfx.font_rendering.opentype_svg.enabled", false);
 
+// 0 is light, 1 is dark. 
+user_pref("ui.systemUsesDarkTheme", 0);
+
 /* 1402: limit font visibility (Windows, Mac, some Linux) [FF94+]
  * Uses hardcoded lists with two parts: kBaseFonts + kLangPackFonts [1], bundled fonts are auto-allowed
  * In normal windows: uses the first applicable: RFP (4506) over TP over Standard

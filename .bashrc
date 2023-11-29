@@ -23,10 +23,21 @@ alias git-prune='du -sh .git && git remote prune origin && git repack && git pru
 
 alias dot="/usr/bin/git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
 
+# :^)
 source /Users/zooey/Documents/code/site/.env.deploy
-cd $SITE_PATH
-export PATH="$SITE_PATH:$PATH"
+cd $SITE_DEPLOY_PATH
+export PATH="$SITE_DEPLOY_PATH:$PATH"
 
  export NVM_DIR="$HOME/.nvm"
  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# These are ugly, but for reference:
+# export TERM=xterm-color
+# export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
+# export CLICOLOR=1
+# export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# alias less='less --RAW-CONTROL-CHARS'
+alias ls='ls --color=auto -AlFhS'

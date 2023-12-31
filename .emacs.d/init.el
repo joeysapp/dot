@@ -52,7 +52,6 @@
 ; (global-set-key (kbd "C-x C-u") nil) ;; (upcase-region)
 ; (global-set-key (kbd "C-x C-l") nil) ;; (downcase-region)
 (put 'downcase-region 'disabled nil) ;; remove warnings for above keybinds
-(put 'upcase-region 'disable nil)
 
 (global-set-key (kbd "C-t") nil) ;; (transpose-chars) ; swaps chars around, but I like figlet :^)
 
@@ -190,6 +189,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.cjs\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
 
 ;; plists
@@ -256,3 +256,4 @@
  ;; If there is more than one, they won't work right.
  )
 
+(put 'upcase-region 'disabled nil)

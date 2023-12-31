@@ -194,6 +194,7 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # ------------------------------------------------------------
 alias lr="launchctl-reload $1"
 alias arp='function _arp(){ arp $@ | column -t };_arp'
+alias du_here="function _du() { du -ch . | sort -h };_du"
 
 # credits https://gist.github.com/natelandau/10654137#file-bash_profile-L87
 # alias mans='function _mansearch(){ man $1 | grep -iC2 --color=always $2 | less};_mansearch'
@@ -207,7 +208,7 @@ alias mans='function _mansearch(){ man $1 | less +/$2 };_mansearch';
 # chmod 700 [file] gives rwx to owner, --- to group, --- to others.
 
 # - https://stackoverflow.com/questions/69213355/how-can-i-add-a-flag-to-alias
-alias ls='LC_COLLATE=C ls -AlFh@'
+alias ls='LC_COLLATE=C ls -AlFhS@'
 # A - all files, no . ..
 # l - list format
 # F - long show / after directories
@@ -246,9 +247,6 @@ export CURL_HOME="/Users/zooey/.config/curl/curl.conf"
 # export PATH="/usr/local/sbin:$PATH"
 
 # [site]
-export SITE_PATH="/Users/zooey/Documents/code/site"
-export SITE_FRONTEND_PATH="/Users/zooey/Documents/code/site/frontend"
-export SITE_SERVER_PATH="/Users/zooey/Documents/code/site/server"
 export JS_COMMON_PATH="/Users/zooey/Documents/code/javascript/common"
 
 # [postgres]
@@ -256,6 +254,8 @@ export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 # setup default dir for all postgres/pg_ctl commands
 # https://www.postgresql.org/docs/current/libpq-envars.html
+export ANSIBLE_COLLECTIONS_PATH="/Users/zooey/Documents/code/ansible/collections"
+export NODE_ENV="local"
 export PGDATA="/Users/zooey/Documents/code/database"
 export PGPORT="9002"
 export PGHOST="127.0.0.1"
@@ -263,7 +263,9 @@ export PGHOST="127.0.0.1"
 export PGHOSTADDR="127.0.0.1" # prevent DNS lookup on startup 
 export PGUSER="web"
 # export PGPASSFILE="$PGDATA/TODO"
-launchctl setenv LC_ALL "en_us.UTF.8"
+launchctl setenv LC_ALL "en_US.UTF-8"
+# TMP workaround for poorly set dealio
+export LC_ALL="en_US.UTF-8"
 # For compilers to find postgresql@15 you may need to set:
 # export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
@@ -322,8 +324,6 @@ alias git-prune='du -sh .git && git remote prune origin && git repack && git pru
 # echo '\n === ps '
 # ps | lolcat
 
-
-# du -ckh --si ~/ | sort -h   
 # du -hd 1
 
 # find . -maxdepth 1 -type d | sort  
@@ -357,5 +357,6 @@ echo "[bash] Tee usage: launchctl list | sudo tee ~/foo.txt; (pipes stdout to yo
 
 echo-bar | lolcat
 # launchctl list | grep -v 'com.apple'
-site-all-status;
-echo-bar | lolcat
+# site-all-status;
+# echo-bar | lolcat
+

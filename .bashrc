@@ -1,12 +1,17 @@
 # 2023-10-15T15:00:00
 # note(zooey): Creating bashrc for deployments.
-# export HISTFILE=~/log/bash-hist.csv
-# export HISTSIZE=420000000
-# export HISTFILESIZE=420000001
-# 
+# https://www.redhat.com/sysadmin/history-command
+export HISTFILE="/Users/zooey/Documents/code/site/logs/deploy/bash_history"
+export HISTFILESIZE=
+export HISTSIZE=
+HISTTIMEFORMAT="%F %T: "
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+# export HISTCONTROL=ignoredups
+
 # # https://unix.stackexchange.com/questions/121802/zsh-how-to-check-if-an-option-is-enabled
+# These are only for zsh AFAIK:
 # shopt -s histverify
-shopt -s histappend 
+# shopt -s histappend 
 # shopt -s histreedit
 # 
 # Default ubuntu prompt
@@ -23,11 +28,6 @@ alias git-prune='du -sh .git && git remote prune origin && git repack && git pru
 
 alias dot="/usr/bin/git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
 
-# :^)
-source /Users/zooey/Documents/code/site/.env.deploy
-cd $SITE_DEPLOY_PATH
-export PATH="$SITE_DEPLOY_PATH:$PATH"
-
  export NVM_DIR="$HOME/.nvm"
  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -41,3 +41,8 @@ export PATH="$SITE_DEPLOY_PATH:$PATH"
 
 # alias less='less --RAW-CONTROL-CHARS'
 alias ls='ls --color=auto -AlFhS'
+
+# :^)
+source /Users/zooey/Documents/code/site/.env.deploy
+cd $SITE_DEPLOY_PATH
+export PATH="$SITE_DEPLOY_PATH:$PATH"

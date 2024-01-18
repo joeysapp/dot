@@ -192,6 +192,7 @@ PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K
 # |   _|  -__|   _|        ||  ||     |  _  ||  |
 # |____|_____|__| |__|__|__||__||__|__|___._||__|
 # ------------------------------------------------------------
+alias emacs="/Users/zooey/Documents/code/emacs/nextstep/Emacs.app/Contents/MacOS/Emacs"
 alias lr="launchctl-reload $1"
 alias arp='function _arp(){ arp $@ | column -t };_arp'
 alias du_here="function _du() { du -ch . | sort -h };_du"
@@ -360,3 +361,4 @@ echo-bar | lolcat
 # site-all-status;
 # echo-bar | lolcat
 
+export PATH="/usr/local/opt/texinfo/bin:$PATH"

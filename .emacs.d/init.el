@@ -69,7 +69,7 @@
 ;; |_____||____|___  ||__||_____|
 ;;             |_____|
 ;; ----------------------------------------------------------------------
-(load-theme 'moe-light t)
+(load-theme 'moe-dark t)
 ;; Function/minibuf prompt has wrong face with this...
 ; (require 'moe-theme)
 ; (setq moe-theme-highlight-buffer-id 1)
@@ -90,15 +90,15 @@
 (add-to-list 'default-frame-alist '(alpha 95 95))
 
 ;; Borders of window
-(global-linum-mode 1)
+;(global-linum-mode 1)
+(global-display-line-numbers-mode 1)
+
 (setq linum-format "%4d") ; "%4d \u2502 "  is  pipe to right side of 00 | on the left side
 (fringe-mode '(3 . 0)) ; 6px border of gray60..?
 ; (add-to-list 'default-frame-alist '(left-fringe . 8))
 ; (add-to-list 'default-frame-alist '(right-fringe . 0)) ; right side of window
 ;; line separating fringe and content
 ; (set-face-attribute 'fringe nil :background "white" :foreground nil)
-
-
 
 ;;  __                 __
 ;; |  |--.-----.-----.|  |--.-----.
@@ -234,16 +234,21 @@
  '(custom-safe-themes
    '("58c996beb973f7e988ee4fd21c367b7a5bbdb0622ddfbbd112672a7b4e3d3b81" "a68624bd5c4bec879ee59cd3039531b6229766a8b8ed0e79eef2642f14dbda32" "afeb7b07dbc1a4cfadb24f3ef6c8cf5e63051bf76411779f03a0fe3aadc07768" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" default))
  '(electric-indent-mode nil)
+ '(global-display-line-numbers-mode t)
  '(js-expr-indent-offset 2)
  '(js-indent-align-list-continuation t)
  '(js-indent-level 2)
- '(js-js-switch-tabs nil)
+ '(js-js-switch-tabs nil t)
  '(js-jsx-align->-with-< t)
  '(js-jsx-detect-syntax nil)
  '(js-jsx-syntax t)
  '(list-colors-sort '(hsv-dist . "gray100"))
  '(outline-minor-mode-cycle t)
  '(py-outline-minor-mode-p nil)
+ '(safe-local-variable-values
+   '((vc-prepare-patches-separately)
+     (diff-add-log-use-relative-names . t)
+     (vc-git-annotate-switches . "-w")))
  '(standard-indent 2)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
@@ -256,6 +261,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(line-number-current-line ((t nil))))
 
 (put 'upcase-region 'disabled nil)

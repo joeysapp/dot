@@ -1,116 +1,79 @@
-/* stack* websites */
-.js-consent-banner {
-    opacity: 0.33;
-    width: 200px !important;
-}
-
 @import url('userChrome.css');
 
 /* Removes the white loading page */
-/* url(about:newtab), url(about:home) */
-@-moz-document url(about:blank) {
-	html:not(#ublock0-epicker), html:not(#ublock0-epicker) body, #newtab-customize-overlay {
-		background: var(--bf-bg) !important;
-	}
+@-moz-document url(about:blank), url(about:newtab), url(about:home) {
+  html:not(#ublock0-epicker), html:not(#ublock0-epicker) body, #newtab-customize-overlay {
+    background: var(--bf-bg) !important;
+  }
+  body { background: transparent !important; }
 }
-
-/* Sets up minimal scrollbar */
+/* Minimal scrollbar */
 :root {
-	scrollbar-width: thin !important;
-	scrollbar-color: rgb(161, 161, 161) transparent !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgb(161, 161, 161) transparent !important;
 }
-
-/*  Sets up minimal incognito scrollbar */
 @-moz-document url(about:privatebrowsing) {
-	:root{
-		scrollbar-width: thin !important;
-		scrollbar-color: rgb(161, 161, 161) transparent !important;
-	}
+  :root {
+    scrollbar-width: thin !important;
+    scrollbar-color: rgb(161, 161, 161) transparent !important;
+  }
 }
 
-html {
-    /*background-color: red !important;*/
+/* Stack-overflow, exchange, etc. */
+.js-consent-banner, #onetrust-banner-sdk {
+    opacity: 0.33;
+    width: 200px !important;
+    padding: 4px;
 }
 
-@-moz-document url("about:newtab"), url("about:home"), url("about:blank#foobar") {
-
-body { background: transparent !important;}
-
-} 
-
-/* reddit */
-/* bottom thing on pages */
-.read-next-container {
-    display: none;
-}
+/* Reddit */
+/* Bottom ad on all pages */
+.read-next-container { display: none; }
 .link.promotedlink {
     background: white !important;
     filter: grayscale(1);
     opacity: 0.5;
     scale: 0.75;
-
-    * {
-        background: white !important;
-    }
+    * { background: white !important; }
 }
 
-/* gmail */
+/* Gmail */
+/* Make the load-in "Load Gmail classic" easier to click */
 .submit_as_link {
-  /* make the load-in "Load Gmail classic easier to click */
   background-color: lightblue;
   padding-top: 100vh;
   font-weight: bolder;
 }
-
+/* Bottom container that contains above link. it just gets display: none'd. */
 #stb, .msgb {
-  /* bottom container that contains above link. it just gets display: none'd */
   display: flex !important;
 }
 
-/* youtube */
-ytd-watch-felxy {
-  /* hiding the search bar */
-  position: absolute;
-  top: 0px;
-}
-
-#masthead-container {
-    opacity: 0 !important;
-    transition: all 1s ease !important;
-
-}
-
-#masthead-container:hover {
-    opacity: 1 !important
-}
-
-#start {
-display: none !important;
-}
-
-/* Turn this back on so you can see your user >_> */
+/* Youtube */
 @-moz-document domain(youtube.com), domain(google.com) {
-#end {
-  /* display: none !important; */
-}
+  /* Hiding the top search bar */
+  #masthead-container {
+    opacity: 0 !important;
+    transition: all 0.5s ease-out !important;
+  }
+  #masthead-container:hover { opacity: 1 !important }
+  #start { display: none !important; }
+  #page-manager { margin-top: 0px !important; }
 
-#page-manager {
-    margin-top: 0px !important;
-}
-
-#player-theater-container
-{
+  /* Make the player take the entire page */
+  #player-theater-container, .html5-main-video, #full-bleed-container, yd-watch-flexy {
     max-height: 100vh !important;
     height: 100vh !important;
-}
-
-#video-stream, #html5-main-video {
+    position: absolute !important;
+    top: 0px !important;
+  }
+  #video-stream, #html5-main-video {
     width: auto;
     height: auto;
-}
+  }
 
-/* adds in the """suggested videos""" area */
-#watch-checkout-offers {
-  max-height: 0px !important;
-  opacity: 0.25;
+  /* Advertisements in the suggested videos area */
+  #watch-checkout-offers {
+    max-height: 0px !important;
+    opacity: 0.25;
 }

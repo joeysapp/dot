@@ -153,16 +153,15 @@ export CLICOLOR=0 # Need to set this for LS to be pretty :^)
 # x     default foreground or background
 
 # [info] 11 items, one char for bgfg, so 22 chars:
-# the 11 items are: dir, symlink, socket, pipe, exec, block special, char spec, ex-w-setuid-bi-set, ex-w-setgid-bit-set,
+# the 11 items are:
+# dir, symlink, socket, pipe, exec, block special, char spec, ex-w-setuid-bi-set, ex-w-setgid-bit-set,
 # dir-writable-to-others-w-sticky-bit, dir-writable-to-others-wo,sticky-bit
-# 
+# [ref] So this is breaking them out to be legible:
 # export LSCOLORS=ga  fa  ca  da  ba  eg  ed  ab  ag  ac  ad
 # export LSCOLORS=gx  fx  cx  dx  Bh  Eg  ed  ab  ag  ac  ad
 
-export LSCOLORS=gxfxcxdxBhEgedabagacad
-
-# making executables bold red, char special bold blue
-# export lscolors=Exbhcxdxbxegedabagacad
+# export lscolors=Exbhcxdxbxegedabagacad # making executables bold red, char special bold blue
+export LSCOLORS=gxfxcxdxbxEgedabagacfd
 
 # [ref] https://www.manpagez.com/man/1/zshmisc/
 # [ref] https://stackoverflow.com/questions/19901044/what-is-k-f-in-oh-my-zsh-theme
@@ -174,8 +173,20 @@ export LSCOLORS=gxfxcxdxBhEgedabagacad
 # * command substitution
 # * arithmetic expansion
 setopt PROMPT_SUBST
-# Shows user and host
-PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
+# '%/' is the pwd
+# Shows user and host - K000 for darkening the background.
+# PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
+# kittenblob.local@2024-01-08 lime : bluish
+# export PS1="%F{190}$(users)@$(hostname):%F{0015}%F{039}%/%F{015}\$ "
+# https://superuser.com/questions/60555/show-only-current-directory-name-not-full-path-on-bash-prompt
+# For showing the last directory you can just do ${PWD/*\//}, i.e. find any thing before and including the last '/' and replace it with nothing.
+
+# kittenblob.local@2024-01-08 lime : bluish
+# PS1="%F{140}$(users)@$(hostname):%F{0015}%F{039}%/%F{015}\$ "
+export PS1="%F{190}$(users)@${HOST/\.*/} %F{39}${PWD/*\//}/%F{15} "
+
+# foxy
+# export PS1="%F{231}$(users)@${HOST/\.*/} %F{114}${PWD/*\//}/%F{015} "
 
 # Only pwd (%/ does that bit, rest is coloring)
 # PS1="%F{039}%K{000}%/%F{015}%K{000} "

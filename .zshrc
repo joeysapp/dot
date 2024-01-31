@@ -92,7 +92,6 @@ alias h="fc -il"
 
 # https://unix.stackexchange.com/questions/1935/extending-history-search-in-zsh
 # uh, where's my history going?
-export HISTFILE=~/log/zsh-hist2.csv
 export HISTSIZE=51100000 # The number of lines held in memory
 export SAVEHIST=51200000  # Maximum number of items for the history file
 setopt HIST_FIND_NO_DUPS # Don't show the same command twice in C-s or C-r
@@ -167,36 +166,9 @@ export LSCOLORS=gxfxcxdxbxEgedabagacfd
 # [ref] https://stackoverflow.com/questions/19901044/what-is-k-f-in-oh-my-zsh-theme
 # [ref] https://stackoverflow.com/a/19901630
 
-# If the PROMPT_SUBST option is set,
-# the prompt string is first subjected to:
-# * parameter expansion
-# * command substitution
-# * arithmetic expansion
+# If the PROMPT_SUBST option is set, the prompt string is first subjected to:
+#    * parameter expansion -> command substitution -> arithmetic expansion
 setopt PROMPT_SUBST
-# '%/' is the pwd
-# Shows user and host - K000 for darkening the background.
-# PS1="%F{190}%K{000}$(users)@$(hostname):%F{0015}%K{000}%F{039}%K{000}%/%F{015}%K{000}\$ "
-# kittenblob.local@2024-01-08 lime : bluish
-# export PS1="%F{190}$(users)@$(hostname):%F{0015}%F{039}%/%F{015}\$ "
-# https://superuser.com/questions/60555/show-only-current-directory-name-not-full-path-on-bash-prompt
-# For showing the last directory you can just do ${PWD/*\//}, i.e. find any thing before and including the last '/' and replace it with nothing.
-
-# kittenblob.local@2024-01-08 lime : bluish
-# PS1="%F{140}$(users)@$(hostname):%F{0015}%F{039}%/%F{015}\$ "
-export PS1="%F{190}$(users)@${HOST/\.*/} %F{39}${PWD/*\//}/%F{15} "
-
-# foxy
-# export PS1="%F{231}$(users)@${HOST/\.*/} %F{114}${PWD/*\//}/%F{015} "
-
-# Only pwd (%/ does that bit, rest is coloring)
-# PS1="%F{039}%K{000}%/%F{015}%K{000} "
-
-# [todo] SUPER cool theme: https://aperiodic.net/phil/prompt/
-
-# [old prompts]
-# Timestamp of [YYYY-MM-DD @ 00:00AM] ttys_id on right side
-# RPROMPT="$(tput dim)[%D{%F @ %I:%M%p}] tty%l"
-
 
 #  __                        __               __
 # |  |_.-----.----.--------.|__|.-----.---.-.|  |
@@ -316,7 +288,6 @@ alias git-submodule_fix_dirty_commit='git submodule deinit -f .; git submodule u
 alias git-graph='git log --graph --decorate --oneline $(git rev-list -g --all)'
 alias git-prune='du -sh .git && git remote prune origin && git repack && git prune-packed && git reflog expire --all --expire=now && git gc --aggressive --prune=now && du -sh .git'
 
-
 # Add this to your .gitprofile for git/git-print to display all remotes/branches
 # [alias]
 #         branches = branch --all -vvv --color=auto
@@ -352,6 +323,7 @@ alias git-prune='du -sh .git && git remote prune origin && git repack && git pru
 # df | lolcat --spread=4
 # $a = figlet -k -f chunky "o     helo" | lolcat
 
+source ~/.zshenv
 echo-bar | lolcat
 (
 # echo '[emacs] <M-x> outline-show-all to unfold'

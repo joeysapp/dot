@@ -8,3 +8,5 @@
 
 # Node
 *node_modules/*
+
+*.zshenv*

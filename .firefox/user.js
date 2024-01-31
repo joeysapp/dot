@@ -1,5 +1,6 @@
 /* https://github.com/arkenfox/user.js/wiki/2.1-User.js */
 /* look @ ./prefs.js */
+use_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 
 // https://gist.github.com/chelovekula/c752de4bcbdeef6e4995a6b3467198d4
 user_pref("geo.enabled", false);
@@ -32,30 +33,28 @@ user_pref("accessibility.force_disabled", 1);
 //         ******************************************************************************/
 //        
 //        // Disable Location-Aware Browsing (geolocation)
-//        user_pref("geo.enabled", false);
-//        
 //        // Enable hardening against various fingerprinting vectors (Tor Uplift project)
 //        // Note this can break the ability to remember the window size of Firefox on startup
-//        //user_pref("privacy.resistFingerprinting", true);
+        user_pref("privacy.resistFingerprinting", true);
 //        
 //        // Enable first-party isolation
-//        //user_pref("privacy.firstparty.isolate", true);
+         user_pref("privacy.firstparty.isolate", true);
 //        
 //        // Disable WebRTC to prevent leaking inernal IP addresses
-//        user_pref("media.peerconnection.enabled", false);
-//        user_pref("media.navigator.enabled", false);
-//        user_pref("media.navigator.video.enabled", false);
-//        user_pref("media.getusermedia.screensharing.enabled", false);
-//        user_pref("media.getusermedia.audiocapture.enabled", false);
+        user_pref("media.peerconnection.enabled", false);
+        user_pref("media.navigator.enabled", false);
+        user_pref("media.navigator.video.enabled", false);
+        user_pref("media.getusermedia.screensharing.enabled", false);
+        user_pref("media.getusermedia.audiocapture.enabled", false);
 //        
 //        // Accept only first party cookies
-//        user_pref("network.cookie.cookieBehavior", 1);
+        user_pref("network.cookie.cookieBehavior", 1);
 //        
 //        // Disable "beacon" asynchronous HTTP transfers (used for analytics)
-//        user_pref("beacon.enabled", false);
+        user_pref("beacon.enabled", false);
 //        
 //        // Disable leaking network/browser connection type via Javascript (WiFi, cellular, etc.)
-//        user_pref("dom.netinfo.enabled", false);
+        user_pref("dom.netinfo.enabled", false);
 //        
 //        // Disable sensor API
 //        user_pref("device.sensors.enabled", false);

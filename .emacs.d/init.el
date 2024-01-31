@@ -16,6 +16,15 @@
 
 (setq inhibit-splash-screen t)
 (setq initial-scratch-message "")
+
+; For using emacsclient:
+(add-hook 'server-switch-hook #'raise-frame)
+;;; [todo] https://stackoverflow.com/questions/10171280/how-to-launch-gui-emacs-from-command-line-in-osx
+;;;        https://emacs.stackexchange.com/questions/34737/start-emacsclient-with-focus-from-command-line
+
+; For invoking nextstep/ macOS app wrapper
+(x-focus-frame nil)
+
 ; (set #'display-startup-echo-area-message #'ignore)
 ; (setq initial-scratch-message "foo") ; (figlet-preview-fonts)
 ; (add-hook 'after-init-hook (lambda () (figlet-preview-fonts)))
@@ -85,9 +94,9 @@
 ; (font-family-list)
 ; (set-face-attribute 'default nil :family "CtrlD" :height 130) ; height is 100 = 1*10pt, so 130 is 13pt
 (set-face-attribute 'default nil :family "Essential PragmataPro" :height 135) ; height is 100 = 1*10pt, so 130 is 13pt
-(setq default-frame-alist '((width . 110) (height . 70)))
-(set-frame-parameter (selected-frame) 'alpha '(98 98))
-(add-to-list 'default-frame-alist '(alpha 98 98))
+(setq default-frame-alist '((width . 140) (height . 120)))
+(set-frame-parameter (selected-frame) 'alpha '(100 100))
+(add-to-list 'default-frame-alist '(alpha 100 100))
 
 ;; Borders of window
 ;(global-linum-mode 1)
@@ -136,7 +145,7 @@
 
 ;; (load "fmt.el") ;; todo - fitting paragraphs to ~60char width
 
-(load "arduino-mode.el")
+; (load "arduino-mode.el")
 ; [note] requires https://github.com/arduino/arduino-cli / https://arduino.github.io/arduino-cli/
 ; (autoload 'arduino-mode "arduino-mode" "Major mode for editing Arduino code." t)
 ; (autoload 'ede-arduino-preferences-file "ede-arduino" "Preferences file of Arduino." t)

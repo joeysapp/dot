@@ -6,4 +6,5 @@ CHAR_CT=$((COLUMNS * (${2=33.3} / 100.0))); # convert percent to amt of console 
 
 # Convert to int
 CHAR_CT=${CHAR_CT%.*}
-printf "${1:=-}%.0s" {1..$CHAR_CT}; echo '';
+printf "${1:=-}%.0s" {1..$CHAR_CT};
+echo '';

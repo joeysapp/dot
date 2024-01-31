@@ -29,6 +29,18 @@
 ; (setq initial-scratch-message "foo") ; (figlet-preview-fonts)
 ; (add-hook 'after-init-hook (lambda () (figlet-preview-fonts)))
 
+; (defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
+;   "Create parent directory if not exists while visiting file."
+;   (unless (file-exists-p filename)
+;     (let ((dir (file-name-directory filename)))
+;       (unless (file-exists-p dir)
+;         (make-directory dir t)))))
+
+; https://emacs.stackexchange.com/questions/34392/how-to-check-if-a-directory-exists-in-elisp
+; Before this, you'd just get files placed all over on new computers(or even remotes???)
+(unless (file-directory-p "~/.emacs.d/backup")
+  (make-directory "~/.emacs.d/backup"))
+
 (setq create-lockfiles nil)
 (setq make-backup-files nil)
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))) ; for when we do use above
@@ -93,7 +105,7 @@
 ;; frame size / opacity
 ; (font-family-list)
 ; (set-face-attribute 'default nil :family "CtrlD" :height 130) ; height is 100 = 1*10pt, so 130 is 13pt
-(set-face-attribute 'default nil :family "Essential PragmataPro" :height 135) ; height is 100 = 1*10pt, so 130 is 13pt
+(set-face-attribute 'default nil :family "Essential PragmataPro" :height 165) ; height is 100 = 1*10pt, so 130 is 13pt
 (setq default-frame-alist '((width . 140) (height . 120)))
 (set-frame-parameter (selected-frame) 'alpha '(100 100))
 (add-to-list 'default-frame-alist '(alpha 100 100))

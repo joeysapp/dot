@@ -323,25 +323,35 @@ alias git-prune='du -sh .git && git remote prune origin && git repack && git pru
 # df | lolcat --spread=4
 # $a = figlet -k -f chunky "o     helo" | lolcat
 
-source ~/.zshenv
-echo-bar | lolcat
+# echo-bar | lolcat
 (
+
 # echo '[emacs] <M-x> outline-show-all to unfold'
-echo '[emacs] <M-!> shell.. <C-x r N> incr. idx in region.. <M-;> comment region..'
-echo '[emacs] <M-e/a> for fwd/bw sentences.. <C-x-tab> for ez indent.. <W> in dired to open file'
-echo "[emacs] regex repl. is cool:\treplace-regexp \\(trigger\\)\\([RL]\\) \\,(downcase \\2)2force)"
-echo "[bash] Tee usage: launchctl list | sudo tee ~/foo.txt; (pipes stdout to your tty and foo.txt)"
+# echo "  <M-!> & W\t launchctl list | tee ~/log/\tplsss someone teach me vi emacs over ssh makes me sad"
+
+# [todo] https://aperiodic.net/phil/prompt/
+SPACE_CT=$((COLUMNS * (50 / 100.0)));
+SPACE_CT=${SPACE_CT%.*}
+printf "e%.0s" {1..$SPACE_CT};
+
+
+# echo "[emacs] regex repl. is cool:\treplace-regexp \\(trigger\\)\\([RL]\\) \\,(downcase \\2)2force)"
 # echo '[regex] an example of needing to escape regex operators, all the same result:'
 # echo '[regex]       .... lol, the -regex here will execute.'
 # echo '[regex]'
 # echo '        find . -regex \./DSC_007\[0-9\]\.NEF'
 # echo '        find . -regex \./.\*007\[0-9\]\.NEF      <-- see, gotta escape the *!'
 # echo '        find -E . -regex "\./.*(07[0-7]).NEF$"'
+# echo-bar '-' 30
 ) | lolcat
+echo "pls some1 send me a vi cheatsheet emacs over ssh makes me very sad ;____;"
+# echo-bar '-' 30 | lolcat
 
-echo-bar | lolcat
 # launchctl list | grep -v 'com.apple'
 # site-all-status;
 # echo-bar | lolcat
 
 export PATH="/usr/local/opt/texinfo/bin:$PATH"
+
+# [NOTE] Move out more machine-specific items here:
+source ~/.zshenv

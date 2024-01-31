@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# 2024-01-31: This is a decent script to plop into .zshenv/rc I guess
+#             Ideally we'll have cron backup/combinined jobs like the bottom (but better obv :^))
+#             [cronnab-el-items]:
+#               * Combined zsh-history         * ~/.bin/backup *         *
+#               *
+#
+
+
+
+
+# 2024-01-31: Lol, what is this doing... Why is there a command piping right after ssh? Is it gonna ssh in after it does everything?
+#             Also what is \>.... I addded all the other \s...
+
+# https://stackoverflow.com/questions/10508052/how-do-you-share-zsh-history-between-multiple-machines
+> Caution, this will break if you have commands in your history that span multiple lines! 
+
+ssh username@example.com cat ~/.zsh/.zhistory \
+    | cat ~/.zsh/.zhistory - \
+    | sort \
+    | uniq \
+    | tee ~/.zsh/.zhistory \
+    | ssh username@example.com cat \> ~/log/zsh-hist-mega

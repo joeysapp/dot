@@ -16,7 +16,31 @@ else
 fi
 
 # Set zsh history file based on machine ( goes to ~/log/zsh-hist-[host]
-source /Users/zooey/.bin/zsh-set-hist-file
+NAME=${HOST/\.*/}
+# Handling silly wifi<->ethernet mixups >_>
+if   [[ "$NAME" == "kittenblob.local" ]]; then 
+    NAME="kittenblob"
+elif [[ "$NAME" == "no_idea_1" || "$NAME" == "zooeys-MacBook-Pro" ]]; then
+    NAME="foxy"
+elif [[ "$NAME" == "" ]]; then
+    # placeholder
+else 
+    # placeholder, pls just figure this out better >_> e.g. rasp-pi er something. 
+fi
+_HISTFILE="log/zsh-hist-$NAME.csv"
+if [[ -f "$HOME/$_HISTFILE" ]];
+then
+    export HISTFILE="$HOME/$_HISTFILE"
+else
+    echo "\n[DANGER] ERROR! Alert!! ALARM!!! You have no shell history!\n\n\timma make u 1 dw\n\t-> *touches ~/$_HISTFILE* :3\n"
+    touch "$HOME/$_HISTFILE"
+    export HISTFILE="$HOME/$_HISTFILE"
+fi
+return 0;
+
+# source /Users/zooey/.bin/zsh-set-hist-file
+
+
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_NO_ANALYTICS=1

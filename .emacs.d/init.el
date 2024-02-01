@@ -105,7 +105,7 @@
 ;; frame size / opacity
 ; (font-family-list)
 ; (set-face-attribute 'default nil :family "CtrlD" :height 130) ; height is 100 = 1*10pt, so 130 is 13pt
-(set-face-attribute 'default nil :family "Essential PragmataPro" :height 165) ; height is 100 = 1*10pt, so 130 is 13pt
+(set-face-attribute 'default nil :family "Essential PragmataPro" :height 166) ; height is 100 = 1*10pt, so 130 is 13pt
 (setq default-frame-alist '((width . 140) (height . 120)))
 (set-frame-parameter (selected-frame) 'alpha '(100 100))
 (add-to-list 'default-frame-alist '(alpha 100 100))

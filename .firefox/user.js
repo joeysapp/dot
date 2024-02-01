@@ -1,60 +1,89 @@
-/* https://github.com/arkenfox/user.js/wiki/2.1-User.js */
-/* look @ ./prefs.js */
+/*
+   ~/.firefox/user.js  (or wherever your firefox profile is)
+   
+   [about]
+   This file is read in on every firefox start and applies preferences set here.
+   These preferences can be seen on `about:config` (type that into your address bar)
+   This file is read _AFTER_ prefs.js (which is not per-user?)
+  
+   [notes]
+   - Some preferences will not show until they are set ("hidden preferences")
+   - true/false !== 1/0
+  
+   [refs]
+   https://kb.mozillazine.org
+   https://kb.mozillazine.org/Browser.bookmarks.file
+   https://github.com/arkenfox/user.js/wiki/2.1-User.js
+*/
+
+// Override system theme (0=light, 1=dark)
+user_pref("ui.systemUsesDarkTheme", 0);
+
+// Allow use of customizing CSS on all pages (./chrome/userProfile.css and ./chrome/userContent.css)
 use_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
+
+// Save bookmarks to file on exit (https://support.mozilla.org/en-US/questions/928809)
+user_pref("browser.bookmarks.autoExportHTML", true);
+user_pref("browser.bookmarks.file", "~/.firefox/bookmarks-backup.html");
+
+// Turn off webps
+user_pref('image.webp.enabled', false);
+
+// Allow legacy alt-click to save links/images (handy when right-click is disabled)
+user_pref('browser.altClickSave', true);
+
+//              __
+// .-----.----.|__|.--.--.---.-.----.--.--.
+// |  _  |   _||  ||  |  |  _  |  __|  |  |
+// |   __|__|  |__| \___/|___._|____|___  |
+// |__|                             |_____|
+
+// Limit font visibility that can be used in browser fingerprinting
+// 1=Base system fonts
+// 2=also fonts from optional language packs
+// 3=also user-installed fonts
+user_pref("layout.css.font-visibility.private", 1);
+user_pref("layout.css.font-visibility.standard", 1);
+
+user_pref("gfx.font_rendering.opentype_svg.enabled", false);
+
+// Send DNT=1 in all requests
+user_pref("layout.css.font-visibility.trackingprotection", 1);
+
+/* 2601: prevent accessibility services from accessing your browser
+ * [1] https://support.mozilla.org/kb/accessibility-services ***/
+user_pref("accessibility.force_disabled", 1);
+
+// Disable Location-Aware Browsing (geolocation)
+// Enable hardening against various fingerprinting vectors (Tor Uplift project)
+// Note this can break the ability to remember the window size of Firefox on startup
+user_pref("privacy.resistFingerprinting", true);
+        
+// Enable first-party isolation
+user_pref("privacy.firstparty.isolate", true);
+  
+// Disable WebRTC to prevent leaking inernal IP addresses
+user_pref("media.peerconnection.enabled", false);
+user_pref("media.navigator.enabled", false);
+user_pref("media.navigator.video.enabled", false);
+user_pref("media.getusermedia.screensharing.enabled", false);
+user_pref("media.getusermedia.audiocapture.enabled", false);
+  
+// Accept only first party cookies
+user_pref("network.cookie.cookieBehavior", 1);
+  
+// Disable "beacon" asynchronous HTTP transfers (used for analytics)
+user_pref("beacon.enabled", false);
+  
+// Disable leaking network/browser connection type via Javascript (WiFi, cellular, etc.)
+user_pref("dom.netinfo.enabled", false);
 
 // https://gist.github.com/chelovekula/c752de4bcbdeef6e4995a6b3467198d4
 user_pref("geo.enabled", false);
 
-user_pref('image.webp.enabled', false);
-user_pref('browser.altClickSave', true); // enable legacy alt-click to save
-user_pref("gfx.font_rendering.opentype_svg.enabled", false);
 
-// 0 is light, 1 is dark. 
-user_pref("ui.systemUsesDarkTheme", 0);
+// The rest I need to review
 
-/* 1402: limit font visibility (Windows, Mac, some Linux) [FF94+]
- * Uses hardcoded lists with two parts: kBaseFonts + kLangPackFonts [1], bundled fonts are auto-allowed
- * In normal windows: uses the first applicable: RFP (4506) over TP over Standard
- * In Private Browsing windows: uses the most restrictive between normal and private
- * 1=only base system fonts, 2=also fonts from optional language packs, 3=also user-installed fonts
- * [1] https://searchfox.org/mozilla-central/search?path=StandardFonts*.inc ***/
-   // user_pref("layout.css.font-visibility.private", 1);
-   // user_pref("layout.css.font-visibility.standard", 1);
-   // user_pref("layout.css.font-visibility.trackingprotection", 1);
-user_pref("layout.css.font-visibility.private", 1);
-
-/* 2601: prevent accessibility services from accessing your browser [RESTART]
- * [1] https://support.mozilla.org/kb/accessibility-services ***/
-user_pref("accessibility.force_disabled", 1);
-
-//        
-//        /******************************************************************************
-//         * Privacy                                                                    *
-//         ******************************************************************************/
-//        
-//        // Disable Location-Aware Browsing (geolocation)
-//        // Enable hardening against various fingerprinting vectors (Tor Uplift project)
-//        // Note this can break the ability to remember the window size of Firefox on startup
-        user_pref("privacy.resistFingerprinting", true);
-//        
-//        // Enable first-party isolation
-         user_pref("privacy.firstparty.isolate", true);
-//        
-//        // Disable WebRTC to prevent leaking inernal IP addresses
-        user_pref("media.peerconnection.enabled", false);
-        user_pref("media.navigator.enabled", false);
-        user_pref("media.navigator.video.enabled", false);
-        user_pref("media.getusermedia.screensharing.enabled", false);
-        user_pref("media.getusermedia.audiocapture.enabled", false);
-//        
-//        // Accept only first party cookies
-        user_pref("network.cookie.cookieBehavior", 1);
-//        
-//        // Disable "beacon" asynchronous HTTP transfers (used for analytics)
-        user_pref("beacon.enabled", false);
-//        
-//        // Disable leaking network/browser connection type via Javascript (WiFi, cellular, etc.)
-        user_pref("dom.netinfo.enabled", false);
 //        
 //        // Disable sensor API
 //        user_pref("device.sensors.enabled", false);

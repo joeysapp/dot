@@ -41,8 +41,13 @@ alias dot="/usr/bin/git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
 
 # alias less='less --RAW-CONTROL-CHARS'
 alias ls='ls --color=auto -AlFhS'
+alias mans='man $1 | less +/$2'
 
 # :^)
 source /Users/zooey/Documents/code/site/.env.deploy
 cd $SITE_DEPLOY_PATH
 export PATH="$SITE_DEPLOY_PATH:$PATH"
+
+# [todo] https://www.cyberciti.biz/faq/add-bash-auto-completion-in-ubuntu-linux/
+source "$SITE_DEPLOY_PATH/scripts/deploy/bash-autocompletion.sh"
+source /etc/profile.d/bash_completion.sh

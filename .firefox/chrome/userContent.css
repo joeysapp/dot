@@ -50,6 +50,7 @@
 }
 
 /* Youtube */
+
 @-moz-document domain(youtube.com), domain(google.com) {
   /* Hiding the top search bar */
   #masthead-container {
@@ -61,6 +62,7 @@
   #page-manager { margin-top: 0px !important; }
 
   /* Make the player take the entire page */
+  /*
   #player-theater-container, .html5-main-video, #full-bleed-container, yd-watch-flexy {
     max-height: 100vh !important;
     height: 100vh !important;
@@ -71,6 +73,7 @@
     width: auto;
     height: auto;
   }
+*/
 
   /* Advertisements in the suggested videos area */
   #watch-checkout-offers {

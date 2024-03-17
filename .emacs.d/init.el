@@ -83,6 +83,10 @@
 ; (global-set-key (kbd "<S-tab>") nil)
 ; (global-set-key (kbd "<backtab>") nil) ; equivalent of above
 
+; https://stackoverflow.com/questions/2627289/how-to-replace-a-region-in-emacs-with-yank-buffer-contents
+; [note] This is probably different than how the original mark/point usage of emacs was intended, but this is nice for now
+(delete-selection-mode 1)
+
 
 ;;         __          __
 ;; .-----.|  |_.--.--.|  |.-----.
@@ -105,7 +109,7 @@
 ;; frame size / opacity
 ; (font-family-list)
 ; (set-face-attribute 'default nil :family "CtrlD" :height 130) ; height is 100 = 1*10pt, so 130 is 13pt
-(set-face-attribute 'default nil :family "Essential PragmataPro" :height 166) ; height is 100 = 1*10pt, so 130 is 13pt
+(set-face-attribute 'default nil :family "Essential PragmataPro" :height 135) ; height is 100 = 1*10pt, so 130 is 13pt
 (setq default-frame-alist '((width . 140) (height . 120)))
 (set-frame-parameter (selected-frame) 'alpha '(100 100))
 (add-to-list 'default-frame-alist '(alpha 100 100))

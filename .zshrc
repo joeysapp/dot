@@ -123,7 +123,7 @@ setopt HIST_LEX_WORDS # This allows proper hist multiline commands, but may slow
 #             |_____|
 # ----------------------------------------------------------------------
 # [todo] zsh function loading in fg[], bg[], _bold, _no_bold
-autoload -U ~/.bin/term-bootup-color-vars && term-bootup-color-vars
+autoload -U ~/.bin/term-setup-ansi-vars && term-setup-ansi-vars
 # autoload -U colors && colors
 
 # LS colors 
@@ -326,14 +326,20 @@ alias git-prune='du -sh .git && git remote prune origin && git repack && git pru
 # echo-bar | lolcat
 (
 
+# echo '[emacs] To fold/collapse via a header in e.g. markdown-mode, <Tab>. https://emacs.stackexchange.com/questions/7115/collapse-sections-in-markdown
 # echo '[emacs] <M-x> outline-show-all to unfold'
+# echo '[emacs] <M-!> shell.. <C-x r N> incr. idx in region.. <M-;> comment region..'
+# echo '[emacs] <M-e/a> for fwd/bw sentences.. <C-x-tab> for ez indent.. <W> in dired to open file'
+# echo "[emacs] regex repl. is cool:\treplace-regexp \\(trigger\\)\\([RL]\\) \\,(downcase \\2)2force)"
+# echo "[bash] Tee usage: launchctl list | sudo tee ~/foo.txt; (pipes stdout to your tty and foo.txt)"
 # echo "  <M-!> & W\t launchctl list | tee ~/log/\tplsss someone teach me vi emacs over ssh makes me sad"
 
 # [todo] https://aperiodic.net/phil/prompt/
-SPACE_CT=$((COLUMNS * (50 / 100.0)));
-SPACE_CT=${SPACE_CT%.*}
-printf "e%.0s" {1..$SPACE_CT};
-
+local repeat_str="."
+local repeat_amt=5
+# local repeat_amt=$((COLUMNS * (33.3 / 100.0))); 1/3 the size of the tty
+repeat_print_str=${repeat_amt%.*}
+printf "$repeat_str%.0s" {1..$repeat_print_str};
 
 # echo "[emacs] regex repl. is cool:\treplace-regexp \\(trigger\\)\\([RL]\\) \\,(downcase \\2)2force)"
 # echo '[regex] an example of needing to escape regex operators, all the same result:'
@@ -344,7 +350,8 @@ printf "e%.0s" {1..$SPACE_CT};
 # echo '        find -E . -regex "\./.*(07[0-7]).NEF$"'
 # echo-bar '-' 30
 ) | lolcat
-echo "pls some1 send me a vi cheatsheet emacs over ssh makes me very sad ;____;"
+local comment_color=$(($RANDOM%255))
+printf "$FG[bold] [+ vi/cheatsheet] $FG[reset] $FG[$comment_color] // cuz emacs over ssh is v sad ;__;\n$FG[reset]"
 # echo-bar '-' 30 | lolcat
 
 # launchctl list | grep -v 'com.apple'

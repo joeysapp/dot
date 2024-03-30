@@ -24,13 +24,10 @@ done 2>/dev/null &
 ; defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false      ; echo never try to save to iCloud
 ; defaults write com.apple.LaunchServices LSQuarantine -bool false                 ; echo disable unknown developer dialog
 
-
 ; echo '\n\n== Network =='
 ; defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true         ; echo enable airdrop over ethernet
 ; defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true   ; echo no .DS_Store on ssh
 ; defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true       ; echo no .DS_Store on usb
-
-
 
 ; echo '\n\n== Main configs - Keyboard / Devices / UX =='
 ; defaults write NSGlobalDomain InitialKeyRepeat -int 15                         ; echo faster initial keypress

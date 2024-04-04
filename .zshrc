@@ -33,13 +33,9 @@ alias hist="fc -il"
 alias mans='function _mansearch(){ man $1 | less +/$2 };_mansearch';
 alias ls='LC_COLLATE=C ls -AlFhS@'
 alias git="git-print $@"
-
-emacs_cocoa_app="$HOME/Documents/code/emacs/nextstep/Emacs.app/Contents/MacOS/Emacs"
-if [ -e $emacs_cocoa_app ]; then
-    alias emacs=$emacs_cocoa_app
-else
-    alias emacs="/usr/bin/emacs"
-fi
+alias _emacs_ssh="emacs ssh"
+# [TODO] Largely useful on *nix deploys where we need to access /etc/ a lot. IDK where it gets stored w/ NeXT buids.
+# alias _emacs_sudo="sudo emacs /etc/emacs/site-start.d/00foobar.el --file $HOME/.emacs.d/init.el"
 function pi() { echo "scale=1000; 4*a(1)" | bc -l }
 
 # https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout?newreg=741ab675789d4b1ba96862d40c2bb2d7

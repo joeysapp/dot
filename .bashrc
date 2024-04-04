@@ -74,7 +74,7 @@ alias mans="man $1 | less +/$2"
 alias ls="ls -AlFhS --color"
 # /usr/share/emacs/site-lisp/site-start.el 
 # https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html
-alias Semacs="sudo /usr/bin/emacs /etc/emacs/site-start.d/00debian.el --file $HOME/.emacs.d/init.el"
+alias _emacs_sudo="sudo /usr/bin/emacs /etc/emacs/site-start.d/00debian.el --file $HOME/.emacs.d/init.el"
 alias dot="/usr/bin/git --git-dir=$HOME/.dot/.git --work-tree=$HOME"
 
 alias tmux="tmux $@"

@@ -48,6 +48,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/packages")
 
+(load "exec-path-from-shell.el")
 (load "nyan-mode-1.1.3/nyan-mode-autoloads.el")
 (load "sanityinc-tomorrow-night-theme.el")
 ; (load "color-theme-sanityinc-tomorrow.el")
@@ -134,7 +135,7 @@
 
 (global-set-key (kbd "C-c C-c") nil)
 (defun ssh-hotkey (host)
-  (interactive (list (read-string "Enter: /ssh: user:host:path ]: " (exec-path-from-shell-copy-env "DEPLOY_SSH_HOST"))))
+  (interactive (list (read-string "Enter: /ssh: user:host:path ]: " (exec-path-from-shell-copy-env "SSH_DIGITALOCEAN_000"))))
   (switch-to-buffer (find-file-noselect host)))
 (global-set-key (kbd "C-c C-c") 'ssh-hotkey)
 

@@ -10,3 +10,5 @@
 *node_modules/*
 
 *.zshenv*
+.zshev
+.zsh_splash

@@ -1,7 +1,10 @@
 # 2023-10-15T15:00:00
+cd /Users/zooey/Documents/code/site
+source ./.env.deploy
+
 # note(zooey): Creating bashrc for deployments.
 # https://www.redhat.com/sysadmin/history-command
-export HISTFILE="/Users/zooey/Documents/code/site/logs/deploy/bash_history"
+export HISTFILE="$SITE_DEPLOY_PATH/logs/deploy/bash_history"
 export HISTFILESIZE=
 export HISTSIZE=
 HISTTIMEFORMAT="%F %T: "
@@ -20,15 +23,12 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # export PS1="\[\e]0;\u\h:\w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] "
 
 # alias git="~/.bin/git-print"
-alias git-submodule_fix_dirty_commit='git submodule deinit -f .; git submodule update --init --remote'
-alias git-graph='git log --graph --decorate --oneline $(git rev-list -g --all)'
-alias git-prune='du -sh .git && git remote prune origin && git repack && git prune-packed && git reflog expire --all --expire=now && git gc --aggressive --prune=now && du -sh .git'
 
 alias dot="/usr/bin/git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
 
-#e xport NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # These are ugly, but for reference:
 # export TERM=xterm-color
@@ -70,17 +70,26 @@ fi
 #     return
 # fi
 
-# I think this just needs to go in bashrc...
+alias mans="man $1 | less +/$2"
+alias ls="ls -AlFhS --color"
+# /usr/share/emacs/site-lisp/site-start.el 
+# https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html
+alias Semacs="sudo /usr/bin/emacs /etc/emacs/site-start.d/00debian.el --file $HOME/.emacs.d/init.el"
+alias dot="/usr/bin/git --git-dir=$HOME/.dot/.git --work-tree=$HOME"
+
+alias tmux="tmux $@"
+  	# PS1="${knc}┌─(${kuc}\u${knc}@\h)(\$kituu_info_up1)(\$kituu_info_up2${knc})\$kituu_info_up3${knc}\${kituu_fill}(${kpc}\${kituu_live_pwd}${knc})─┐\n└─(${kituu_smiley}${knc})─> $kituu_user_symbol "
+
+# Handling tramp poorly
 case "$TERM" in
     "dumb")
 	PS1="> "
 	;;
     xterm*|rxvt*|eterm*|screen*)
         PS1="\[\e]0;\u\h:\w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] "
-  	# PS1="${knc}┌─(${kuc}\u${knc}@\h)(\$kituu_info_up1)(\$kituu_info_up2${knc})\$kituu_info_up3${knc}\${kituu_fill}(${kpc}\${kituu_live_pwd}${knc})─┐\n└─(${kituu_smiley}${knc})─> $kituu_user_symbol "
 	;;
     linux*)
-	PS1="${knc}┌─(${kuc}\u${knc}@\h)(\$kituu_info_up1)(\$kituu_info_up2${knc})\$kituu_info_up3${knc}\${kituu_fill}(${kpc}\${kituu_live_pwd}${knc})─┐\n└─(${kituu_smiley}${knc})─> $kituu_user_symbol "
+        PS1="> "
 	;;
     *)
 	PS1="> "
@@ -88,6 +97,10 @@ case "$TERM" in
 esac
 
 
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
 
-
-./Users/zooey/Documents/code/site/deploy/scripts/setup.sh
+# source ./scripts/desploy/bash-autocompletion-ubuntu.sh
+source ./scripts/deploy/pm2-autocompletion.sh
+source ./scripts/deploy/tmux-keybinds.sh

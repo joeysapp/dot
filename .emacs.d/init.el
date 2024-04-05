@@ -12,6 +12,7 @@
 ; (eval 'load-path)
 
 (save-place-mode 1)
+(electric-indent-mode nil)
 
 (setq-default indent-tabs-mode nil) ; indent will only insert spaces now
 (put 'set-goal-column 'disabled nil) ; what happens on <enter>, basically auto-indenting (?)
@@ -46,14 +47,13 @@
 ; |   __|___._|____|__|__|___._|___  |_____|_____|
 ;-|__|-------------------------|_____|----------------------------------------
 
-(add-to-list 'load-path "~/.emacs.d/packages")
+(add-to-list 'load-path "/home/zooey/.emacs.d/packages")
 
 (load "exec-path-from-shell.el")
 (load "ssh-to-host.el")
 (global-set-key (kbd "C-c C-c") 'ssh-hotkey)
 ; I'm fine with having interactive functions as above; just know we can ssh-to-... from --funcall in cli.
 ; (keymap-global-set "C-c C-0" 'ssh-to-digitalocean-000)
-; (add-hook 'foobar-mode-hook (lambda () (local-set-key [f1] 'sick-function-thing)))
 
 (load "nyan-mode-1.1.3/nyan-mode-autoloads.el")
 (load "sanityinc-tomorrow-night-theme.el")
@@ -167,7 +167,10 @@
 ;-------------|_____|----------------------------------------------------------
 
 ; (load-theme 'moe-dark t)
-(load-theme 'sanityinc-tomorrow-night t)
+; (load-theme 'adwaita)
+; (add-to-list 'load-path "~/Documents/code/emacs/nextstep/Emacs.app/Contents/Resources/etc/themes")
+; (load-theme 'sanityinc-tomorrow-night t)
+; (load "adwaita-theme.el")
 ; (require 'moe-theme)
 ; (setq moe-theme-highlight-buffer-id 1)
 ; (setq moe-theme-modeline-color 'cyan)
@@ -190,19 +193,36 @@
 (add-to-list 'default-frame-alist '(alpha 100 100))
 
 ; Borders of window
+
 (add-to-list 'default-frame-alist '(left-fringe . 4))
-(add-to-list 'default-frame-alist '(right-fringe . 0)) ; right side of window
+(add-to-list 'default-frame-alist '(right-fringe . 0)) ; aright side of window
 (setq linum-format "%4d") ; "%4d \u2502 "  is  pipe to right side of 00 | on the left side
 (fringe-mode '(3 . 0)) ; 6px border of gray60..?
 (global-display-line-numbers-mode 1) ; <-- used to display fringe (w/ fringe-mode/linum-format
 ; far-left frame fringe lol
 ; (set-face-attribute 'fringe nil :background "white" :foreground nil)
-
 ;  __                 __
 ; |  |--.-----.-----.|  |--.-----.
 ; |     |  _  |  _  ||    <|__ --|
 ;-|__|__|_____|_____||__|__|_____|-------------------------------------------------------
-
+; https://www.gnu.org/software/emacs/manual/html_node/elisp/Startup-Summary.html#Startup-Summary
+; 2024-04-04: None of these work >_> Trying to figure out how to diff. tramp frames automatically
+; (add-hook 'after-init-hook (lambda () (local-set-key [f1] 'sick-function-thing)))
+; (defvar after-load-theme-hook nil
+;   "... this might actually be firing? Hook run after a color theme is loaded using `load-theme'."
+;   (if (not (eq 'user-init-file "/home/zooey/.emacs.d/init.el"))
+;       (face-remap-add-relative 'default :background "darkgreen" :foreground "lightblue")
+;     nil)
+                                        ;   )
+; Throwing errors on deployments:
+; (add-hook 'after-make-frame-functions
+; 	  (lambda (frame)
+; 	    ; (set-variable 'color-theme-is-global nil)
+; 	    (select-frame frame)
+; 	    (if (string= (window-system) "ns")
+; 		(color-theme-sanityinc-tomorrow-blue)
+; 	      nil)))
+; 
 ; (add-to-list 'load-path "~/.emacs.d/hooks")
 ; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 ; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
@@ -219,19 +239,30 @@
 ; .--------.-----.--|  |.-----.
 ; |        |  _  |  _  ||  -__|
 ;-|__|__|__|_____|_____||_____|-------------------------------------------------
+; (require 'shell-script-mode)
 
+;  ~/Documents/code/emacs/nextstep/Emacs.app/Contents/Resources/lisp/progmodes/
+(require 'js)
+(require 'conf-mode)
 (add-to-list 'auto-mode-alist  (cons (concat "^" (getenv "HOME") "/[.]zsh") 'shell-script-mode))
 
+; Something's weird up with tramp regex stuff.. for now I think it has to all be evaluated manually:
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.cjs\\'" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("*\\.js" . js-mode))
+(add-to-list 'auto-mode-alist '("*\\.jsx" . js-mode))
+(add-to-list 'auto-mode-alist '("*\\.mjs" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.mjs" . js-mode))
+(add-to-list 'auto-mode-alist '("*\\.cjs" . js-mode))
+(add-to-list 'auto-mode-alist '("*\\.ts" . js-mode))
 
-(add-to-list 'auto-mode-alist '("\\.plist\\'" . xml-mode))
-(add-to-list 'auto-mode-alist '("/\\.bin" . shell-script-mode))
-(add-to-list 'auto-mode-alist '("\\.conf\\'" . conf-mode))
-(add-to-list 'auto-mode-alist '("/etc/nginx" . conf-mode))
+; (add-to-list 'auto-mode-alist '("\\.plist" . xml-mode))
+(add-to-list 'auto-mode-alist '("/\\.bin*" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("*\\.conf" . conf-mode))
+(add-to-list 'auto-mode-alist '("/etc/nginx/*" . conf-mode))
 ; (require 'web-mode)
 ; (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
@@ -261,9 +292,15 @@
 ; [todo] https://stackoverflow.com/questions/10171280/how-to-launch-gui-emacs-from-command-line-in-osx
 ; [todo] https://emacs.stackexchange.com/questions/34737/start-emacsclient-with-focus-from-command-line
 
-(raise-frame)
+; (raise-frame)
 
-
+;; ================================================================================
+;; ================================================================================
+;; WARNING
+;; NONE OF THIS WILL BE SET IF YOU HAVE TO MANUALLY SET THEM ON
+;; BOTH TRAMP and SUDOER EMACS SESSIONS!!!!!!!!!!!!!!!
+;; ================================================================================
+;;================================================================================
 (custom-set-variables
  ; custom-set-variables was added by Custom.
  ; If you edit it by hand, you could mess it up, so be careful.

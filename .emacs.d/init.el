@@ -248,7 +248,7 @@
 ;  ~/Documents/code/emacs/nextstep/Emacs.app/Contents/Resources/lisp/progmodes/
 (require 'js)
 (require 'conf-mode)
-(add-to-list 'auto-mode-alist  (cons (concat "^" (getenv "HOME") "/[.]zsh") 'shell-script-mode))
+(add-to-list 'auto-mode-alist  (cons (concat "^" (getenv "HOME") "/.") 'shell-script-mode))
 
 ; Something's weird up with tramp regex stuff.. for now I think it has to all be evaluated manually:
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))

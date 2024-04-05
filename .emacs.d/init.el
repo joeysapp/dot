@@ -52,6 +52,7 @@
 
 (load "exec-path-from-shell.el")
 (load "ssh-to-host.el")
+(load "resize-windows.el")
 (global-set-key (kbd "C-c C-c") 'ssh-hotkey)
 ; I'm fine with having interactive functions as above; just know we can ssh-to-... from --funcall in cli.
 ; (keymap-global-set "C-c C-0" 'ssh-to-digitalocean-000)
@@ -167,9 +168,11 @@
 ; |_____||____|___  ||__||_____|
 ;-------------|_____|----------------------------------------------------------
 
-; (load-theme 'moe-dark t)
-; (load-theme 'adwaita)
-; (add-to-list 'load-path "~/Documents/code/emacs/nextstep/Emacs.app/Contents/Resources/etc/themes")
+; examining the var: ("/usr/share/emacs/27.1/etc/themes/" "/home/zooey/.emacs.d/packages/" custom-theme-directory t)
+
+                                        ; (load-theme 'moe-dark t)
+(add-to-list 'load-path "~/Documents/code/emacs/nextstep/Emacs.app/Contents/Resources/etc/themes")
+(load-theme 'adwaita)
 ; (load-theme 'sanityinc-tomorrow-night t)
 ; (load "adwaita-theme.el")
 ; (require 'moe-theme)
@@ -332,3 +335,8 @@
  '(web-mode-enable-auto-opening t)
  '(web-mode-enable-auto-quoting nil)
  '(web-mode-markup-indent-offset 2))
+
+; [TODO]
+; https://www.gnu.org/software/emacs/manual/html_node/emacs/Initial-Options.html
+; https://www.gnu.org/software/emacs/manual/html_node/emacs/Emacs-Server.html
+(open-dribble-file (exec-path-from-shell-copy-env "EMACS_HISTFILE"))

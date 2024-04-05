@@ -47,7 +47,8 @@
 ; |   __|___._|____|__|__|___._|___  |_____|_____|
 ;-|__|-------------------------|_____|----------------------------------------
 
-(add-to-list 'load-path "/home/zooey/.emacs.d/packages")
+; (add-to-list 'load-path "/home/zooey/.emacs.d/packages")
+(add-to-list 'load-path "~/.emacs.d/packages")
 
 (load "exec-path-from-shell.el")
 (load "ssh-to-host.el")
@@ -268,11 +269,10 @@
 
 ; [ref] https://orgmode.org/worg/orgcard.html
 ; [ref] https://zzamboni.org/post/beautifying-org-mode-in-emacs/
-(setq org-hide-emphasis-markers t)
-
-(add-hook 'python-mode-hook
-   (function (lambda ()
-      (setq indent-tabs-mode nil tab-width 2))))
+; (setq org-hide-emphasis-markers t)
+; (add-hook 'python-mode-hook
+;   (function (lambda ()
+;      (setq indent-tabs-mode nil tab-width 2))))
 
 ;  __                 __
 ; |  |--.-----.-----.|  |_.--.--.-----.

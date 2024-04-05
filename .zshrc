@@ -3,6 +3,7 @@
 # [reminder] All of this will be evaluated by anything ran by you w/ zsh (e.g. if you have to use venv for some reason)
 fpath=(~/.bin $fpath)
 autoload -U $fpath[1]/*(.:t)
+autoload -U $HOME/.bin/term-setup-ansi && term-setup-ansi # [OLD] autoload -U colors && colors
 
 setopt nobeep;
 setopt no_list_beep;
@@ -18,6 +19,15 @@ autoload -Uz compinit && compinit
 zle -N backward-word
 zle -N forward-word
 
+# export EDITOR='emacs';
+
+export HISTSIZE=51100000 # The number of lines held in memory
+export SAVEHIST=51200000  # Maximum number of items for the history file
+setopt HIST_FIND_NO_DUPS # Don't show the same command twice in C-s or C-r
+# Omit duplicates and commands that begin with a space from history.
+export HISTCONTROL='ignoreboth';
+setopt INC_APPEND_HISTORY # Write to histfile immediately after execution
+setopt EXTENDED_HISTORY  # Write ': <start>:<elapsed>;<command>' (since epoch)
 setopt NO_HIST_BEEP
 setopt HIST_VERIFY
 setopt HIST_LEX_WORDS 
@@ -40,4 +50,11 @@ function pi() { echo "scale=1000; 4*a(1)" | bc -l }
 
 # https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout?newreg=741ab675789d4b1ba96862d40c2bb2d7
 # vs like, changing out /etc/zprofile I guess.
+source $HOME/.zshalias
 source $HOME/.zshpriv
+
+# echo "CHECK .zshpriv, CUZ:"
+# echo "HISTFILE=$HISTFILE"
+# echo "its even cooler cuz it gets reset after"
+# export HISTFILE=$HISTFILE
+

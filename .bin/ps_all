@@ -1,0 +1,1 @@
+ps -e -orss=,args= |awk '{ print completion-ignore-case/1024    on }' | awk '{tot[on]+=completion-ignore-case;count[on]++} END {for (i in tot) {print tot[i],i,count[i]}}' | sort -n

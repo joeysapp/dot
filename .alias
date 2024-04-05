@@ -1,0 +1,31 @@
+
+# Don’t clear the screen after quitting a manual page.
+export MANPAGER='less -X'
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+	alias "${method}"="lwp-request -m '${method}'"
+done
+
+# IP addresses
+alias localip="ipconfig getifaddr en0"
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+# alias ip="echo $(ip) $(localip)"
+# alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Show active network interfaces
+alias ipactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+
+# Flush Directory Service cache
+alias dnsflush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec ${SHELL} -l"
+
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+alias aliases='print -rl -- ${(k)aliases} | sort'
+alias functions='print -rl -- ${(k)functions} | sort'
+alias vars='print -rl -- ${(k)parameters} | sort'

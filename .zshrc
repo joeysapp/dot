@@ -36,7 +36,7 @@ export CLICOLOR=0
 export LSCOLORS=gxfxcxdxbxEgedabagacfd
 setopt PROMPT_SUBST
 
-alias lr="launchctl-reload $1"
+# alias lr="launchctl-reload $1"
 alias arp='function _arp(){ arp $@ | column -t };_arp'
 alias du_here="function _du() { du -ch $1 | sort -h };_du"
 alias hist="fc -il"
@@ -50,6 +50,7 @@ function pi() { echo "scale=1000; 4*a(1)" | bc -l }
 
 # https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout?newreg=741ab675789d4b1ba96862d40c2bb2d7
 # vs like, changing out /etc/zprofile I guess.
+source $HOME/.alias
 source $HOME/.zshalias
 source $HOME/.zshpriv
 

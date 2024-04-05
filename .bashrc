@@ -44,7 +44,6 @@ alias mans='man $1 | less +/$2'
 source /etc/profile.d/bash_completion.sh
 
 if [[ $TMUX ]]; then
-    echo "wat"
     # [NOTE] The default prefix is C-b
     tmux unbind C-b
     tmux set -g prefix C-t
@@ -123,3 +122,6 @@ shopt -s nocaseglob;
 # Add tab completion for `defaults read|write NSGlobalDomain`
 # You could just use `-g` instead, but I like being explicit
 complete -W "NSGlobalDomain" defaults;
+
+
+source ~/.alias

@@ -1,4 +1,4 @@
-;                                        __    _____         __ __
+ ;                                        __    _____         __ __
 ; .-----.--------.---.-.----.-----.  .--|  |  /  /__|.-----.|__|  |_   .-----.
 ; |  -__|        |  _  |  __|__ --|__|  _  |,' ,'|  ||     ||  |   _|__|  -__|
 ; |_____|__|__|__|___._|____|_____|__|_____/__/  |__||__|__||__|____|__|_____|
@@ -53,13 +53,21 @@
 (load "exec-path-from-shell.el")
 (load "ssh-to-host.el")
 (load "resize-windows.el")
+
+(global-set-key (kbd "C-c C-c") nil)
 (global-set-key (kbd "C-c C-c") 'ssh-hotkey)
 ; I'm fine with having interactive functions as above; just know we can ssh-to-... from --funcall in cli.
-; (keymap-global-set "C-c C-0" 'ssh-to-digitalocean-000)
+
+(load "processing-mode.el")
+; (global-set-key (kbd "C-c C-p") 'processing-run-sketch)
+; C-c C-p 0 to run sketch
+
+(load "timu-macos-theme.el")
 
 (load "nyan-mode-1.1.3/nyan-mode-autoloads.el")
-(load "sanityinc-tomorrow-night-theme.el")
+; (load "sanityinc-tomorrow-night-theme.el")
 ; (load "color-theme-sanityinc-tomorrow.el")
+
 ; [ref] If you open emacs via Finder, your $PATH will be wrong & no fonts! 
 (load "figlet.el") ; (figlet-get-font-list)
 (global-set-key (kbd "M-t") 'figlet-figletify-region-comment)
@@ -70,8 +78,6 @@
 ; (load "arduino-mode.el")
 ; (autoload 'arduino-mode "arduino-mode" "Major mode for editing Arduino code." t)
 ; (autoload 'ede-arduino-preferences-file "ede-arduino" "Preferences file of Arduino." t)
-; (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
-; (add-to-list 'auto-mode-alist '("\\.pde\\'" . arduino-mode))
 
 ; (load "osascript.el") 
 ; (load "applescript-mode.el")
@@ -169,22 +175,19 @@
 ;-------------|_____|----------------------------------------------------------
 
 ; examining the var: ("/usr/share/emacs/27.1/etc/themes/" "/home/zooey/.emacs.d/packages/" custom-theme-directory t)
-
-                                        ; (load-theme 'moe-dark t)
 (add-to-list 'load-path "~/Documents/code/emacs/nextstep/Emacs.app/Contents/Resources/etc/themes")
-(load-theme 'adwaita)
+; (load-theme 'adwaita)
 ; (load-theme 'sanityinc-tomorrow-night t)
 ; (load "adwaita-theme.el")
-; (require 'moe-theme)
+
+
 ; (setq moe-theme-highlight-buffer-id 1)
 ; (setq moe-theme-modeline-color 'cyan)
 
 (nyan-mode t)
-
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (horizontal-scroll-bar-mode -1)
-
 (line-number-mode 1)
 (column-number-mode 1)
 
@@ -249,6 +252,7 @@
 (require 'js)
 (require 'conf-mode)
 (add-to-list 'auto-mode-alist  (cons (concat "^" (getenv "HOME") "/.") 'shell-script-mode))
+(add-to-list 'auto-mode-alist  (cons (concat "^" (getenv "HOME") "/.emacs.d/") 'elisp-byte-code-mode))
 
 ; Something's weird up with tramp regex stuff.. for now I think it has to all be evaluated manually:
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-mode))
@@ -263,10 +267,14 @@
 (add-to-list 'auto-mode-alist '("*\\.cjs" . js-mode))
 (add-to-list 'auto-mode-alist '("*\\.ts" . js-mode))
 
-; (add-to-list 'auto-mode-alist '("\\.plist" . xml-mode))
-(add-to-list 'auto-mode-alist '("/\\.bin*" . shell-script-mode))
+(add-to-list 'auto-mode-alist '("\\.pde\\'" . processing-mode))
+(add-to-list 'auto-mode-alist '("\\.bin\\'" . shell-script-mode))
+
 (add-to-list 'auto-mode-alist '("*\\.conf" . conf-mode))
 (add-to-list 'auto-mode-alist '("/etc/nginx/*" . conf-mode))
+
+; (add-to-list 'auto-mode-alist '("\\.plist" . xml-mode))
+
 ; (require 'web-mode)
 ; (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 
@@ -305,12 +313,14 @@
 ;; ================================================================================
 ;;================================================================================
 (custom-set-variables
- ; custom-set-variables was added by Custom.
- ; If you edit it by hand, you could mess it up, so be careful.
- ; Your init file should contain only one such instance.
- ; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(css-indent-offset 2)
- '(custom-safe-themes '(default))
+ '(custom-enabled-themes '(moe-dark))
+ '(custom-safe-themes
+   '("956d660752e0b3ee48b437007b493769ed844c7311026c7a54e3360c1afaae54" "b7b9a74d248fdf304bc7207dc78c10b2fd632974e6f2d3d50ea4258859472581" default))
  '(dired-listing-switches "-alFhs")
  '(electric-indent-mode nil)
  '(js-expr-indent-offset 2)
@@ -340,3 +350,32 @@
 ; https://www.gnu.org/software/emacs/manual/html_node/emacs/Initial-Options.html
 ; https://www.gnu.org/software/emacs/manual/html_node/emacs/Emacs-Server.html
 (open-dribble-file (exec-path-from-shell-copy-env "EMACS_HISTFILE"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+ 
+ 
+
+
+
+;; Has to be below the above custom package stuff.
+(load "moe-theme/moe-dark-theme.el")
+(load "moe-theme/moe-light-theme.el")
+(load "moe-theme/moe-theme.el")
+(load "moe-theme/moe-theme-autoloads.el")
+(load "moe-theme/moe-theme-flavours.el")
+; (load "moe-theme/moe-theme-switcher.el") ; day/sunlight stuff
+;; Flavours apply to a given dark/light loaded in. Eval for fun.
+; (load-theme 'moe-light t)
+; (load-theme 'moe-dark t)
+(moe-theme-flavour-monokai)
+(moe-theme-flavour-tomorrow)
+(moe-theme-flavour-default)
+(moe-theme-flavour-monokai)
+
+; [todo] figure the left gutter color?
+; (load-theme 'timu-macos t)
+; (customize-set-variable 'timu-macos-flavour "light")

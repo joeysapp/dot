@@ -1,6 +1,6 @@
 (defun ssh-hotkey (host)
   (interactive (list (read-string 
-     "Enter: /ssh: user:host:path ]: "
+     "Enter: /ssh: user@host:path"
      (concat "/ssh:" (exec-path-from-shell-copy-env "SSH_DIGITALOCEAN_000")))))
   (switch-to-buffer (find-file-noselect host)))
 

@@ -1,4 +1,11 @@
 # 2023-10-15T15:00:00
+# https://stackoverflow.com/questions/40952759/how-to-tell-the-difference-between-scp-and-ssh-in-bash-profile
+# Return if non-interactive session (scp/rsync)
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 cd /Users/zooey/Documents/code/site
 source ./.env.deploy
 

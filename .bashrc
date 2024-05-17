@@ -6,14 +6,12 @@ case $- in
       *) return;;
 esac
 
-cd /Users/zooey/Documents/code/site
-source ./.env.deploy
-
 # note(zooey): Creating bashrc for deployments.
 # https://www.redhat.com/sysadmin/history-command
-export HISTFILE="$SITE_DEPLOY_PATH/logs/deploy/bash_history"
-export HISTFILESIZE=
-export HISTSIZE=
+# export HISTFILE="$SITE_DEPLOY_PATH/logs/deploy/bash_history"
+export HISTFILE="/joeysapp/etc/bash/_bash_history"
+export HISTFILESIZE=512800
+export HISTSIZE=512799
 HISTTIMEFORMAT="%F %T: "
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # export HISTCONTROL=ignoredups
@@ -47,8 +45,6 @@ export NVM_DIR="$HOME/.nvm"
 # alias ls="ls -AlFhS"
 alias ls='ls --color=auto -AlFhS'
 alias mans='man $1 | less +/$2'
-
-source /etc/profile.d/bash_completion.sh
 
 if [[ $TMUX ]]; then
     # [NOTE] The default prefix is C-b
@@ -107,10 +103,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# source ./scripts/desploy/bash-autocompletion-ubuntu.sh
-source ./scripts/deploy/pm2-autocompletion.sh
-source ./scripts/deploy/tmux-keybinds.sh
-
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 # Add tab completion for many Bash commands
 if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
@@ -130,5 +122,10 @@ shopt -s nocaseglob;
 # You could just use `-g` instead, but I like being explicit
 complete -W "NSGlobalDomain" defaults;
 
-
-source ~/.alias
+source /etc/profile.d/bash_completion.sh
+# source ./scripts/desploy/bash-autocompletion-ubuntu.sh
+# source ./scripts/deploy/pm2-autocompletion.sh
+# source ./scripts/deploy/tmux-keybinds.sh
+# source ~/.alias
+cd /Users/zooey/Documents/code/site
+source ./.env.deploy

@@ -9,7 +9,7 @@ esac
 # note(zooey): Creating bashrc for deployments.
 # https://www.redhat.com/sysadmin/history-command
 # export HISTFILE="$SITE_DEPLOY_PATH/logs/deploy/bash_history"
-export HISTFILE="/joeysapp/etc/bash/_bash_history"
+export HISTFILE="/joeysapp/var/log/bash.log"
 export HISTFILESIZE=512800
 export HISTSIZE=512799
 HISTTIMEFORMAT="%F %T: "
@@ -30,6 +30,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # alias git="~/.bin/git-print"
 
 alias dot="/usr/bin/git --git-dir="$HOME/.dot/.git" --work-tree=$HOME"
+# alias pm2="/joeysapp/etc/pm2/_pm2"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -42,8 +43,6 @@ export NVM_DIR="$HOME/.nvm"
 # export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # alias less='less --RAW-CONTROL-CHARS'
-# alias ls="ls -AlFhS"
-alias ls='ls --color=auto -AlFhS'
 alias mans='man $1 | less +/$2'
 
 if [[ $TMUX ]]; then
@@ -79,7 +78,6 @@ alias ls="ls -AlFhS --color"
 alias _emacs_sudo="sudo /usr/bin/emacs /etc/emacs/site-start.d/00debian.el --file /home/zooey/.emacs.d/init.el"
 alias dot="/usr/bin/git --git-dir=$HOME/.dot/.git --work-tree=$HOME"
 
-alias tmux="tmux $@"
   	# PS1="${knc}┌─(${kuc}\u${knc}@\h)(\$kituu_info_up1)(\$kituu_info_up2${knc})\$kituu_info_up3${knc}\${kituu_fill}(${kpc}\${kituu_live_pwd}${knc})─┐\n└─(${kituu_smiley}${knc})─> $kituu_user_symbol "
 
 # Handling tramp poorly
@@ -112,6 +110,7 @@ if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completi
 elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
+
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
 
@@ -122,10 +121,12 @@ shopt -s nocaseglob;
 # You could just use `-g` instead, but I like being explicit
 complete -W "NSGlobalDomain" defaults;
 
-source /etc/profile.d/bash_completion.sh
 # source ./scripts/desploy/bash-autocompletion-ubuntu.sh
-# source ./scripts/deploy/pm2-autocompletion.sh
-# source ./scripts/deploy/tmux-keybinds.sh
-# source ~/.alias
-cd /Users/zooey/Documents/code/site
-source ./.env.deploy
+source /etc/profile.d/bash_completion.sh
+source /joeysapp/etc/pm2/_autocompletion.sh
+source /joeysapp/etc/tmux/_startup.sh
+
+cd /joeysapp
+echo "[info] You still have the site/.env.deploy that you likely need."
+# cd /Users/zooey/Documents/code/site
+# source ./.env.deploy

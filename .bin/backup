@@ -1,94 +1,77 @@
-#!/usr/bin/zsh
-usage() { echo "Usage: $0 [directory] [sync-from-pc-first]" 1>&2; }
-
-
-## TODO 2023-08-05:
-## ...Either use --delete or some kind of link to prevent duplication of data while moving stuff around..
-## Or just do this a lot more often to keep stuff 1:1?
-
-# Exclude Node_modules....
-
-# arg="-aHx"
-arg="-avHx --progress"
-# arg="-aHx --delete" 
-
-if [[ $1 == "" ]]; then
+#!/bin/zsh
+usage() {
+    echo "Script to backup a given directory to a given destination" 1>&2;
+    echo "$ backup full-path [?user@]location]" 1>&2;
+}
+if [[ $1 == "" || $2 == "" ]]; then
     usage
     return
 fi
+start=$(date +%s)
+start_pwd=$(pwd)
 
-unset dir; cd ~/Documents;
-start=$(date +%s);
-dir=$1
-fpath="/Users/zooey/Documents/$dir"
+cd /
+dir="$1"
+dest="$2"
+flocal="$(whoami)@$(hostname):$1"
+fdest="$2:$1"
+shift 2
 
-if [ -d "$fpath" ]; then
-    size_full=$(du -h -d 0 "/Users/zooey/Documents/$dir")
-    size=${size_full}
+rsync_arg="-aHx"
+# arg="-aHxvP"
+if [[ $@ == "" ]]; then
+    rsync_arg="-aHxq"
+    size_full="$(du -h -d 0 $dir | sort -h)"
 else
-    size_full="dir not present"
-    size=${size_full}
+    size_full="$(du -h -d 1 $dir | sort -h)"
+fi
+size_str=${size_full}
+type="?"
+
+if [[ -d $dir ]]; then
+    type="directory"
+    # dir=${dir%/*}
+    printf "Backing up $type: $FG[bold]\n$size_str$FG[reset]"
+    # https://stackoverflow.com/questions/125281/how-do-i-remove-the-file-suffix-and-path-portion-from-a-path-string-in-bash
+    # Send our directory to the parent directory of the destination
+    fdest="$dest:${dir%/*}"
+elif [[ -f $dir ]]; then
+    # If it's a specific file, remove the filename from the destination
+    type="file"
+    printf "Backing up $type: $FG[bold]$size_str$FG[reset]"
+    fdest="$dest:${dir%/*}"
+    # lol, this uses NF to get the LAST. we want the start as above
+    # dir=$(echo "$dir" | awk -F"/" '{ print "/"$(NF-1)"/"$NF }')
+else
+    printf "\e[38;5;%sm[err]\e[0m $dir is not present locally at: \e[38;5;%sm$flocal\e[0m \n" 1 8
+    return 1
 fi
 
-# Copy everything from the PC to local macbook before copying to it and others
-# --------------------------------------------------------------------------------
-# printf "- Syncing $FG[bold][$size]$FG[reset]\n"
-# sleep 1
-# if [[ $2 == "sync" ]]; then
-#     start=$(date +%s);
-#     printf "[ macbook $FG[bold]$FG[9] <<< $FG[reset] pc\t\t"
-# 
-#     rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
-#           --exclude="*.git" --exclude="node_modules/*" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
-#           "/Volumes/192.168.0.10/root/content/$dir/" "$dir/";
-# 
-#     now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
-#     printf "$FG[bold] $ts $FG[reset] ]\n"
-# fi
+# printf "$dir $FG[bold]$FG[78] -> $FG[reset] $fdest \n"
+printf "$FG[bold]$FG[78] ->$FG[reset] $fdest \n"
+printf "$FG[4]"
 
+rsync \
+    $rsync_arg \
+    --update \
+    --numeric-ids \
+    --prune-empty-dirs \
+    --exclude="/.git" --include="/*" --exclude="*.git" --exclude="node_modules/*" \
+    --exclude="*.DS_Store" \
+    -e 'ssh -T -o Compression=no -x' \
+    $@ \
+    "$dir" \
+    "$fdest"
+exit_code=$?
+printf "$FG[reset]"
 
-# Copy to thumbdrive
-# ----------------------------------------
-start=$(date +%s);
-printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] thumbdrive\t"
-
-rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
-      --exclude="*.git" --exclude="node_modules/*" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
-      "$dir/" \
-      "/Volumes/Halcyon/Documents/$dir/";
-
-now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
-printf "$FG[bold] $ts $FG[reset] ]\n"
-
-
-
-# Copy to Foxy
-# ----------------------------------------
-start=$(date +%s);
-printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] xaria/zooey\t"
-
-rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
-      --exclude="*.git" --exclude="node_modules/*" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
-      "$dir/" \
-      "zooey@foxy.local:/Users/zooey/Documents/$dir/";
-
-now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
-printf "$FG[bold] $ts $FG[reset] ]\n"
-
-
-# Copy to PC
-# ----------------------------------------
-# start=$(date +%s);
-# printf "[ macbook $FG[bold]$FG[78] >>> $FG[reset] pc\t\t"
-# 
-# rsync "$arg" --numeric-ids --prune-empty-dirs --exclude="/.git" --include="/*" \
-#       --exclude="*.git" --exclude="node_modules" --exclude="node_modules/*" --exclude="*node_modules*" --exclude="*.DS_Store" -e 'ssh -T -o Compression=no -x' \
-#       "$dir/" "/Volumes/192.168.0.10/root/content/$dir/";
-# 
-# now=$(date +%s); ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
-# printf "$FG[bold] $ts $FG[reset] ]\n"
-
-
-
-
-return
+now=$(date +%s) ts=$(date -r $(( $now - $start ))  +'%-Mm %-Ss')
+if [[ $exit_code == 0 ]]; then
+    printf "Done in $FG[bold]$ts$FG[reset], return to $start_pwd\n"
+    cd $start_pwd
+    return 0
+else
+    printf "Error code($exit_code) in $FG[bold] $ts $FG[reset]\nmans rsync EXIT"
+    # exit $exit_code
+    return $exit_code
+fi
